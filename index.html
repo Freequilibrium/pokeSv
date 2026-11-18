@@ -4332,7 +4332,7 @@ render();
       const w2 = kind === 'pool' && v.c === strong ? '<span class="w2" title="和這隻寶可夢較強的一邊相符，升級卡出現權重 2 倍">常出現</span>' : '';
       const cat = v.c ? `<span class="${CAT[v.c][1]}">${CAT[v.c][0]}</span>` : '<span class="buf">變化</span>';
       const price = kind === 'tm' ? `<td class="num">${(D.price[id] || 0).toLocaleString()}</td>` : '';
-      return `<tr data-me="${mine || 0}" data-r="${v.r5 || 0}" data-h="${v.h5 || 0}" data-s="${v.s5 || 0}" data-t="${TORD.indexOf(v.t)}"><th scope="row"><span class="tdot" data-t="${v.t}"></span><a class="mvl" href="#mv-${id}" data-go="mv:${id}">${esc(v.n)}</a>${w2}</th>`
+      return `<tr data-me="${mine || 0}" data-r="${v.r5 || 0}" data-h="${v.h5 || 0}" data-s="${v.s5 || 0}" data-t="${TORD.indexOf(v.t)}" data-c="${v.c === 'p' ? 0 : v.c === 's' ? 1 : 2}" data-k="${esc(v.k)}"><th scope="row"><span class="tdot" data-t="${v.t}"></span><a class="mvl" href="#mv-${id}" data-go="mv:${id}">${esc(v.n)}</a>${w2}</th>`
         + `<td>${ty(v.t)}</td><td>${cat}</td><td class="mu">${v.k}</td>`
         + `<td class="num me">${f1(mine)}</td><td class="num">${f1(v.r5)}</td><td class="num">${f1(v.h5)}</td><td class="num">${f1(v.s5)}</td>`
         + `<td class="num mu">${f1(v.re)}${v.en ? '<small>（' + esc(v.en) + '）</small>' : ''}</td>${price}</tr>`;
@@ -4341,14 +4341,18 @@ render();
   function mvTable(id, list, m, kind) {
     if (!list.length) return '<p class="empty">沒有。</p>';
     const price = kind === 'tm' ? '<th scope="col"><button class="sth" data-k="p">價格</button></th>' : '';
-    return `<div class="tbl"><table id="${id}"><thead><tr><th scope="col">招式</th><th scope="col"><button class="sth" data-k="t">屬性</button></th><th scope="col">分類</th><th scope="col">攻擊方式</th>`
+    return `<div class="tbl"><table id="${id}"><thead><tr><th scope="col">招式</th><th scope="col"><button class="sth" data-k="t">屬性</button></th><th scope="col"><button class="sth" data-k="c">分類</button></th><th scope="col"><button class="sth" data-k="k">攻擊方式</button></th>`
       + `<th scope="col"><button class="sth" data-k="me" aria-pressed="true">這隻用的實況 DPS</button></th><th scope="col"><button class="sth" data-k="r">Lv5 實況 DPS</button></th><th scope="col"><button class="sth" data-k="h">Lv5 大潮 DPS</button></th><th scope="col"><button class="sth" data-k="s">Lv5 單體 DPS</button></th><th scope="col">進化後實況 DPS（條件）</th>${price}</tr></thead>`
       + `<tbody>${mvRows(list, m, kind)}</tbody></table></div>`;
   }
   function sortTable(tb, k) {
     const rows = [...tb.children];
     const val = r => k === 'p' ? +r.lastElementChild.textContent.replace(/,/g, '') : +r.dataset[k];
-    rows.sort((a, b) => k === 't' ? val(a) - val(b) || (+b.dataset.me - +a.dataset.me) : val(b) - val(a));
+    // 屬性、分類：依固定順序；攻擊方式：依名稱；同一組內依「這隻用的實況 DPS」高→低
+    const tie = (a, b) => (+b.dataset.me - +a.dataset.me);
+    rows.sort((a, b) => k === 't' || k === 'c' ? val(a) - val(b) || tie(a, b)
+      : k === 'k' ? a.dataset.k.localeCompare(b.dataset.k, 'zh-Hant') || tie(a, b)
+      : val(b) - val(a));
     rows.forEach(r => tb.appendChild(r));
   }
   // 遊戲內的待機動畫：assets/pokemon/<編號>/Idle.png 是 n 格 × r 個方向的圖，第 1 列是面向前方；d 是每格的長度（1/60 秒）
