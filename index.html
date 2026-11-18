@@ -623,6 +623,17 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 #tab-sp .pwc .tm b{color:var(--fg)}
 #tab-sp .pwc ul{margin:0;padding-left:1.1em;font-size:14px;display:grid;gap:3px}
 #tab-sp .pwc .who{font-size:13px;color:var(--muted)}
+#tab-sp .pwt{font-size:13.5px}
+#tab-sp .pwt th,#tab-sp .pwt td{padding:10px 10px}
+#tab-sp .pwt tbody th{min-width:5.5em}
+#tab-sp .pwt .pwn{font-size:16px;font-weight:700;white-space:nowrap}
+#tab-sp .pwt td.who{color:var(--muted);font-size:13px;min-width:10em}
+#tab-sp .pwt td{line-height:1.55}
+#tab-sp .pwt td:nth-child(5),#tab-sp .pwt td:nth-child(6){min-width:11em}
+#tab-sp .pwt td:nth-child(7){min-width:9em}
+#tab-sp .pwt td:nth-child(8){min-width:20em}
+#tab-sp .pwt .ln+.ln{margin-top:4px;padding-top:4px;border-top:1px dashed var(--line)}
+#tab-sp .pwt b.up{color:var(--accent)}
 #tab-sp .sptools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 #tab-sp #spq{flex:1 1 220px;font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg)}
 #tab-sp .spf{font:inherit;font-size:13px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--fg);cursor:pointer}
@@ -2466,32 +2477,10 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 <section class="narrow" id="sp-powers">
   <h2>五種力量</h2>
   <p class="note">每個人都能選極巨化（或超極巨化）、Z 手環、太晶化；寶可夢有超級進化或特殊形態時多一個「超級進化」選項。表中的「最強一擊」是你目前招式裡「威力 × 攻擊倍率」最高的那一招單次傷害（含道具、強化、性格等倍率；沒有攻擊招式時以 10 × 攻擊倍率計）。</p>
-  <div class="pw">
-    <div class="pwc"><h3>超級進化</h3><div class="tm">持續 <b>40</b> 秒・冷卻 <b>90</b> 秒</div><div class="who">有超級進化、原始回歸、形態變化或合體的寶可夢</div><ul>
-      <li>換成該形態的<b>屬性、特性</b>，以及速度、物攻、特攻、防禦、特防（體力不變）。</li>
-      <li>能力值依你本局的成長比例換算：例如你的特攻是種族值的 1.2 倍，超級進化後也是超級進化特攻的 1.2 倍。</li>
-      <li>有多種形態（噴火龍 X／Y、超夢 X／Y 等）時，選力量時先選一種。</li>
-      <li>超級噴火龍 Y、原始固拉多會帶來 40 秒晴天，原始蓋歐卡帶來 40 秒下雨。</li>
-      <li>招式不變；專屬招式在超級進化／原始形態時也會出現在升級卡中。</li></ul></div>
-    <div class="pwc"><h3>極巨化</h3><div class="tm">持續 <b>12</b> 秒・冷卻 <b>80</b> 秒</div><div class="who">沒有超極巨化型態的寶可夢</div><ul>
-      <li>變巨大，鏡頭拉遠 1.6 倍（看得更遠）。</li>
-      <li><b>最大體力和目前體力各加上原本的最大體力</b>（約兩倍）；結束時按比例縮回。</li>
-      <li>所有招式傷害 <b>×1.4</b>。</li>
-      <li>每次命中，目標周圍 70 單位內的其他敵人再受到 <b>45%</b> 的傷害（同一隻敵人最快每 0.22 秒一次）。</li>
-      <li><b>踩踏</b>：身邊 66～110 單位內（依體型）的一般敵人直接被踩扁（5 倍剩餘體力的傷害）；每走 96 單位一步，對範圍內的首領、傳說、阿爾宙斯造成 0.8 × 最強一擊。</li></ul></div>
-    <div class="pwc"><h3>超極巨化</h3><div class="tm">持續 <b>12</b> 秒・冷卻 <b>80</b> 秒</div><div class="who">有超極巨化型態的寶可夢（33 種，見下方）</div><ul>
-      <li>包含極巨化的全部效果。</li>
-      <li>另外<b>每 3 秒</b>自動施放一次超極巨招式：170 單位內所有敵人受到 <b>2.2 × 最強一擊</b>，並附帶各寶可夢不同的效果（灼傷、暈眩、連鎖、回復、掉寶可幣等）。</li></ul></div>
-    <div class="pwc"><h3>Z 手環</h3><div class="tm">持續 <b>15</b> 秒・冷卻 <b>60</b> 秒</div><div class="who">所有寶可夢；選力量時先選 Z 招式的屬性（有專屬 Z 招式的可以選專屬）</div><ul>
-      <li>持續期間每 <b>0.8 秒</b>朝 420 單位內最近的敵人滾出一個大「Z」：<b>1.2 × 最強一擊</b>，貫穿路上所有敵人（半徑 24、速度 280、飛 1.7 秒）。</li>
-      <li>結束後放出 Z 招式：<b>畫面內（約 480 單位）所有敵人</b>受到 <b>30 × 最強一擊</b>，越遠越弱（邊緣剩 60%）。</li>
-      <li>專屬 Z 招式：兩種傷害再 ×1.2（結尾 36 倍）。</li>
-      <li>對首領、傳說仍受「首領保護」限制（每一下最多掉 10% 最大體力）。</li></ul></div>
-    <div class="pwc"><h3>太晶化</h3><div class="tm">持續 <b>30</b> 秒・冷卻 <b>75</b> 秒</div><div class="who">所有寶可夢；選力量時先選太晶屬性（18 種＋星晶）</div><ul>
-      <li>變成<b>單一的太晶屬性</b>（受到的屬性相剋也跟著變）。</li>
-      <li>太晶屬性的招式 <b>×1.5</b>；寶可夢本來就有這個屬性時 <b>×1.8</b>。</li>
-      <li><b>星晶</b>：保留原本的屬性，<b>所有招式 ×1.3</b>。</li></ul></div>
-  </div>
+  <div class="tbl"><table class="pwt">
+    <thead><tr><th scope="col">力量</th><th scope="col">持續</th><th scope="col">冷卻</th><th scope="col">可以選的寶可夢</th><th scope="col">能力值</th><th scope="col">屬性・特性</th><th scope="col">招式傷害</th><th scope="col">其他效果</th></tr></thead>
+    <tbody><tr><th scope="row"><b class="pwn">超級進化</b></th><td class="num"><b>40</b> 秒</td><td class="num"><b>90</b> 秒</td><td class="who">有超級進化、原始回歸、形態變化或合體的寶可夢；有多種形態（噴火龍 X／Y、超夢 X／Y 等）時先選一種</td><td><div class="ln">速度、物攻、特攻、防禦、特防換成該形態的值</div><div class="ln">依本局成長比例換算：你的特攻是種族值的 1.2 倍，超級進化後也是超級進化特攻的 1.2 倍</div><div class="ln"><b>體力不變</b></div></td><td><div class="ln">換成該形態的<b>屬性</b>和<b>特性</b></div></td><td><div class="ln"><span class="mu">倍率不變</span>（跟著物攻、特攻改變）</div></td><td><div class="ln">超級噴火龍 Y、原始固拉多：<b>晴天</b> 40 秒</div><div class="ln">原始蓋歐卡：<b>下雨</b> 40 秒</div><div class="ln">招式不變；專屬招式在超級進化／原始形態時也會出現在升級卡中</div></td></tr><tr><th scope="row"><b class="pwn">極巨化</b></th><td class="num"><b>12</b> 秒</td><td class="num"><b>80</b> 秒</td><td class="who">沒有超極巨化型態的寶可夢</td><td><div class="ln"><b class="up">最大體力和目前體力各加上原本的最大體力</b>（約 ×2）</div><div class="ln">結束時按比例縮回</div></td><td><span class="mu">不變</span></td><td><div class="ln">所有招式 <b class="up">×1.4</b></div></td><td><div class="ln"><b>濺射</b>：每次命中，目標周圍 70 單位內的其他敵人再受到 45% 傷害（同一隻最快每 0.22 秒一次）</div><div class="ln"><b>踩踏</b>：身邊 66～110 單位內（依體型）的一般敵人直接被踩扁；每走 96 單位一步，對範圍內的首領、傳說、阿爾宙斯造成 0.8 × 最強一擊</div><div class="ln">變巨大，鏡頭拉遠 1.6 倍</div></td></tr><tr><th scope="row"><b class="pwn">超極巨化</b></th><td class="num"><b>12</b> 秒</td><td class="num"><b>80</b> 秒</td><td class="who">有超極巨化型態的寶可夢（33 種，見下方）</td><td><div class="ln">同極巨化</div></td><td><span class="mu">不變</span></td><td><div class="ln">同極巨化：所有招式 <b class="up">×1.4</b></div></td><td><div class="ln">包含極巨化的全部效果</div><div class="ln"><b>每 3 秒</b>自動施放超極巨招式：170 單位內所有敵人受到 <b>2.2 × 最強一擊</b>，附帶各寶可夢不同的效果（灼傷、暈眩、連鎖、回復、掉寶可幣等）</div></td></tr><tr><th scope="row"><b class="pwn">Z 手環</b></th><td class="num"><b>15</b> 秒</td><td class="num"><b>60</b> 秒</td><td class="who">所有寶可夢；先選 Z 招式的屬性（有專屬 Z 招式的可以選專屬）</td><td><span class="mu">不變</span></td><td><span class="mu">不變</span></td><td><div class="ln"><span class="mu">倍率不變</span></div><div class="ln">專屬 Z 招式：Z 的兩種傷害再 <b class="up">×1.2</b></div></td><td><div class="ln">每 <b>0.8 秒</b>朝 420 單位內最近的敵人滾出大「Z」：<b>1.2 × 最強一擊</b>，貫穿路上所有敵人（半徑 24、速度 280、飛 1.7 秒）</div><div class="ln">結束時放出 Z 招式：畫面內（約 480 單位）所有敵人受到 <b>30 × 最強一擊</b>，越遠越弱（邊緣剩 60%）；專屬 Z 招式為 36 倍</div><div class="ln">對首領、傳說仍受「首領保護」限制（每一下最多掉 10% 最大體力）</div></td></tr><tr><th scope="row"><b class="pwn">太晶化</b></th><td class="num"><b>30</b> 秒</td><td class="num"><b>75</b> 秒</td><td class="who">所有寶可夢；先選太晶屬性（18 種＋星晶）</td><td><span class="mu">不變</span></td><td><div class="ln">變成<b>單一的太晶屬性</b>，受到的屬性相剋也跟著變</div><div class="ln">星晶：保留原本的屬性</div></td><td><div class="ln">太晶屬性的招式 <b class="up">×1.5</b></div><div class="ln">本來就有這個屬性時 <b class="up">×1.8</b></div><div class="ln">星晶：所有招式 <b class="up">×1.3</b></div></td><td><span class="mu">—</span></td></tr></tbody>
+  </table></div>
   <ul class="rules" style="margin-top:14px">
     <li>升級卡「快速力量」：每張冷卻 −8%（前 4 張加法，之後每張 ×0.92，最低 50%），只在已經選好力量後出現。</li>
     <li>寶可夢在局內進化後，力量會自動對應新的寶可夢：例如原本選超級進化但新形態沒有超級進化，會改成極巨化；極巨化的寶可夢進化成有超極巨化型態的，會改成超極巨化。</li>
