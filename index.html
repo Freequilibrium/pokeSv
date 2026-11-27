@@ -1088,6 +1088,11 @@ body{background:var(--bg)}
 #tab-moves .bufsrc td[rowspan]{white-space:normal;vertical-align:middle}
 #tab-moves .bufsrc tr:last-child td:last-child{white-space:normal;min-width:16em}
 
+#tab-moves .fit table{width:100%}
+#tab-moves .fit th:not(:last-child),#tab-moves .fit td:not(:last-child):not([colspan]){white-space:nowrap}
+#tab-moves .fit th:last-child{width:100%}
+#tab-moves .tbl + .tbl{margin-top:12px}
+
 </style>
 </head>
 <body>
@@ -2418,6 +2423,7 @@ body{background:var(--bg)}
     <a class="fact" href="#mv-atk" data-go="mv:atk"><b>攻擊</b><span>傷害公式、同屬性加成</span></a>
     <a class="fact" href="#mv-def" data-go="mv:def"><b>防禦</b><span>受傷公式、減傷上限</span></a>
     <a class="fact" href="#mv-typefx" data-go="mv:typefx"><b>屬性命中效果</b><span>18 個屬性的追加效果</span></a>
+    <a class="fact" href="#mv-movefx" data-go="mv:movefx"><b>招式附加效果</b><span>灼傷、中毒、控場與疊加</span></a>
     <a class="fact" href="#mv-buffs" data-go="mv:buffs"><b>增益疊加</b><span>攻擊招式與強化招式</span></a>
     <a class="fact" href="#mv-kinds" data-go="mv:kinds"><b>攻擊類型</b><span>37 種施放方式與命中判定</span></a>
   </nav>
@@ -2833,7 +2839,7 @@ body{background:var(--bg)}
 
 <section id="mv-fx">
   <h2>命中效果與增益</h2>
-  <p class="lede">屬性的命中效果、哪些情況不會觸發，以及攻擊招式和強化招式的增益怎麼疊加。</p>
+  <p class="lede">屬性的命中效果、哪些情況不會觸發、招式自帶的附加效果，以及攻擊招式和強化招式的增益怎麼疊加。</p>
 
   <h3 id="mv-typefx">屬性命中效果</h3>
   <ul class="rules">
@@ -2851,9 +2857,7 @@ body{background:var(--bg)}
     <tbody><tr><td><span class="ty" data-t="normal">一般</span></td><td>傷害永遠 ×1.05</td></tr><tr><td><span class="ty" data-t="dark">惡</span></td><td>打體力低於 30% 的敵人時傷害 ×1.18</td></tr><tr><td><span class="ty" data-t="fighting">格鬥</span></td><td>擊退距離 ×1.3</td></tr></tbody>
   </table></div>
   <ul class="rules">
-    <li><b>招式自帶效果</b>（例如鬼火的灼傷、帶減速的招式）每一下都會套用，不受 2.5 秒冷卻和機率限制；和屬性效果可以同時存在。</li>
-    <li><b>減速</b>取比較強、比較久的那個，不相加。<b>灼傷、中毒</b>各最多 8 層，每次疊加重設持續時間，計算用的傷害取目前最高的那一下。</li>
-    <li><b>易傷</b>（蟲、鋼）和咬碎的「易傷 ×1.25」是不同的效果，可以相乘。</li>
+    <li>招式自帶的灼傷、中毒、減速、暈眩等效果和屬性命中效果分開判定，見下方「<a href="#mv-movefx" data-go="mv:movefx">招式自帶的附加效果</a>」。</li>
   </ul>
   <h4>不會觸發或會改變效果的情況</h4>
   <div class="tbl ktbl"><table>
@@ -2867,6 +2871,78 @@ body{background:var(--bg)}
       <tr><td>打樹木、岩石、牆壁</td><td>不觸發</td></tr>
     </tbody>
   </table></div>
+
+  <h3 id="mv-movefx">招式自帶的附加效果</h3>
+  <ul class="rules">
+    <li><b>每一下都套用</b>：招式自帶效果不看機率、沒有冷卻；和屬性命中效果<b>分開判定，兩者都保留</b>。</li>
+    <li>持續傷害區域（毒水窪、火焰窪）每次跳傷害也算一下，會再上一次灼傷／中毒，也會再擲一次屬性命中效果。</li>
+    <li>遊戲內「噴煙」（lava-plume）的中文名稱和「噴射火焰」相同，本節寫作「噴煙」以示區別。</li>
+  </ul>
+
+  <h4>持續傷害：灼傷與中毒</h4>
+  <div class="tbl ktbl fit"><table>
+    <thead><tr><th scope="col">項目</th><th scope="col">灼傷</th><th scope="col">中毒</th><th scope="col">說明</th></tr></thead>
+    <tbody>
+      <tr><td>每層傷害</td><td class="num">每 0.5 秒 6%</td><td class="num">每 0.6 秒 5%</td><td>百分比乘上「基準傷害」</td></tr>
+      <tr><td>每層每秒</td><td class="num">12%</td><td class="num">約 8.3%</td><td></td></tr>
+      <tr><td>持續</td><td class="num">3 秒</td><td class="num">4 秒</td><td>每次加層數時重設</td></tr>
+      <tr><td>層數上限</td><td class="num">8 層</td><td class="num">8 層</td><td>層數可以是小數（例如每下 +1.5）</td></tr>
+      <tr><td>滿層每秒</td><td class="num">96%</td><td class="num">約 67%</td><td>滿層灼傷約等於每秒多打一下</td></tr>
+      <tr><td>基準傷害</td><td colspan="2">對這隻敵人打出的最強一下</td><td>狀態持續中只會往上換；已含威力卡、增益、要害、獵手等所有加成</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tbl ktbl fit"><table>
+    <thead><tr><th scope="col">狀態</th><th scope="col">每下加</th><th scope="col">招式</th></tr></thead>
+    <tbody>
+      <tr><td>灼傷</td><td class="num">1 層</td><td>餘燼、噴射火焰、火焰旋渦、熱風、鬼火、火焰輪、蓄能焰襲、大字爆炎、火焰拳、熱水、噴煙、火焰球</td></tr>
+      <tr><td>灼傷</td><td class="num">1.5 層</td><td>神聖之火、青焰</td></tr>
+      <tr><td>中毒</td><td class="num">1 層</td><td>污泥攻擊、毒針、劇毒、酸液炸彈、污泥炸彈</td></tr>
+      <tr><td>中毒</td><td class="num">1.5 層</td><td>晶光轉轉</td></tr>
+      <tr><td>中毒</td><td class="num">2 層</td><td>毒菱、邪毒鎖鏈</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="rules">
+    <li>多段、高頻率的招式（噴射火焰、火焰旋渦等）很快就能疊滿 8 層。</li>
+    <li>火、毒屬性命中效果觸發時也是 +1 層，和招式自帶的加在<b>同一個</b>灼傷／中毒上，一起算 8 層上限。</li>
+  </ul>
+
+  <h4>其他傷害與增傷效果</h4>
+  <div class="tbl ktbl fit"><table>
+    <thead><tr><th scope="col">招式</th><th scope="col">效果</th><th scope="col">數值</th><th scope="col">備註</th></tr></thead>
+    <tbody>
+      <tr><td>污泥炸彈、噴煙</td><td>留下毒水窪／火焰窪</td><td class="num">每 0.5 秒 30%</td><td>對範圍內所有敵人；持續 3 秒／2.5 秒；同一招最多 12 個</td></tr>
+      <tr><td>雷電拳、等離子閃電拳</td><td>連鎖電擊</td><td class="num">60% × 2／3 隻</td><td>跳到附近 130 範圍內最近的敵人</td></tr>
+      <tr><td>咬碎</td><td>易傷</td><td class="num">受到傷害 ×1.25，4 秒</td><td>只對<b>非投射物</b>的傷害有效（近身、範圍、水窪等）；扇形招式其實是發射投射物，吃不到。和蟲、鋼屬性的易傷是不同效果，<b>相乘</b></td></tr>
+      <tr><td>禍不單行</td><td>追擊異常狀態</td><td class="num">×1.7</td><td>目標正在灼傷、中毒或被減速時（屬性命中效果造成的減速也算）</td></tr>
+    </tbody>
+  </table></div>
+
+  <h4>控場效果（不造成傷害）</h4>
+  <div class="tbl ktbl fit"><table>
+    <thead><tr><th scope="col">效果</th><th scope="col">規則</th><th scope="col">招式（Lv5 數值）</th></tr></thead>
+    <tbody>
+      <tr><td>減速</td><td>取最強的，不相加；1.2 秒；上限 80%</td><td>冰凍光束 70%、吐絲 60%、冰封世界 60%、暴風雪 55%、雪矛 50%、縫影 50%、泡沫 45%、細雪 45%、泥巴射擊 40%、舌舔 40%、冰雹 40%、冰凍拳 40%、重踏 35%、泡沫光線 30%、薄霧球 30%、龍息 25%</td></tr>
+      <tr><td>暈眩</td><td>取最長的，不相加；對頭目、審判只有 35% 時間</td><td>暗黑洞 2.7 秒、電磁波 1.5 秒、冷凍乾燥 1.5 秒、岩石封鎖 1.35 秒、爆裂拳 1.35 秒、攀瀑 1.2 秒、水之波動 0.45 秒、冰凍拳 0.35 秒；前六招進化後 ×1.4</td></tr>
+      <tr><td>吸引</td><td>把敵人拉向漩渦中心</td><td>潮旋 150、流沙地獄 140、奇異之風 140</td></tr>
+    </tbody>
+  </table></div>
+
+  <h4>和屬性命中效果的關係</h4>
+  <div class="tbl ktbl fit"><table>
+    <thead><tr><th scope="col">項目</th><th scope="col">招式自帶效果</th><th scope="col">屬性命中效果</th></tr></thead>
+    <tbody>
+      <tr><td>觸發</td><td>每一下 100%</td><td>每一下擲機率（火 10%、水 12% 等）</td></tr>
+      <tr><td>冷卻</td><td>沒有</td><td>同一隻敵人 2.5 秒內只觸發一次</td></tr>
+      <tr><td>天恩</td><td>全部加倍（每下 +2 層、減速 ×2 但仍有 80% 上限、暈眩 ×2）</td><td>機率<b>不</b>加倍</td></tr>
+      <tr><td>強行</td><td colspan="2">兩者全部消失，換成強行本身的傷害加成</td></tr>
+      <tr><td>毒手</td><td colspan="2">用近身、突進、拳、剪、飛撲類招式打中時，額外 +1 層中毒</td></tr>
+      <tr><td>阿爾宙斯</td><td colspan="2">對灼傷、中毒、減速、暈眩和所有屬性命中效果免疫</td></tr>
+      <tr><td>審判</td><td>灼傷、中毒變成每跳固定 1.5 × 層數</td><td>免疫</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="rules">
+    <li>例：<b>熱水</b>每下必定 +1 層灼傷，另有 12% 機率觸發水屬性減速；被減速後也符合禍不單行的條件。</li>
+  </ul>
 
   <h3 id="mv-buffs">攻擊招式與強化招式的疊加</h3>
   <h4>增益格子</h4>
