@@ -2954,9 +2954,9 @@ body{background:var(--bg)}
   <h1>招式坐標軸</h1>
   <p class="lede">把每個攻擊招式的<b>實戰分</b>和<b>單體 DPS</b>畫在同一張圖上，一眼看出哪些招式清群強、哪些打單體強。</p>
   <ul class="rules lede-list">
-    <li><b>座標</b>：橫軸 ＝ log<sub>10</sub>(招式實戰分 ÷ 篩選後所有招式實戰分的平均)，縱軸 ＝ log<sub>10</sub>(招式單體 DPS ÷ 篩選後所有招式單體 DPS 的平均)。0 就是平均；每 +0.3 約等於 2 倍，−0.3 約等於一半。</li>
+    <li><b>座標</b>：橫軸 ＝ log<sub>10</sub>(招式實戰分 ÷ 篩選後所有招式實戰分的中位數)，縱軸 ＝ log<sub>10</sub>(招式單體 DPS ÷ 篩選後所有招式單體 DPS 的中位數)。0 就是中位數（一半招式比它高、一半比它低）；每 +0.3 約等於 2 倍，−0.3 約等於一半。</li>
     <li><b>怎麼讀</b>：右上＝實戰和單體都強；右下＝清群強、打單體普通；左上＝打單體（頭目）強、清群弱；左下＝兩者都弱。</li>
-    <li><b>資料</b>：實戰分依下方「實戰模擬」選的時間、型態和玩法；單體 DPS 取招式表的 Lv5 欄或進化 + 欄（選「最終型態」時；不會進化的招式用 Lv5）。平均值隨篩選結果重新計算。</li>
+    <li><b>資料</b>：實戰分依下方「實戰模擬」選的時間、型態和玩法；單體 DPS 取招式表的 Lv5 欄或進化 + 欄（選「最終型態」時；不會進化的招式用 Lv5）。中位數隨篩選結果重新計算。</li>
     <li><b>操作</b>：滑鼠移到點或招式名稱上會淡化其他招式並顯示詳細數值；點招式名稱跳到「招式與傷害」表格中的那一列。</li>
   </ul>
 </header>
@@ -4969,9 +4969,10 @@ render();
       .map(d => ({ d, s: d.sd[key][sim.m][5], p: sim.s === 'fin' ? d.ev : d.lv5 })).filter(q => q.s > 0 && q.p > 0);
     svg.textContent = ''; tip.hidden = true;
     if (!L.length) { cnt.textContent = '沒有符合篩選的攻擊招式'; svg.setAttribute('height', 80); return; }
-    const mS = L.reduce((a, q) => a + q.s, 0) / L.length, mP = L.reduce((a, q) => a + q.p, 0) / L.length;
+    const med = a => { a = a.slice().sort((u, v) => u - v); const k = a.length >> 1; return a.length % 2 ? a[k] : (a[k - 1] + a[k]) / 2; };
+    const mS = med(L.map(q => q.s)), mP = med(L.map(q => q.p));
     L.forEach(q => { q.x = Math.log10(q.s / mS); q.y = Math.log10(q.p / mP); });
-    cnt.textContent = '顯示 ' + L.length + ' 個攻擊招式・' + (sim.t === '600' ? '10' : '20') + ' 分・' + (sim.s === 'fin' ? '最終型態' : 'Lv5') + '・' + MZ[sim.m] + '｜平均實戰分 ' + fmt(mS) + '、平均單體 DPS ' + fmt(mP);
+    cnt.textContent = '顯示 ' + L.length + ' 個攻擊招式・' + (sim.t === '600' ? '10' : '20') + ' 分・' + (sim.s === 'fin' ? '最終型態' : 'Lv5') + '・' + MZ[sim.m] + '｜實戰分中位數 ' + fmt(mS) + '、單體 DPS 中位數 ' + fmt(mP);
     const W = Math.max(640, box.clientWidth), H = Math.max(520, Math.min(900, Math.round(W * 0.62)));
     const ml = 64, mr = 24, mt = 24, mb = 56;
     let x0 = Math.min(...L.map(q => q.x)), x1 = Math.max(...L.map(q => q.x)), y0 = Math.min(...L.map(q => q.y)), y1 = Math.max(...L.map(q => q.y));
@@ -4985,7 +4986,7 @@ render();
     el('rect', { x: X(0), y: mt, width: W - mr - X(0), height: Y(0) - mt, class: 'q q1' }, g0);
     el('rect', { x: ml, y: Y(0), width: X(0) - ml, height: H - mb - Y(0), class: 'q q3' }, g0);
     const step = (a, b) => { const r = b - a; return r > 2.4 ? 0.5 : r > 1.2 ? 0.25 : 0.1; };
-    const tickLbl = v => { const m = Math.pow(10, v); return v === 0 ? '平均' : '×' + (m >= 10 ? m.toFixed(0) : m >= 1 ? m.toFixed(1).replace(/\.0$/, '') : m.toFixed(2).replace(/0$/, '')); };
+    const tickLbl = v => { const m = Math.pow(10, v); return v === 0 ? '中位數' : '×' + (m >= 10 ? m.toFixed(0) : m >= 1 ? m.toFixed(1).replace(/\.0$/, '') : m.toFixed(2).replace(/0$/, '')); };
     const sx = step(x0, x1), sy = step(y0, y1);
     for (let v = Math.ceil(x0 / sx) * sx; v <= x1 + 1e-9; v += sx) {
       const vv = Math.round(v * 100) / 100;
@@ -5000,8 +5001,8 @@ render();
       const t2 = el('text', { x: ml - 8, y: Y(vv) + 11, class: 'tk2', 'text-anchor': 'end' }, g0); t2.textContent = tickLbl(vv);
     }
     el('rect', { x: ml, y: mt, width: W - ml - mr, height: H - mt - mb, class: 'frame' }, g0);
-    const xl = el('text', { x: (ml + W - mr) / 2, y: H - 8, class: 'axl', 'text-anchor': 'middle' }, g0); xl.textContent = '實戰分：log₁₀(實戰分 ÷ 平均) →';
-    const yl = el('text', { x: 14, y: (mt + H - mb) / 2, class: 'axl', 'text-anchor': 'middle', transform: 'rotate(-90 14 ' + (mt + H - mb) / 2 + ')' }, g0); yl.textContent = '單體 DPS：log₁₀(單體 DPS ÷ 平均) →';
+    const xl = el('text', { x: (ml + W - mr) / 2, y: H - 8, class: 'axl', 'text-anchor': 'middle' }, g0); xl.textContent = '實戰分：log₁₀(實戰分 ÷ 中位數) →';
+    const yl = el('text', { x: 14, y: (mt + H - mb) / 2, class: 'axl', 'text-anchor': 'middle', transform: 'rotate(-90 14 ' + (mt + H - mb) / 2 + ')' }, g0); yl.textContent = '單體 DPS：log₁₀(單體 DPS ÷ 中位數) →';
     const ql = (x, y, a, s) => { const t = el('text', { x, y, class: 'ql', 'text-anchor': a }, g0); t.textContent = s; };
     ql(W - mr - 8, mt + 16, 'end', '實戰強・單體強'); ql(W - mr - 8, H - mb - 8, 'end', '清群型'); ql(ml + 8, mt + 16, 'start', '打王型'); ql(ml + 8, H - mb - 8, 'start', '兩者偏弱');
     // 點與標籤
