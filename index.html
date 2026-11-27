@@ -858,11 +858,229 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 [id^="pk-"],[id^="ab-"],[id^="mv-"]{scroll-margin-top:calc(var(--toph,60px) + 8px)}
 .tabpanel{scroll-margin-top:8px}
 
+
+/* 招式坐標軸：沿用招式頁的版面 */
+#tab-ax .wrap{max-width:1400px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:26px}
+#tab-ax h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0;text-wrap:balance}
+#tab-ax h2{font-family:var(--f-display);font-weight:500;font-size:22px;margin:0 0 10px;text-wrap:balance}
+#tab-ax .lede{color:var(--muted);max-width:68ch;margin:8px 0 0}
+#tab-ax .facts{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-size:14px;color:var(--muted)}
+#tab-ax .facts b{font-variant-numeric:tabular-nums;color:var(--fg);font-size:17px}
+#tab-ax .wrap>*{min-width:0}
+#tab-ax .rules{margin:0;padding-left:1.2em;max-width:76ch;display:grid;gap:4px}
+#tab-ax .rules.howto{max-width:152ch}
+#tab-ax .phy{color:var(--phy)}
+#tab-ax .spe{color:var(--spe)}
+#tab-ax .buf{color:var(--buf)}
+#tab-ax .tools{display:grid;gap:10px}
+#tab-ax #mq{width:100%;box-sizing:border-box;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg)}
+#tab-ax .chips{display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:6px;align-items:start}
+#tab-ax .chips .cg{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+#tab-ax .chips .lbl{font-size:12px;color:var(--muted);padding-top:5px}
+#tab-ax .chip small{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+#tab-ax .chip[aria-pressed="true"] small{color:inherit}
+#tab-ax .chip{font:inherit;font-size:13px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+#tab-ax .chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+#tab-ax .chip:focus-visible,#tab-ax #mq:focus-visible,#tab-ax #sort:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#tab-ax #sort{font:inherit;font-size:13px;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg)}
+#tab-ax .count{font-size:13px;color:var(--muted)}
+#tab-ax .tdot{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none;vertical-align:middle}
+#tab-ax .tdot[data-t="normal"]{background:var(--t-normal)}
+#tab-ax .tdot[data-t="fire"]{background:var(--t-fire)}
+#tab-ax .tdot[data-t="water"]{background:var(--t-water)}
+#tab-ax .tdot[data-t="grass"]{background:var(--t-grass)}
+#tab-ax .tdot[data-t="electric"]{background:var(--t-electric)}
+#tab-ax .tdot[data-t="ice"]{background:var(--t-ice)}
+#tab-ax .tdot[data-t="fighting"]{background:var(--t-fighting)}
+#tab-ax .tdot[data-t="poison"]{background:var(--t-poison)}
+#tab-ax .tdot[data-t="ground"]{background:var(--t-ground)}
+#tab-ax .tdot[data-t="flying"]{background:var(--t-flying)}
+#tab-ax .tdot[data-t="psychic"]{background:var(--t-psychic)}
+#tab-ax .tdot[data-t="bug"]{background:var(--t-bug)}
+#tab-ax .tdot[data-t="rock"]{background:var(--t-rock)}
+#tab-ax .tdot[data-t="ghost"]{background:var(--t-ghost)}
+#tab-ax .tdot[data-t="dragon"]{background:var(--t-dragon)}
+#tab-ax .tdot[data-t="dark"]{background:var(--t-dark)}
+#tab-ax .tdot[data-t="steel"]{background:var(--t-steel)}
+#tab-ax .tdot[data-t="fairy"]{background:var(--t-fairy)}
+#tab-ax .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+#tab-ax #mvtbl{max-height:86vh;overflow:auto;overscroll-behavior:contain}
+#tab-ax table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}
+#tab-ax th,#tab-ax td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:8px 10px}
+#tab-ax thead th{position:sticky;top:0;background:var(--head);font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.04em;white-space:nowrap;z-index:2}
+#tab-ax thead th.evoh{color:var(--evo)}
+#tab-ax th.nm,#tab-ax thead th:first-child{position:sticky;left:0;z-index:1;background:var(--panel);min-width:12em;max-width:15em;border-right:1px solid var(--line)}
+#tab-ax thead th:first-child{z-index:3;background:var(--head)}
+#tab-ax th.nm b{font-size:15px;margin-left:6px}
+#tab-ax th.nm .desc{display:block;font-weight:400;font-size:12px;color:var(--muted);line-height:1.45;margin-top:2px}
+#tab-ax th.nm .fx{display:inline-block;font-weight:400;font-size:11px;background:var(--tag);color:var(--muted);border-radius:4px;padding:0 6px;margin:4px 4px 0 0}
+#tab-ax tr.grp th{background:var(--head);font-family:var(--f-display);font-size:17px;font-weight:500;padding:8px 12px;position:sticky;left:0}
+#tab-ax tr.grp th small{font-family:var(--f-body);font-size:12px;color:var(--muted);margin-left:10px;font-weight:400}
+#tab-ax tr.grp th .tdot{width:12px;height:12px;margin-right:8px}
+#tab-ax td.cat,#tab-ax td.kind{white-space:nowrap}
+#tab-ax .pill{display:inline-block;font-size:12px;font-weight:500;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
+#tab-ax td.lv{min-width:7.4em;font-variant-numeric:tabular-nums}
+#tab-ax td.lv .pw{font-size:16px;font-weight:700}
+#tab-ax td.lv .u{font-size:12px;color:var(--muted);margin-left:3px}
+#tab-ax td.lv .x{font-size:12px;color:var(--muted);margin-left:3px}
+#tab-ax td.lv .ds{display:block;font-size:12px;color:var(--muted)}
+#tab-ax td.lv .ds b{color:var(--fg);font-weight:500}
+#tab-ax h3{font-family:var(--f-display);font-weight:500;font-size:18px;margin:22px 0 8px}
+#tab-ax .formula{font-weight:500;background:var(--tag);border-radius:6px;padding:10px 14px;margin:8px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#tab-ax .note{color:var(--muted);max-width:76ch;margin:6px 0 10px}
+#tab-ax .example{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin-top:14px;max-width:80ch;background:var(--panel)}
+#tab-ax .ktbl td.sub{padding-left:26px;color:var(--muted)}
+#tab-ax #mv-dmg .rules{margin-top:12px}
+#tab-ax .sh{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:3px;letter-spacing:inherit}
+#tab-ax .sh i::after{content:"↕";opacity:.45}
+#tab-ax th[aria-sort="descending"] .sh,#tab-ax th[aria-sort="ascending"] .sh{color:var(--accent);font-weight:700}
+#tab-ax th[aria-sort="descending"] .sh i::after{content:"↓";opacity:1}
+#tab-ax th[aria-sort="ascending"] .sh i::after{content:"↑";opacity:1}
+#tab-ax .sh:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#tab-ax td.lv .dg{display:block;font-size:12.5px}
+#tab-ax td.lv .dg b{color:var(--accent);font-weight:700;font-size:14px}
+#tab-ax td.lv .geo,#tab-ax td.lv .hn{display:block;font-size:11px;color:var(--muted);line-height:1.35}
+#tab-ax td.lv .geo{margin-top:3px}
+#tab-ax td.lv .d1{display:block;font-size:11.5px;color:var(--muted)}
+#tab-ax td.lv .d1 b{font-weight:500;color:var(--accent)}
+#tab-ax td.lv .d1.hz b{color:var(--phy)}
+#tab-ax td.lv .bar{display:block;height:3px;background:var(--line);border-radius:2px;margin:3px 0 2px;overflow:hidden}
+#tab-ax td.lv .bar i{display:block;height:100%;background:var(--accent)}
+#tab-ax td.lv .cd{display:block;font-size:11px;color:var(--muted)}
+#tab-ax td.lv .up{display:block;font-size:11px;color:var(--accent);line-height:1.35;margin-top:2px}
+#tab-ax td.last{box-shadow:inset 1px 0 0 var(--line)}
+#tab-ax td.evo{background:var(--evobg)}
+#tab-ax td.sim{min-width:10.5em;font-variant-numeric:tabular-nums;background:color-mix(in srgb,var(--accent) 5%,var(--panel))}
+#tab-ax td.sim.none .sn{font-size:12px;color:var(--muted)}
+#tab-ax td.sim .sc{display:flex;align-items:baseline;gap:5px;margin-bottom:3px}
+#tab-ax td.sim .sc b{font-size:18px;font-weight:700}
+#tab-ax td.sim .sc small{font-size:11px;color:var(--muted)}
+#tab-ax td.sim .sc em{font-style:normal;font-size:11px;padding:0 6px;border-radius:4px;margin-left:auto;background:var(--tag);color:var(--muted)}
+#tab-ax td.sim .sc em.tg-mv{color:var(--spe)}
+#tab-ax td.sim .sc em.tg-st{color:var(--phy)}
+#tab-ax td.sim .sc em.tg-all{color:var(--accent)}
+#tab-ax td.sim .sb{display:grid;grid-template-columns:2.4em 1fr 2em;align-items:center;gap:4px;font-size:11.5px;line-height:1.5}
+#tab-ax td.sim .sb .sl{color:var(--muted)}
+#tab-ax td.sim .sb .st{height:5px;background:var(--line);border-radius:3px;overflow:hidden}
+#tab-ax td.sim .sb .st i{display:block;height:100%;border-radius:3px}
+#tab-ax td.sim .sb.k .st i{background:var(--accent)}
+#tab-ax td.sim .sb.s .st i{background:var(--spe)}
+#tab-ax td.sim .sb.w .st i{background:var(--phy)}
+#tab-ax td.sim .sb b{text-align:right;font-weight:600}
+#tab-ax td.sim .sx{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+#tab-ax th.simh .simsel{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+#tab-ax .simtools .sg{display:inline-flex;flex-wrap:wrap;gap:4px;align-items:center;margin-right:10px}
+#tab-ax .simtools .lbl2{font-size:12px;color:var(--muted);margin-right:2px}
+#tab-ax .simtools .cg{flex:1}
+#tab-ax .simtools .sreset{margin-left:auto;margin-right:0}
+#tab-ax .simtools .rst{border-style:dashed}
+#tab-ax td.sim .sx2 b{color:var(--fg);font-weight:600}
+#tab-ax td.sim .sref b.up{color:#3fb26b}
+#tab-ax td.sim .sref b.dn{color:#e05a5a}
+#tab-ax td.evo .bar i{background:var(--evo)}
+#tab-ax td.evo .up{color:var(--evo)}
+#tab-ax td.evo.none .ds{font-style:italic}
+#tab-ax tr.mv:hover th.nm,#tab-ax tr.mv:hover td{background-image:linear-gradient(var(--tag),var(--tag))}
+#tab-ax .ktbl table{font-size:14px}
+#tab-ax .ktbl td,#tab-ax .ktbl th{padding:7px 12px}
+#tab-ax .ktbl td:nth-child(2){font-variant-numeric:tabular-nums;color:var(--muted)}
+#tab-ax footer{color:var(--muted);font-size:13px;max-width:76ch}
+#tab-ax footer a{color:var(--accent)}
+#tab-ax .facts.jump{margin-top:10px}
+#tab-ax dl.cols{display:grid;grid-template-columns:7em minmax(0,1fr);gap:8px 16px;margin:0;max-width:110ch}
+#tab-ax dl.cols dt{font-weight:700}
+#tab-ax dl.cols dd{margin:0;color:var(--fg)}
+#tab-ax dl.cols .own-t{color:var(--evo)}
+#tab-ax th.nm .fx.own{color:var(--evo)}
+#tab-ax .vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin:12px 0}
+#tab-ax .vcard{border:1px solid var(--line);border-radius:6px;background:var(--panel);padding:12px 14px}
+#tab-ax .vcard h4{margin:0 0 8px;font-size:14px;font-weight:700}
+#tab-ax .vcard p{margin:8px 0 0;font-size:12px;color:var(--muted);line-height:1.5}
+#tab-ax .hb{display:grid;grid-template-columns:6.2em minmax(0,1fr) 4.2em;gap:8px;align-items:center;font-size:12.5px;margin:3px 0;font-variant-numeric:tabular-nums}
+#tab-ax .hb .hl{color:var(--muted);white-space:nowrap}
+#tab-ax .hb .ht{height:10px;background:var(--tag);border-radius:3px;overflow:hidden}
+#tab-ax .hb .ht i{display:block;height:100%;background:var(--accent)}
+#tab-ax .hb .hv{text-align:right}
+#tab-ax th.nm .fx.rc{background:none;border:1px dashed var(--line)}
+#tab-ax .facts a.fact{color:var(--muted);text-decoration:none;border-bottom:1px dashed var(--line)}
+#tab-ax .facts a.fact b{font-size:15px;margin-right:4px}
+#tab-ax .facts a.fact:hover{color:var(--accent);border-bottom-color:var(--accent)}
+#tab-ax .facts a.fact:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* ===== 淡橘色主題（淺色、深色系統設定都用這一套） ===== */
+:root,:root:not([data-theme="light"]),:root[data-theme="dark"],:root[data-theme="light"]{
+  --bg:#fdf0e2; --panel:#fffaf4; --fg:#2b1d12; --muted:#7a6250; --line:#ecd6bd;
+  --accent:#c2571a; --accent-ink:#ffffff; --gold:#946200; --phy:#b8431f; --spe:#2f55c4; --tag:#fbe4cb; --head:#f8e1c6; --buf:#7a6a1f; --evo:#9a6b00; --evobg:#fdf3dc;
+  color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#fdf0e2; --panel:#fffaf4; --fg:#2b1d12; --muted:#7a6250; --line:#ecd6bd;
+  --accent:#c2571a; --accent-ink:#ffffff; --gold:#946200; --phy:#b8431f; --spe:#2f55c4; --tag:#fbe4cb; --head:#f8e1c6; --buf:#7a6a1f; --evo:#9a6b00; --evobg:#fdf3dc; color-scheme:light}}
+body{background:var(--bg)}
+.topwrap,.topbar{background:var(--bg)}
+.tabs a[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+
+/* ===== 頁內跳轉：彩色區塊，名稱在上、說明在第二行 ===== */
+.tabpanel .facts:has(> a.fact){display:flex!important;flex-wrap:wrap;gap:10px!important;margin-top:14px}
+.tabpanel .facts a.fact{--c:#d9772b;display:flex!important;flex-direction:column;gap:1px;min-width:9.5em;padding:8px 14px 9px;border:1.5px solid var(--c)!important;border-radius:10px;background:color-mix(in srgb,var(--c) 11%,var(--panel));color:var(--fg)!important;text-decoration:none;line-height:1.35;transition:background .15s,transform .15s}
+.tabpanel .facts a.fact b{display:block;font-size:15px!important;font-weight:700;margin:0!important;color:color-mix(in srgb,var(--c) 70%,#000)!important}
+.tabpanel .facts a.fact span{display:block;font-size:12.5px;color:var(--muted)}
+.tabpanel .facts a.fact:hover{background:color-mix(in srgb,var(--c) 24%,var(--panel));transform:translateY(-1px)}
+.tabpanel .facts a.fact:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+.tabpanel .facts a.fact:nth-child(8n+1){--c:#d9772b}
+.tabpanel .facts a.fact:nth-child(8n+2){--c:#2f8f6b}
+.tabpanel .facts a.fact:nth-child(8n+3){--c:#3d6fd6}
+.tabpanel .facts a.fact:nth-child(8n+4){--c:#b8467a}
+.tabpanel .facts a.fact:nth-child(8n+5){--c:#8f6b14}
+.tabpanel .facts a.fact:nth-child(8n+6){--c:#6a52c4}
+.tabpanel .facts a.fact:nth-child(8n+7){--c:#2a8fa3}
+.tabpanel .facts a.fact:nth-child(8n+8){--c:#c0392b}
+
+/* ===== 小標 ===== */
+.tabpanel h4{font-family:var(--f-display);font-weight:500;font-size:16px;margin:18px 0 6px;color:var(--fg)}
+.tabpanel h4::before{content:"▸ ";color:var(--accent)}
+#tab-mech h3{font-family:var(--f-display);font-weight:500;font-size:19px;margin:26px 0 8px;padding-top:6px;border-top:1px dashed var(--line)}
+#tab-mech h2 + h3{border-top:0;padding-top:0}
+#tab-moves #mv-list > h3{margin-top:22px}
+#tab-moves #mv-list > h2 + h3{margin-top:4px}
+#tab-moves .chip[aria-pressed="true"] span,#tab-ax .chip[aria-pressed="true"] span{color:inherit!important}
+
+/* ===== 多選篩選的「全不選」 ===== */
+#tab-moves .chip.clr,#tab-ax .chip.clr{border-style:dashed;color:var(--muted);background:transparent}
+#tab-moves .chip.clr:hover,#tab-ax .chip.clr:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ===== 招式坐標軸 ===== */
+#tab-ax .wrap{gap:20px}
+#tab-ax .axbox{position:relative;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:6px;overflow:hidden}
+#tab-ax #axsvg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+#tab-ax .axgrid .gl{stroke:var(--line);stroke-width:1}
+#tab-ax .axgrid .zero{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 4;opacity:.7}
+#tab-ax .axgrid .frame{fill:none;stroke:var(--line)}
+#tab-ax .axgrid .q{fill:var(--accent);opacity:.05}
+#tab-ax .axgrid .tk{font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums}
+#tab-ax .axgrid .tk2{font-size:10px;fill:var(--muted);opacity:.75}
+#tab-ax .axgrid .axl{font-size:13px;fill:var(--fg);font-weight:500}
+#tab-ax .axgrid .ql{font-size:12px;fill:var(--accent);opacity:.55;font-weight:700}
+#tab-ax .pt{transition:opacity .15s}
+#tab-ax .pt .dot{stroke:#fff;stroke-width:1.2}
+#tab-ax .pt .ld{stroke-width:1;opacity:.75}
+#tab-ax .pt .lab text{font-size:11.5px;fill:var(--fg);paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round;cursor:pointer}
+#tab-ax .pt .lab:hover text,#tab-ax .pt .lab:focus text{fill:var(--accent);text-decoration:underline}
+#tab-ax #axsvg.focus .pt{opacity:.12}
+#tab-ax #axsvg.focus .pt.on{opacity:1}
+#tab-ax #axsvg.focus .pt.on .dot{r:7}
+#tab-ax #axsvg.focus .pt.on .lab text{font-weight:700;font-size:13px}
+#tab-ax .axtip{position:absolute;z-index:5;width:240px;box-sizing:border-box;padding:10px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line);box-shadow:0 6px 18px rgba(80,40,10,.18);font-size:13px;display:grid;gap:2px;pointer-events:none}
+#tab-ax .axtip b{font-size:15px}
+#tab-ax .axtip span b{font-size:13px}
+#tab-ax .axtip .hint{color:var(--muted);font-size:11.5px;margin-top:4px}
+#tab-ax .count{font-size:13px;color:var(--muted)}
+#tab-ax .axhi{pointer-events:none}
+#tab-ax #axsvg.focus .axhi .pt{opacity:1}
+
 </style>
 </head>
 <body>
 <div class="topwrap"><div class="topbar"><span class="brand">PokéSurvivor 資料表</span>
-<nav class="tabs" role="tablist" aria-label="資料表"><a href="#pokedex" id="t-dex" role="tab" aria-controls="tab-dex" aria-selected="true">寶可夢</a><a href="#abilities" id="t-abil" role="tab" aria-controls="tab-abil" aria-selected="false">特性</a><a href="#moves" id="t-moves" role="tab" aria-controls="tab-moves" aria-selected="false">招式與傷害</a><a href="#special" id="t-sp" role="tab" aria-controls="tab-sp" aria-selected="false">特殊進化</a><a href="#mechanics" id="t-mech" role="tab" aria-controls="tab-mech" aria-selected="false">遊戲機制</a><a href="#items" id="t-items" role="tab" aria-controls="tab-items" aria-selected="false">道具</a><a href="#enemies" id="t-en" role="tab" aria-controls="tab-en" aria-selected="false">敵軍寶可夢</a></nav></div></div>
+<nav class="tabs" role="tablist" aria-label="資料表"><a href="#pokedex" id="t-dex" role="tab" aria-controls="tab-dex" aria-selected="true">寶可夢</a><a href="#abilities" id="t-abil" role="tab" aria-controls="tab-abil" aria-selected="false">特性</a><a href="#moves" id="t-moves" role="tab" aria-controls="tab-moves" aria-selected="false">招式與傷害</a><a href="#axis" id="t-ax" role="tab" aria-controls="tab-ax" aria-selected="false">招式坐標軸</a><a href="#special" id="t-sp" role="tab" aria-controls="tab-sp" aria-selected="false">特殊進化</a><a href="#mechanics" id="t-mech" role="tab" aria-controls="tab-mech" aria-selected="false">遊戲機制</a><a href="#items" id="t-items" role="tab" aria-controls="tab-items" aria-selected="false">道具</a><a href="#enemies" id="t-en" role="tab" aria-controls="tab-en" aria-selected="false">敵軍寶可夢</a></nav></div></div>
 <noscript><p class="nojs">這份資料表需要 JavaScript。請用 Safari、Chrome 等瀏覽器開啟檔案。</p></noscript>
 <p class="loading" id="loading">載入中…</p>
 <button type="button" id="goback" class="goback" hidden>← 返回</button>
@@ -870,6 +1088,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 <section class="tabpanel on" id="tab-dex" role="tabpanel" aria-labelledby="t-dex"></section>
 <section class="tabpanel" id="tab-abil" role="tabpanel" aria-labelledby="t-abil"></section>
 <section class="tabpanel" id="tab-moves" role="tabpanel" aria-labelledby="t-moves"></section>
+<section class="tabpanel" id="tab-ax" role="tabpanel" aria-labelledby="t-ax"></section>
 <section class="tabpanel" id="tab-sp" role="tabpanel" aria-labelledby="t-sp"></section>
 <section class="tabpanel" id="tab-mech" role="tabpanel" aria-labelledby="t-mech"></section>
 <section class="tabpanel" id="tab-items" role="tabpanel" aria-labelledby="t-items"></section>
@@ -2178,42 +2397,47 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 <template id="tpl-moves"><div class="wrap">
 <header>
   <h1>PokéSurvivor 招式表</h1>
-  <p class="lede">依 2026-11-19 版本的遊戲程式整理的全部招式，依屬性分組，物理在前、特殊在後、變化最後。</p>
-  <ul class="rules lede-list">
-    <li>11/19 版：傳說和幻之寶可夢的 26 個專屬招式（精神擊破、氣旋攻擊、神聖之火、制裁光礫、時光咆哮等）現在也能進化成「+」。</li>
-    <li>11/19 版：會追蹤的超能力招式（念力、精神強念、薄霧球、精神擊破）追蹤力減弱 25%。</li>
-    <li>11/16 版：衝浪寬 190→130、長 560→360，威力大幅下修。</li>
-  </ul>
+  <p class="lede">依遊戲程式整理的全部招式，依屬性分組，物理在前、特殊在後、變化最後。</p>
   <div class="facts"><span><b>176</b> 個招式</span><span><b>73</b> 物理</span><span><b>88</b> 特殊</span><span><b>15</b> 變化</span><span><b>39</b> 專屬招式</span><span><b>37</b> 種攻擊類型</span></div>
-  <nav class="facts jump" aria-label="頁內跳轉"><a class="fact" href="#mv-list" data-go="mv:list"><b>招式一覽</b></a><a class="fact" href="#mv-sim" data-go="mv:sim"><b>實戰模擬</b>清怪、安全、浪潮的算法</a><a class="fact" href="#mv-dmg" data-go="mv:dmg"><b>攻防計算</b>DPS 算法、招式規則</a><a class="fact" href="#mv-atk" data-go="mv:atk"><b>攻擊</b>傷害公式</a><a class="fact" href="#mv-def" data-go="mv:def"><b>防禦</b>受傷公式</a><a class="fact" href="#mv-fx" data-go="mv:fx"><b>命中效果與強化</b>屬性效果、增益疊加</a><a class="fact" href="#mv-kinds" data-go="mv:kinds"><b>攻擊類型</b></a></nav>
+  <nav class="facts jump" aria-label="頁內跳轉">
+    <a class="fact" href="#mv-list" data-go="mv:list"><b>招式一覽</b><span>欄位說明、篩選與排序、全部招式</span></a>
+    <a class="fact" href="#mv-sim" data-go="mv:sim"><b>實戰模擬</b><span>實戰分、殲滅時間、測試設定</span></a>
+    <a class="fact" href="#mv-dmg" data-go="mv:dmg"><b>攻防計算</b><span>DPS 算法、招式成長</span></a>
+    <a class="fact" href="#mv-atk" data-go="mv:atk"><b>攻擊</b><span>傷害公式、同屬性加成</span></a>
+    <a class="fact" href="#mv-def" data-go="mv:def"><b>防禦</b><span>受傷公式、減傷上限</span></a>
+    <a class="fact" href="#mv-typefx" data-go="mv:typefx"><b>屬性命中效果</b><span>18 個屬性的追加效果</span></a>
+    <a class="fact" href="#mv-buffs" data-go="mv:buffs"><b>增益疊加</b><span>攻擊招式與強化招式</span></a>
+    <a class="fact" href="#mv-kinds" data-go="mv:kinds"><b>攻擊類型</b><span>37 種施放方式與命中判定</span></a>
+    <a class="fact" href="#axis" data-go="ax:main"><b>招式坐標軸</b><span>實戰分 × 單體 DPS 散布圖</span></a>
+  </nav>
 </header>
-
-<section>
-  <h2>表格欄位</h2>
-  <dl class="cols">
-    <dt>招式</dt><dd>名稱和說明。下方小標籤：附帶效果（灼傷、減速…）、<span class="own-t">專屬：可學的寶可夢</span>、屬性初始招式，以及虛線框的「Lv5 施放距離」（需要目標的招式要等敵人進入這個距離才會出手）。</dd>
-    <dt>分類</dt><dd>物理（看物攻倍率）、特殊（看特攻倍率）、變化（不造成傷害）。</dd>
-    <dt>攻擊類型</dt><dd>招式的施放方式，決定怎麼命中，見下方「攻擊類型」。</dd>
-    <dt>實戰模擬</dt><dd><b>主要比較指標。</b>照遊戲程式讓敵人移動、有體力、會碰你，所有招式用<b>同一套固定標準</b>比較。<b>實戰分</b>（大字）＝ 綜合 × 8 ÷ 殲滅時間，同時反映「撐不撐得住」和「殺得多快」，可以跨招式、跨 Lv5／最終型態比較。<b>綜合</b>＝清怪、安全、浪潮三項平均（0～100）；<b>殲滅時間</b>＝一群大潮敵人迎面而來時打倒 90% 所需秒數。標籤表示適合的玩法。不造成傷害的招式不模擬。詳見下方「<a href="#mv-sim" data-go="mv:sim">實戰模擬</a>」。</dd>
-    <dt>Lv1～Lv5</dt><dd><b>大字</b>是每次命中的威力，「×n」是打同一隻敵人時每次施放命中幾次。<b>單體 DPS</b>（綠色長條）：只有一隻敵人、全部命中時的每秒傷害（打頭目看這個）；<b>單發 DPS</b>：一次多發的招式只中一發時。這兩個是招式本身的紙面數值，不代表清怪能力，比較清怪和生存請看「實戰模擬」。灰字是冷卻和範圍，綠字是這一級新增的強化。</dd>
-    <dt>進化 +</dt><dd>滿級後滿足條件（金色字）時的進化版本。</dd>
-    <dt>變化招式</dt><dd>格子裡是效果數值（每層加成、持續時間、冷卻）。</dd>
-  </dl>
-  <ul class="rules">
-    <li>點表格標題可以排序：第 1 下高→低、第 2 下低→高、第 3 下取消。</li>
-    <li>點「玩法」按鈕（三種玩法平均／站樁／繞圈／直線）會立刻依該玩法的分數由高到低排序；「實戰欄排序」決定排的是實戰分、殲滅時間（短→長）、綜合、清怪、安全或浪潮。Lv1～進化 + 欄依「排序依據」選的單體或單發 DPS 排序。</li>
-    <li>實戰模擬列最右邊的「重置」把模擬設定恢復成 20 分・最終型態・三種玩法平均・實戰分，並取消實戰欄排序。</li>
-  </ul>
-</section>
 
 <section id="mv-list">
   <h2>招式一覽</h2>
+  <h3>欄位說明</h3>
+  <dl class="cols">
+    <dt>招式</dt><dd>名稱和說明。下方小標籤：附帶效果（灼傷、減速…）、<span class="own-t">專屬：可學的寶可夢</span>、屬性初始招式，以及虛線框的「Lv5 施放距離」（需要目標的招式要等敵人進入這個距離才會出手）。</dd>
+    <dt>分類</dt><dd>物理（看物攻倍率）、特殊（看特攻倍率）、變化（不造成傷害）。</dd>
+    <dt>攻擊類型</dt><dd>招式的施放方式，決定怎麼命中，見「<a href="#mv-kinds" data-go="mv:kinds">攻擊類型</a>」。</dd>
+    <dt>實戰模擬</dt><dd><b>主要比較指標。</b>大字是<b>實戰分</b>（＝ 綜合 × 8 ÷ 殲滅時間），同時反映「撐不撐得住」和「殺得多快」，可以跨招式、跨 Lv5／最終型態比較。下面一行是<b>綜合</b>（清怪、安全、浪潮三項平均，0～100）和<b>殲滅時間</b>（一群大潮敵人迎面而來時打倒 90% 所需秒數），標籤是適合的玩法。不造成傷害的招式不模擬。詳見「<a href="#mv-sim" data-go="mv:sim">實戰模擬</a>」。</dd>
+    <dt>Lv1～Lv5</dt><dd><b>大字</b>是每次命中的威力，「×n」是打同一隻敵人時每次施放命中幾次。<b>單體 DPS</b>（長條）：只有一隻敵人、全部命中時的每秒傷害（打頭目看這個）；<b>單發 DPS</b>：一次多發的招式只中一發時。灰字是冷卻和範圍，綠字是這一級新增的強化。</dd>
+    <dt>進化 +</dt><dd>滿級後滿足條件（金色字）時的進化版本。</dd>
+    <dt>變化招式</dt><dd>格子裡是效果數值（每層加成、持續時間、冷卻）。</dd>
+  </dl>
+  <h3>篩選與排序</h3>
+  <ul class="rules">
+    <li><b>篩選可以多選</b>：同一列（屬性、分類、攻擊類型、專屬招式）選了幾個就顯示其中任何一個符合的招式，例如屬性同時選火和水；不同列之間要同時符合。每列最後的「全不選」清除該列的選擇；一個都沒選＝不篩選。</li>
+    <li>點表格標題可以排序：第 1 下高→低、第 2 下低→高、第 3 下取消。Lv1～進化 + 欄依「排序依據」選的單體或單發 DPS 排序。</li>
+    <li>「實戰模擬」列：選時間（10／20 分）、型態（Lv5／最終）和玩法；點玩法按鈕會立刻依該玩法的分數由高到低排序，「實戰欄排序」決定排的是實戰分、殲滅時間（短→長）、綜合、清怪、安全或浪潮。</li>
+    <li>最右邊的「重置」把模擬設定恢復成 20 分・最終型態・三種玩法平均・實戰分，並取消實戰欄排序。</li>
+  </ul>
+
   <div class="tools">
     <input id="mq" type="search" placeholder="搜尋招式名稱、說明或攻擊類型…" aria-label="搜尋招式">
-    <div class="chips" role="group" aria-label="屬性"><span class="lbl">屬性</span><div class="cg"><button class="chip" data-f="t" data-v="" aria-pressed="true">全部</button><button class="chip" data-f="t" data-v="normal" aria-pressed="false"><span class="tdot" data-t="normal"></span>一般</button><button class="chip" data-f="t" data-v="fire" aria-pressed="false"><span class="tdot" data-t="fire"></span>火</button><button class="chip" data-f="t" data-v="water" aria-pressed="false"><span class="tdot" data-t="water"></span>水</button><button class="chip" data-f="t" data-v="grass" aria-pressed="false"><span class="tdot" data-t="grass"></span>草</button><button class="chip" data-f="t" data-v="electric" aria-pressed="false"><span class="tdot" data-t="electric"></span>電</button><button class="chip" data-f="t" data-v="ice" aria-pressed="false"><span class="tdot" data-t="ice"></span>冰</button><button class="chip" data-f="t" data-v="fighting" aria-pressed="false"><span class="tdot" data-t="fighting"></span>格鬥</button><button class="chip" data-f="t" data-v="poison" aria-pressed="false"><span class="tdot" data-t="poison"></span>毒</button><button class="chip" data-f="t" data-v="ground" aria-pressed="false"><span class="tdot" data-t="ground"></span>地面</button><button class="chip" data-f="t" data-v="flying" aria-pressed="false"><span class="tdot" data-t="flying"></span>飛行</button><button class="chip" data-f="t" data-v="psychic" aria-pressed="false"><span class="tdot" data-t="psychic"></span>超能力</button><button class="chip" data-f="t" data-v="bug" aria-pressed="false"><span class="tdot" data-t="bug"></span>蟲</button><button class="chip" data-f="t" data-v="rock" aria-pressed="false"><span class="tdot" data-t="rock"></span>岩石</button><button class="chip" data-f="t" data-v="ghost" aria-pressed="false"><span class="tdot" data-t="ghost"></span>幽靈</button><button class="chip" data-f="t" data-v="dragon" aria-pressed="false"><span class="tdot" data-t="dragon"></span>龍</button><button class="chip" data-f="t" data-v="dark" aria-pressed="false"><span class="tdot" data-t="dark"></span>惡</button><button class="chip" data-f="t" data-v="steel" aria-pressed="false"><span class="tdot" data-t="steel"></span>鋼</button><button class="chip" data-f="t" data-v="fairy" aria-pressed="false"><span class="tdot" data-t="fairy"></span>妖精</button></div></div>
-    <div class="chips" role="group" aria-label="分類"><span class="lbl">分類</span><div class="cg"><button class="chip" data-f="c" data-v="" aria-pressed="true">全部</button><button class="chip" data-f="c" data-v="phy" aria-pressed="false"><span class="phy">物理</span></button><button class="chip" data-f="c" data-v="spe" aria-pressed="false"><span class="spe">特殊</span></button><button class="chip" data-f="c" data-v="buf" aria-pressed="false"><span class="buf">變化</span></button></div></div>
-    <div class="chips" role="group" aria-label="攻擊類型"><span class="lbl">攻擊類型</span><div class="cg"><button class="chip" data-f="k" data-v="" aria-pressed="true">全部</button><button class="chip" data-f="k" data-v="projectile" aria-pressed="false">投射<small>18</small></button><button class="chip" data-f="k" data-v="melee" aria-pressed="false">近身揮擊<small>13</small></button><button class="chip" data-f="k" data-v="beam" aria-pressed="false">光束<small>8</small></button><button class="chip" data-f="k" data-v="orbit" aria-pressed="false">環繞<small>4</small></button><button class="chip" data-f="k" data-v="nova" aria-pressed="false">全方位放射<small>11</small></button><button class="chip" data-f="k" data-v="aura" aria-pressed="false">範圍光環<small>7</small></button><button class="chip" data-f="k" data-v="boomerang" aria-pressed="false">迴旋鏢<small>4</small></button><button class="chip" data-f="k" data-v="chain" aria-pressed="false">連鎖<small>3</small></button><button class="chip" data-f="k" data-v="mine" aria-pressed="false">地雷<small>3</small></button><button class="chip" data-f="k" data-v="meteor" aria-pressed="false">隕石<small>8</small></button><button class="chip" data-f="k" data-v="turret" aria-pressed="false">砲台<small>2</small></button><button class="chip" data-f="k" data-v="dash" aria-pressed="false">衝撞<small>9</small></button><button class="chip" data-f="k" data-v="trail" aria-pressed="false">軌跡<small>2</small></button><button class="chip" data-f="k" data-v="cone" aria-pressed="false">扇形噴射<small>5</small></button><button class="chip" data-f="k" data-v="homing" aria-pressed="false">追蹤<small>10</small></button><button class="chip" data-f="k" data-v="bounce" aria-pressed="false">彈跳<small>7</small></button><button class="chip" data-f="k" data-v="charge" aria-pressed="false">蓄力光束<small>5</small></button><button class="chip" data-f="k" data-v="spin" aria-pressed="false">旋轉<small>7</small></button><button class="chip" data-f="k" data-v="quake" aria-pressed="false">震波<small>2</small></button><button class="chip" data-f="k" data-v="vortex" aria-pressed="false">漩渦<small>3</small></button><button class="chip" data-f="k" data-v="shove" aria-pressed="false">推擊<small>6</small></button><button class="chip" data-f="k" data-v="stun" aria-pressed="false">暈眩<small>6</small></button><button class="chip" data-f="k" data-v="tremor" aria-pressed="false">地震環<small>2</small></button><button class="chip" data-f="k" data-v="wave" aria-pressed="false">巨浪<small>1</small></button><button class="chip" data-f="k" data-v="cross" aria-pressed="false">十字爆炸<small>2</small></button><button class="chip" data-f="k" data-v="storm" aria-pressed="false">落雷<small>2</small></button><button class="chip" data-f="k" data-v="punch" aria-pressed="false">連拳<small>5</small></button><button class="chip" data-f="k" data-v="scissor" aria-pressed="false">交叉斬<small>2</small></button><button class="chip" data-f="k" data-v="blitz" aria-pressed="false">連續突進<small>1</small></button><button class="chip" data-f="k" data-v="leap" aria-pressed="false">飛撲<small>2</small></button><button class="chip" data-f="k" data-v="boom" aria-pressed="false">自爆<small>1</small></button><button class="chip" data-f="k" data-v="buff" aria-pressed="false">強化<small>7</small></button><button class="chip" data-f="k" data-v="weather" aria-pressed="false">天氣<small>3</small></button><button class="chip" data-f="k" data-v="guard" aria-pressed="false">守住<small>1</small></button><button class="chip" data-f="k" data-v="rest" aria-pressed="false">睡覺<small>1</small></button><button class="chip" data-f="k" data-v="screen" aria-pressed="false">光牆<small>2</small></button><button class="chip" data-f="k" data-v="decoy" aria-pressed="false">替身<small>1</small></button></div></div>
-    <div class="chips" role="group" aria-label="專屬招式"><span class="lbl">專屬招式</span><div class="cg"><button class="chip" data-f="o" data-v="" aria-pressed="true">全部</button><button class="chip" data-f="o" data-v="1" aria-pressed="false">只看專屬招式<small>39</small></button><button class="chip" data-f="o" data-v="0" aria-pressed="false">排除專屬招式</button></div></div>
+    <div class="chips" role="group" aria-label="屬性"><span class="lbl">屬性</span><div class="cg"><button class="chip" data-f="t" data-v="normal" aria-pressed="false"><span class="tdot" data-t="normal"></span>一般</button><button class="chip" data-f="t" data-v="fire" aria-pressed="false"><span class="tdot" data-t="fire"></span>火</button><button class="chip" data-f="t" data-v="water" aria-pressed="false"><span class="tdot" data-t="water"></span>水</button><button class="chip" data-f="t" data-v="grass" aria-pressed="false"><span class="tdot" data-t="grass"></span>草</button><button class="chip" data-f="t" data-v="electric" aria-pressed="false"><span class="tdot" data-t="electric"></span>電</button><button class="chip" data-f="t" data-v="ice" aria-pressed="false"><span class="tdot" data-t="ice"></span>冰</button><button class="chip" data-f="t" data-v="fighting" aria-pressed="false"><span class="tdot" data-t="fighting"></span>格鬥</button><button class="chip" data-f="t" data-v="poison" aria-pressed="false"><span class="tdot" data-t="poison"></span>毒</button><button class="chip" data-f="t" data-v="ground" aria-pressed="false"><span class="tdot" data-t="ground"></span>地面</button><button class="chip" data-f="t" data-v="flying" aria-pressed="false"><span class="tdot" data-t="flying"></span>飛行</button><button class="chip" data-f="t" data-v="psychic" aria-pressed="false"><span class="tdot" data-t="psychic"></span>超能力</button><button class="chip" data-f="t" data-v="bug" aria-pressed="false"><span class="tdot" data-t="bug"></span>蟲</button><button class="chip" data-f="t" data-v="rock" aria-pressed="false"><span class="tdot" data-t="rock"></span>岩石</button><button class="chip" data-f="t" data-v="ghost" aria-pressed="false"><span class="tdot" data-t="ghost"></span>幽靈</button><button class="chip" data-f="t" data-v="dragon" aria-pressed="false"><span class="tdot" data-t="dragon"></span>龍</button><button class="chip" data-f="t" data-v="dark" aria-pressed="false"><span class="tdot" data-t="dark"></span>惡</button><button class="chip" data-f="t" data-v="steel" aria-pressed="false"><span class="tdot" data-t="steel"></span>鋼</button><button class="chip" data-f="t" data-v="fairy" aria-pressed="false"><span class="tdot" data-t="fairy"></span>妖精</button><button class="chip clr" data-clr="t">全不選</button></div></div>
+    <div class="chips" role="group" aria-label="分類"><span class="lbl">分類</span><div class="cg"><button class="chip" data-f="c" data-v="phy" aria-pressed="false"><span class="phy">物理</span></button><button class="chip" data-f="c" data-v="spe" aria-pressed="false"><span class="spe">特殊</span></button><button class="chip" data-f="c" data-v="buf" aria-pressed="false"><span class="buf">變化</span></button><button class="chip clr" data-clr="c">全不選</button></div></div>
+    <div class="chips" role="group" aria-label="攻擊類型"><span class="lbl">攻擊類型</span><div class="cg"><button class="chip" data-f="k" data-v="projectile" aria-pressed="false">投射<small>18</small></button><button class="chip" data-f="k" data-v="melee" aria-pressed="false">近身揮擊<small>13</small></button><button class="chip" data-f="k" data-v="beam" aria-pressed="false">光束<small>8</small></button><button class="chip" data-f="k" data-v="orbit" aria-pressed="false">環繞<small>4</small></button><button class="chip" data-f="k" data-v="nova" aria-pressed="false">全方位放射<small>11</small></button><button class="chip" data-f="k" data-v="aura" aria-pressed="false">範圍光環<small>7</small></button><button class="chip" data-f="k" data-v="boomerang" aria-pressed="false">迴旋鏢<small>4</small></button><button class="chip" data-f="k" data-v="chain" aria-pressed="false">連鎖<small>3</small></button><button class="chip" data-f="k" data-v="mine" aria-pressed="false">地雷<small>3</small></button><button class="chip" data-f="k" data-v="meteor" aria-pressed="false">隕石<small>8</small></button><button class="chip" data-f="k" data-v="turret" aria-pressed="false">砲台<small>2</small></button><button class="chip" data-f="k" data-v="dash" aria-pressed="false">衝撞<small>9</small></button><button class="chip" data-f="k" data-v="trail" aria-pressed="false">軌跡<small>2</small></button><button class="chip" data-f="k" data-v="cone" aria-pressed="false">扇形噴射<small>5</small></button><button class="chip" data-f="k" data-v="homing" aria-pressed="false">追蹤<small>10</small></button><button class="chip" data-f="k" data-v="bounce" aria-pressed="false">彈跳<small>7</small></button><button class="chip" data-f="k" data-v="charge" aria-pressed="false">蓄力光束<small>5</small></button><button class="chip" data-f="k" data-v="spin" aria-pressed="false">旋轉<small>7</small></button><button class="chip" data-f="k" data-v="quake" aria-pressed="false">震波<small>2</small></button><button class="chip" data-f="k" data-v="vortex" aria-pressed="false">漩渦<small>3</small></button><button class="chip" data-f="k" data-v="shove" aria-pressed="false">推擊<small>6</small></button><button class="chip" data-f="k" data-v="stun" aria-pressed="false">暈眩<small>6</small></button><button class="chip" data-f="k" data-v="tremor" aria-pressed="false">地震環<small>2</small></button><button class="chip" data-f="k" data-v="wave" aria-pressed="false">巨浪<small>1</small></button><button class="chip" data-f="k" data-v="cross" aria-pressed="false">十字爆炸<small>2</small></button><button class="chip" data-f="k" data-v="storm" aria-pressed="false">落雷<small>2</small></button><button class="chip" data-f="k" data-v="punch" aria-pressed="false">連拳<small>5</small></button><button class="chip" data-f="k" data-v="scissor" aria-pressed="false">交叉斬<small>2</small></button><button class="chip" data-f="k" data-v="blitz" aria-pressed="false">連續突進<small>1</small></button><button class="chip" data-f="k" data-v="leap" aria-pressed="false">飛撲<small>2</small></button><button class="chip" data-f="k" data-v="boom" aria-pressed="false">自爆<small>1</small></button><button class="chip" data-f="k" data-v="buff" aria-pressed="false">強化<small>7</small></button><button class="chip" data-f="k" data-v="weather" aria-pressed="false">天氣<small>3</small></button><button class="chip" data-f="k" data-v="guard" aria-pressed="false">守住<small>1</small></button><button class="chip" data-f="k" data-v="rest" aria-pressed="false">睡覺<small>1</small></button><button class="chip" data-f="k" data-v="screen" aria-pressed="false">光牆<small>2</small></button><button class="chip" data-f="k" data-v="decoy" aria-pressed="false">替身<small>1</small></button><button class="chip clr" data-clr="k">全不選</button></div></div>
+    <div class="chips" role="group" aria-label="專屬招式"><span class="lbl">專屬招式</span><div class="cg"><button class="chip" data-f="o" data-v="1" aria-pressed="false">只看專屬招式<small>39</small></button><button class="chip" data-f="o" data-v="0" aria-pressed="false">排除專屬招式</button><button class="chip clr" data-clr="o">全不選</button></div></div>
     <div class="chips" role="group" aria-label="排序依據"><span class="lbl">排序依據</span><div class="cg"><button class="chip" data-m="s" aria-pressed="true">單體 DPS</button><button class="chip" data-m="1" aria-pressed="false">單發 DPS</button></div></div>
     <div class="chips simtools" role="group" aria-label="實戰模擬"><span class="lbl">實戰模擬</span><div class="cg">
       <span class="sg"><button class="chip" data-st="600" aria-pressed="false">10 分</button><button class="chip" data-st="1200" aria-pressed="true">20 分</button></span>
@@ -2412,10 +2636,9 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 <section id="mv-sim">
   <h2>實戰模擬</h2>
   <ul class="rules">
-    <li>DPS 只回答「每秒打出多少傷害」；實際手感還取決於：打倒的是不是快碰到你的敵人、一發能打到幾隻、打在快死的敵人身上浪費多少、招式跟你的走位合不合。</li>
-    <li>所以這裡依 11/26 版遊戲程式重現戰鬥：每個攻擊招式<b>單獨上場</b>；不造成傷害的招式不模擬。</li>
-    <li>每個招式都跑<b>三種玩法 × 10／20 分鐘 × Lv5／最終型態</b>，每種情況 12 次取平均；每次包含一場 45 秒的「生存測試」和一場「殲滅測試」。</li>
-    <li><b>統一標準</b>：同一個時間點，所有招式、Lv5 和最終型態都面對同樣的敵人、用同樣的攻擊倍率，安全分和實戰分的基準是固定數字，不再用「該欄中位數」。所以任何兩格分數都可以直接比較（10 分和 20 分的敵人不同，比較時請注意）。</li>
+    <li><b>為什麼需要</b>：DPS 只回答「每秒打出多少傷害」；實際手感還取決於打倒的是不是快碰到你的敵人、一發能打到幾隻、打在快死的敵人身上浪費多少、招式跟你的走位合不合。</li>
+    <li><b>怎麼做</b>：照遊戲程式重現戰鬥，每個攻擊招式<b>單獨上場</b>，跑<b>三種玩法 × 10／20 分鐘 × Lv5／最終型態</b>，每種情況 12 次取平均；每次包含一場 45 秒的「生存測試」和一場「殲滅測試」。不造成傷害的招式不模擬。</li>
+    <li><b>統一標準</b>：同一個時間點，所有招式、Lv5 和最終型態都面對同樣的敵人、用同樣的攻擊倍率，安全分和實戰分的基準都是固定數字。所以任何兩格分數都可以直接比較（10 分和 20 分的敵人不同，比較時請注意）。</li>
   </ul>
 
   <h3>分數</h3>
@@ -2434,10 +2657,11 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
   <ul class="rules">
     <li>「三種玩法平均」的清怪、安全、浪潮、綜合、殲滅時間是三種玩法的平均；實戰分＝平均綜合 × 8 ÷ 平均殲滅時間。</li>
     <li>實戰分是除法，殲滅很快的招式分數會拉得很開：20 分・最終・平均前五名是 冰封世界（278）、暴風（262）、信號光束（252）、鏡光射擊（248）、精神衝擊（247）；殲滅最快的是 暴風（2.8 秒）、冰封世界（2.8 秒）、信號光束（2.9 秒）、精神衝擊（2.9 秒）、種子炸彈（3.0 秒）。</li>
-    <li>想只看生存能力時，把「實戰欄排序」切到「綜合」或「安全」。</li>
+    <li>想只看生存能力時，把「實戰欄排序」切到「綜合」或「安全」。要看實戰分和單體 DPS 的關係，見「<a href="#axis" data-go="ax:main">招式坐標軸</a>」分頁。</li>
   </ul>
 
-  <h3>兩種測試</h3>
+  <h3>測試設定</h3>
+  <h4>兩種測試</h4>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">測試</th><th scope="col">內容</th><th scope="col">用在</th></tr></thead>
     <tbody>
@@ -2445,8 +2669,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
       <tr><td>殲滅測試</td><td>一次大潮的敵人（10 分 23 隻、20 分 32 隻）從你前進的方向迎面而來（站樁時方向隨機），沒有其他敵人；計時到打倒 90%</td><td>殲滅時間</td></tr>
     </tbody>
   </table></div>
-
-  <h3>場景</h3>
+  <h4>場景</h4>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">項目</th><th scope="col">第 10 分鐘</th><th scope="col">第 20 分鐘</th></tr></thead>
     <tbody>
@@ -2459,21 +2682,9 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
     </tbody>
   </table></div>
   <ul class="rules">
-    <li>攻擊倍率代表升級卡、道具、能力值等招式以外的成長，Lv5 和最終型態用<b>同一個倍率</b>，所以最終型態的分數會比 Lv5 高，反映進化真正的價值。</li>
+    <li>攻擊倍率代表升級卡、道具、能力值等招式以外的成長；Lv5 和最終型態用<b>同一個倍率</b>，所以最終型態的分數會比 Lv5 高，反映進化真正的價值。</li>
   </ul>
-
-  <h3>照程式重現的規則</h3>
-  <ul class="rules">
-    <li><b>施放</b>：自動瞄準最近的敵人；需要目標的招式等敵人進入施放距離才放。</li>
-    <li><b>子彈</b>：有飛行時間，貫穿／彈跳／追蹤照程式；地雷放在腳邊被踩才爆；砲台留在原地。</li>
-    <li><b>位移招式</b>：衝撞／連續突進／飛撲會把你帶到敵人身邊（期間無敵）。</li>
-    <li><b>附加效果</b>：屬性命中效果（見「<a href="#mv-typefx" data-go="mv:typefx">屬性命中效果</a>」）和招式自帶的減速、暈眩、擊退、灼傷、中毒。</li>
-    <li><b>銀色旋風</b>的攻擊＋速度增益會算進它自己的傷害和移動速度。</li>
-    <li><b>落後的敵人移到前方</b>：一般敵人在畫面外、離你超過約 520 單位，而且你以速度 40 以上遠離它累計 2.5 秒，或離你超過 1400 單位，就會被移到你行進方向 ±52° 內、距離約 490～550 的地方。</li>
-    <li><b>被碰到</b>：每隻敵人每 0.55 秒最多碰你一次；被打中後你有 <b>0.45 秒無敵</b>；正在用近身揮擊、連拳、交叉斬時碰撞傷害 <b>×0.75</b>。</li>
-  </ul>
-
-  <h3>三種玩法</h3>
+  <h4>三種玩法</h4>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">玩法</th><th scope="col">怎麼走</th></tr></thead>
     <tbody>
@@ -2482,6 +2693,17 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
       <tr><td>直線</td><td>以速度 105 朝同一方向一直走；甩在後面的敵人會被移到你前方，迎面而來</td></tr>
     </tbody>
   </table></div>
+
+  <h3>照程式重現的規則</h3>
+  <ul class="rules">
+    <li><b>施放</b>：自動瞄準最近的敵人；需要目標的招式等敵人進入施放距離才放。</li>
+    <li><b>子彈</b>：有飛行時間，貫穿／彈跳／追蹤照程式；地雷放在腳邊被踩才爆；砲台留在原地。</li>
+    <li><b>位移招式</b>：衝撞／連續突進／飛撲會把你帶到敵人身邊（期間無敵）。</li>
+    <li><b>附加效果</b>：屬性命中效果（見「<a href="#mv-typefx" data-go="mv:typefx">屬性命中效果</a>」）和招式自帶的減速、暈眩、擊退、灼傷、中毒。</li>
+    <li><b>招式自帶的增益</b>：會提升自身攻擊、速度的攻擊招式，增益會算進它自己的傷害和你的移動速度（見「<a href="#mv-buffs" data-go="mv:buffs">增益疊加</a>」）。</li>
+    <li><b>落後的敵人移到前方</b>：一般敵人在畫面外、離你超過約 520 單位，而且你以速度 40 以上遠離它累計 2.5 秒，或離你超過 1400 單位，就會被移到你行進方向 ±52° 內、距離約 490～550 的地方。</li>
+    <li><b>被碰到</b>：每隻敵人每 0.55 秒最多碰你一次；被打中後你有 <b>0.45 秒無敵</b>；正在用近身揮擊、連拳、交叉斬時碰撞傷害 <b>×0.75</b>。</li>
+  </ul>
 
   <h3>沒有算到的</h3>
   <ul class="rules">
@@ -2494,62 +2716,70 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 
 <section id="mv-dmg">
   <h2>攻防計算</h2>
-  <p class="lede">招式表數字的算法、招式的升級規則，以及傷害與受傷的完整公式。</p>
+  <p class="lede">招式表數字的算法、招式怎麼成長，以及傷害與受傷的完整公式。</p>
 
-  <h3 id="mv-dps">單體 DPS 與單發 DPS</h3>
+  <h3 id="mv-dps">招式表的 DPS</h3>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">指標</th><th scope="col">算法</th><th scope="col">什麼時候看</th></tr></thead>
     <tbody>
-      <tr><td>單體 DPS</td><td>只有一隻敵人、所有子彈都打中牠（各類型算法見最下方「攻擊類型」）。</td><td>打頭目、裂縫傳說、阿爾宙斯</td></tr>
+      <tr><td>單體 DPS</td><td>只有一隻敵人、所有子彈都打中牠（各類型算法見「<a href="#mv-kinds" data-go="mv:kinds">攻擊類型</a>」）。</td><td>打頭目、裂縫傳說、阿爾宙斯</td></tr>
       <tr><td>單發 DPS</td><td>一次多發的招式只中一發（環繞物以 1 顆、砲台以 1 座計），是單體 DPS 的下限。</td><td>目標很遠、子彈容易散開時</td></tr>
     </tbody>
   </table></div>
   <ul class="rules">
-    <li>附帶毒池的招式（污泥炸彈、噴射火焰）已算進毒池每 0.5 秒 0.3 倍的傷害（以目標站在毒池裡計）；月亮之力的濺射（周圍 56 單位 ×0.6）只打旁邊的敵人，不算進單體 DPS（實戰模擬有算）。</li>
-    <li>單體和單發 DPS 是紙面數值：不考慮敵人移動、過量傷害、打不打得到旁邊的敵人，也不考慮你會不會被碰到。舊版的「實況 DPS」和「大潮 DPS」因為用的是凍結的畫面、敵人打不死也不會動，和實際手感差距太大，已改用「<a href="#mv-sim" data-go="mv:sim">實戰模擬</a>」取代。</li>
-    <li>擊退很強的招式（推擊、巨浪）以每次施放時敵人都在範圍內計算；實戰中被推遠的敵人下一次未必打得到。</li>
+    <li><b>紙面數值</b>：不考慮敵人移動、過量傷害、打不打得到旁邊的敵人，也不考慮你會不會被碰到。比較清怪和生存請看「<a href="#mv-sim" data-go="mv:sim">實戰模擬</a>」。</li>
+    <li><b>持續傷害區域</b>：附帶毒池的招式（污泥炸彈、噴射火焰）已算進毒池每 0.5 秒 0.3 倍的傷害（以目標站在毒池裡計）。</li>
+    <li><b>濺射</b>：月亮之力的濺射（周圍 56 單位 ×0.6）只打旁邊的敵人，不算進單體 DPS（實戰模擬有算）。</li>
+    <li><b>擊退</b>：擊退很強的招式（推擊、巨浪）以每次施放時敵人都在範圍內計算；實戰中被推遠的敵人下一次未必打得到。</li>
     <li>進化 + 單體 DPS 最高：替身（1195.6）、冰礫（1157.7）、空氣斬（1149.4）、影子偷襲（1094.2）、薄霧球（1082.1）。</li>
   </ul>
 
-  <h3>招式的升級規則</h3>
-  <ul class="rules">
-    <li>每個招式從 Lv1 升到 Lv5 共 4 次強化（表中綠字）。滿級後，如果同一局拿過對應的能力卡（例如「威力」、「反應」），會出現金色卡片讓招式進化；還沒拿過時，那張能力卡會標上「進化 招式名」並更容易出現。變化招式和專屬招式不會進化。</li>
-    <li><b>專屬招式</b>只有列出的寶可夢能學。寶可夢升到 Lv10 後，只要還有空的招式欄位，每次升級的 4 張卡裡<b>必定有一張</b>是它。</li>
-    <li><b>羈絆</b>：在裂縫打贏傳說寶可夢得到一次，可以把 2～4 個招式結合在同一個欄位同時施放；結合後每個招式傷害 ×0.8（2 個）、×0.667（3 個）、×0.575（4 個），合計 1.6／2／2.3 倍。表中都是沒結合時的值。</li>
-  </ul>
+  <h3>招式的成長</h3>
+  <div class="tbl ktbl"><table>
+    <thead><tr><th scope="col">階段</th><th scope="col">規則</th></tr></thead>
+    <tbody>
+      <tr><td>升級</td><td>每個招式從 Lv1 升到 Lv5 共 4 次強化（表中綠字）。</td></tr>
+      <tr><td>進化</td><td>滿級後，如果同一局拿過對應的能力卡（例如「威力」、「反應」），會出現金色卡片讓招式進化；還沒拿過時，那張能力卡會標上「進化 招式名」並更容易出現。變化招式和沒有進化條件的專屬招式不會進化。</td></tr>
+      <tr><td>專屬招式</td><td>只有列出的寶可夢能學。寶可夢升到 Lv10 後，只要還有空的招式欄位，每次升級的 4 張卡裡<b>必定有一張</b>是它。</td></tr>
+      <tr><td>羈絆</td><td>在裂縫打贏傳說寶可夢得到一次，可以把 2～4 個招式結合在同一個欄位同時施放；結合後每個招式傷害 ×0.8（2 個）、×0.667（3 個）、×0.575（4 個），合計 1.6／2／2.3 倍。表中都是沒結合時的值。</td></tr>
+      <tr><td>欄位</td><td>只有當前欄位的招式會施放和冷卻；要同時使用多個招式必須用羈絆結合在同一欄。</td></tr>
+    </tbody>
+  </table></div>
 
   <h3 id="mv-atk">攻擊：傷害公式</h3>
-  <p class="note">傷害是一連串倍率相乘，每一項都比正作溫和。</p>
   <p class="formula">傷害 ＝ 招式威力 × 攻擊倍率 × 屬性相剋 × 天氣 × 敵人防禦 × 特性 × 招式屬性加成 × 力量形態 × 擊中要害 × 首領加成 × 易傷</p>
-  <p class="note">最後四捨五入成整數，最少 1 點；中間的計算都保留小數。</p>
+  <ul class="rules">
+    <li>傷害是一連串倍率相乘，每一項都比正作溫和。</li>
+    <li>最後四捨五入成整數，最少 1 點；中間的計算都保留小數。</li>
+  </ul>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">倍率</th><th scope="col">怎麼來的</th><th scope="col">範圍</th></tr></thead>
     <tbody>
-      <tr><td>招式威力</td><td>上方招式表的數字，隨招式等級和進化提高</td><td>—</td></tr>
+      <tr><td>招式威力</td><td>招式表的數字，隨招式等級和進化提高</td><td>—</td></tr>
       <tr><td>攻擊倍率</td><td>物理招式用寶可夢的「物攻倍率」，特殊招式用「特攻倍率」；由正作種族值換算：0.70 ＋ 種族值 ÷ 100 × 0.55</td><td>約 0.8–1.7</td></tr>
       <tr><td class="sub">＋ 性格</td><td>加成的那一項 ×1.1，減少的那一項 ×0.9</td><td></td></tr>
       <tr><td class="sub">＋ 單屬性加成</td><td>只有一種屬性的寶可夢，用自己屬性的招式時 ×1.2</td><td></td></tr>
-      <tr><td class="sub">＋ 升級卡「威力」</td><td>每張 +8%，<b>加法疊加</b>（10 張是 ×1.8，不是 1.08<sup>10</sup>）</td><td>11/16 起不限張數</td></tr>
+      <tr><td class="sub">＋ 升級卡「威力」</td><td>每張 +8%，<b>加法疊加</b>（10 張是 ×1.8，不是 1.08<sup>10</sup>）</td><td>不限張數</td></tr>
       <tr><td class="sub">＋ 永久強化「力量」</td><td>每級 +1.5%</td><td>最多 10 級（×1.15）</td></tr>
-      <tr><td class="sub">＋ 強化招式</td><td>劍舞、龍之舞加物理，詭計、大地掌控加特攻；銀色旋風有機率加全部招式。疊加規則見「<a href="#mv-buffs" data-go="mv:buffs">強化疊加</a>」</td><td></td></tr>
-      <tr><td class="sub">＋ 攜帶道具</td><td>講究頭帶 ×1.4、生命寶珠 ×1.3（兩者乘在全部招式上）；拳擊手套：物理接觸招式 ×1.3；爽喉噴霧：發動期間特殊招式 ×1.25；節拍器：連續用同一招每 3 秒 +6%（最多 +48%）；吃了阿塔尼亞果後 10 秒 ×1.3</td><td></td></tr>
+      <tr><td class="sub">＋ 增益</td><td>攻擊、物攻、特攻增益（強化招式、會提升能力的攻擊招式、特性）；疊加規則見「<a href="#mv-buffs" data-go="mv:buffs">增益疊加</a>」</td><td></td></tr>
+      <tr><td class="sub">＋ 攜帶道具</td><td>講究頭帶 ×1.4、生命寶珠 ×1.3（兩者乘在全部招式上）；拳擊手套：物理接觸招式 ×1.3；爽喉噴霧：發動期間特殊招式 ×1.25；節拍器：連續用同一招每 3 秒 +6%（最多 +48%）；吃了阿塔尼亞果後 10 秒 ×1.3；幸運薰香 ×0.85</td><td></td></tr>
       <tr><td class="sub">＋ 羈絆</td><td>同一欄位結合 2／3／4 個招式時，每個招式 ×0.8／×0.667／×0.575</td><td></td></tr>
       <tr><td>屬性相剋</td><td>比正作溫和：效果絕佳 ×1.6、效果不好 ×0.6、無效 ×0.3（不會完全打不動）；雙屬性時兩個倍率相乘</td><td>0.3–2.4</td></tr>
       <tr><td>天氣</td><td>晴天火 ×1.5、水 ×0.5；下雨水 ×1.5、電 ×1.2、火 ×0.5；沙暴岩石、地面、鋼 ×1.3；下雪冰 ×1.5；起霧幽靈、妖精、超能力 ×1.3；天氣剛出現和快結束的 3 秒內倍率逐漸變化。帶「防塵護目鏡」時，天氣只會加成、不會削弱</td><td>0.5–1.5</td></tr>
       <tr><td>敵人防禦</td><td>物理招式看敵人的防禦，特殊招式看特防（正作種族值）：(75 ÷ 防禦)<sup>0.35</sup>，防禦剛好 75 時不增不減</td><td>0.78–1.25</td></tr>
       <tr><td>特性</td><td>例如猛火低體力時 ×1.35、大力士讓物理招式 ×1.5，見「特性」分頁</td><td></td></tr>
       <tr><td>招式屬性加成</td><td>一般屬性招式一律 ×1.05；惡屬性招式打體力低於 30% 的敵人 ×1.18</td><td></td></tr>
-      <tr><td>力量形態</td><td>極巨化／超極巨化期間 ×1.4；太晶化：太晶屬性的招式 ×1.5（寶可夢原本就有那個屬性時 ×1.8），星晶 ×1.3。11/19 起投射、追蹤、反彈、迴旋鏢等飛行類攻擊也適用（以前只有直接命中的攻擊有效）。見「<a href="#sp-powers" data-go="sp:powers">特殊進化</a>」分頁</td><td></td></tr>
-      <tr><td>擊中要害</td><td>機率＝升級卡「要害之眼」每張 +2%＋ 永久強化每級 +1%（最多 10 級）＋ 特性（銳利目光 +5%、復眼 +6%、超幸運 +10%）；<b>機率上限 60%</b>。<br>倍率＝1.5（狙擊手 2）＋ 升級卡「殘暴一擊」每張 +5%＋ 永久強化每級 +5%（最多 10 級）；<b>倍率上限 ×3.5</b></td><td>×1.5–3.5</td></tr>
+      <tr><td>力量形態</td><td>極巨化／超極巨化期間 ×1.4；太晶化：太晶屬性的招式 ×1.5（寶可夢原本就有那個屬性時 ×1.8），星晶 ×1.3。直接命中和投射、追蹤、反彈、迴旋鏢等飛行類攻擊都適用。見「<a href="#sp-powers" data-go="sp:powers">特殊進化</a>」分頁</td><td></td></tr>
+      <tr><td>擊中要害</td><td>機率＝升級卡「要害之眼」每張 +2%＋ 永久強化每級 +1%（最多 10 級）＋ 特性（銳利目光 +5%、復眼 +6%、超幸運 +10%）；<b>機率上限 60%</b>。尖石攻擊、狙擊、千變萬花每一下另外擲一次招式自帶的要害機率。<br>倍率＝1.5（狙擊手 2）＋ 升級卡「殘暴一擊」每張 +5%＋ 永久強化每級 +5%（最多 10 級）；<b>倍率上限 ×3.5</b></td><td>×1.5–3.5</td></tr>
       <tr><td>首領加成</td><td>升級卡「獵手」每張 +6%（加法疊加，不限張數），只對頭目、傳說和無極汰那有效</td><td>5 張 ×1.3</td></tr>
-      <tr><td>易傷</td><td>咬碎打中後 4 秒內 ×1.25；蟲、鋼屬性招式有機率讓敵人 1.8 秒內受到的傷害 +12%</td><td></td></tr>
+      <tr><td>易傷</td><td>咬碎打中後 4 秒內 ×1.25；蟲、鋼屬性招式有機率讓敵人 1.8 秒內受到的傷害 +12%（兩者相乘）</td><td></td></tr>
     </tbody>
   </table></div>
   <ul class="rules">
-    <li>敵人防禦再高，傷害最多也只少 22%；防禦再低，最多多 25%，避免出現打不動的敵人。</li>
-    <li>用寶可夢較強那一邊的招式打得比較痛：例如怪力用空手劈打得重，用暗影球就弱。升級卡上會提示「用這隻寶可夢只有 xx% 威力」。</li>
+    <li><b>防禦的上下限</b>：敵人防禦再高，傷害最多也只少 22%；防禦再低，最多多 25%，避免出現打不動的敵人。</li>
+    <li><b>選對邊</b>：用寶可夢較強那一邊的招式打得比較痛：例如怪力用空手劈打得重，用暗影球就弱。升級卡上會提示「用這隻寶可夢只有 xx% 威力」。</li>
     <li><b>首領保護</b>：頭目、傳說和無極汰那每一下最多只會掉 10% 最大體力；而且每秒「全額吃下」的傷害有上限（約 最大體力 ÷ (0.4 × 保護秒數)，可以累積 2 秒），超過的部分只算 10%。保護秒數：第 1～5 隻頭目 25／30／35／40／45 秒，裂縫傳說 55～75 秒，無極汰那 150 秒。所以第 1 隻頭目最快也要約 10 秒才打得倒，DPS 再高也一樣。</li>
-    <li><b>屬性追加效果</b>：每次命中有機率讓敵人陷入短暫狀態（同一隻敵人每 2.5 秒最多 1 次），完整數值和不會觸發的情況見「<a href="#mv-typefx" data-go="mv:typefx">屬性命中效果</a>」。</li>
+    <li><b>屬性追加效果</b>：每次命中有機率讓敵人陷入短暫狀態，見「<a href="#mv-typefx" data-go="mv:typefx">屬性命中效果</a>」。</li>
   </ul>
   <div class="example">
     <b>實際算一次</b>：小火龍（特攻倍率 1.03、單一火屬性）用 Lv1 火花（威力 26.7，特殊）打妙蛙種子（草／毒，特防 65）。
@@ -2557,10 +2787,11 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
     在全強度的晴天裡再打出擊中要害，還要 × 1.5 × 1.5，大約 125。
   </div>
 
-
-
-  <h3>招式和寶可夢同屬性時</h3>
-  <p class="note">遊戲沒有正作那種所有寶可夢都有的本系加成（×1.5），只有以下三種情況，可以同時成立、互相相乘：</p>
+  <h4>招式和寶可夢同屬性時</h4>
+  <ul class="rules">
+    <li>遊戲沒有正作那種所有寶可夢都有的本系加成（×1.5），只有下表三種情況，可以同時成立、互相相乘。</li>
+    <li>例如特性是通用被動的單屬性寶可夢，用自己屬性的招式時是 1.2 × 1.08 ≈ +30%。</li>
+  </ul>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">來源</th><th scope="col">條件</th><th scope="col">加成</th></tr></thead>
     <tbody>
@@ -2569,32 +2800,36 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
       <tr><td>特性「適應力」</td><td>招式屬性和寶可夢任一屬性相同，雙屬性也適用</td><td>×1.25</td></tr>
     </tbody>
   </table></div>
-  <p class="note">例如特性是通用被動的單屬性寶可夢，用自己屬性的招式時是 1.2 × 1.08 ≈ +30%。</p>
 
   <h3 id="mv-def">防禦：受傷公式</h3>
   <p class="formula">受到傷害 ＝ 敵人攻擊 × 光牆 × 特性 × 你的防禦 × 屬性相剋 × 天氣 × (1 − 減傷%) × 近身減傷</p>
+  <div class="tbl ktbl"><table>
+    <thead><tr><th scope="col">倍率</th><th scope="col">怎麼來的</th></tr></thead>
+    <tbody>
+      <tr><td>敵人攻擊</td><td>敵人用牠較強的一邊攻擊；依難度：普通 ×0.85、困難 ×1.25、噩夢 ×1.65</td></tr>
+      <tr><td>你的防禦</td><td>寶可夢的防禦或特防，公式同攻擊的「敵人防禦」，在 0.78–1.25 之間</td></tr>
+      <tr><td>減傷%</td><td>升級卡「護甲」每張 +5%（不限張數）＋ 永久強化每級 +0.75%（最多 8 級）＋ 突擊背心 +20% ＋ 防禦增益（變硬等），全部<b>相加</b>，<b>總共最多 80%</b></td></tr>
+      <tr><td>反射壁／光牆</td><td>發動期間物理／特殊傷害 −35%（升級後更多），和減傷% 分開相乘</td></tr>
+      <tr><td>近身減傷</td><td>正在使用的欄位裡有近身揮擊、連拳或交叉斬時 ×0.75</td></tr>
+    </tbody>
+  </table></div>
   <ul class="rules">
-    <li>你的防禦用寶可夢的防禦或特防，公式同上，在 0.78–1.25 之間；敵人用牠較強的一邊攻擊。</li>
-    <li>減傷% ＝ 升級卡「護甲」每張 +5%（11/16 起不限張數）＋ 永久強化每級 +0.75%（最多 8 級），這兩項合計最多 80%；再加上突擊背心 +20% 和變硬等強化招式，<b>總共最多 80%</b>。</li>
-    <li>反射壁／光牆：發動期間物理／特殊傷害 −35%（升級後更多），和減傷% 分開相乘。</li>
-    <li>正在使用的欄位裡有近身揮擊、連拳或交叉斬時，受到的傷害再 ×0.75。</li>
-    <li>每一下最多只會扣你一定比例的最大體力：普通 25%、困難 30%、噩夢 33%。被打中後有 0.45 秒無敵時間；升級卡「閃避」每張 +3% 機率完全躲開（最多 15%），有些特性可以吸收某個屬性的攻擊或閃避。</li>
-    <li>敵人傷害依難度：普通 ×0.85、困難 ×1.25、噩夢 ×1.65。阿爾宙斯的攻擊不受防禦影響；減傷% 對牠只有部分效果：減傷 80% 時只減 30%，按比例遞減（例如 35% 的石柱變成 24.5%），碰到牠本身的傷害不變。</li>
+    <li><b>單次上限</b>：每一下最多只會扣你一定比例的最大體力：普通 25%、困難 30%、噩夢 33%。</li>
+    <li><b>無敵與閃避</b>：被打中後有 0.45 秒無敵時間；升級卡「閃避」每張 +3% 機率完全躲開（最多 15%），有些特性可以吸收某個屬性的攻擊或閃避。</li>
+    <li><b>阿爾宙斯</b>：攻擊不受防禦影響；減傷% 對牠只有部分效果：減傷 80% 時只減 30%，按比例遞減（例如 35% 的石柱變成 24.5%），碰到牠本身的傷害不變。</li>
   </ul>
-
-
 </section>
 
 <section id="mv-fx">
-  <h2>命中效果與強化疊加</h2>
-  <p class="lede">依 2026-11-25 版遊戲程式整理：屬性的命中效果、哪些情況不會觸發，以及銀色旋風和強化招式的加成怎麼疊加。</p>
+  <h2>命中效果與增益</h2>
+  <p class="lede">屬性的命中效果、哪些情況不會觸發，以及攻擊招式和強化招式的增益怎麼疊加。</p>
 
   <h3 id="mv-typefx">屬性命中效果</h3>
   <ul class="rules">
-    <li>效果看<b>招式的屬性</b>，和寶可夢自己的屬性無關；所有造成傷害的招式都適用，沒有招式白名單或黑名單。</li>
-    <li>每<b>一下命中</b>各擲一次機率：多段、多發、範圍大、持續傷害區域（每次跳傷害都算一下）的招式比較容易觸發。</li>
-    <li>同一隻敵人觸發成功後 <b>2.5 秒內不會再被任何屬性效果觸發</b>（所有屬性共用這個冷卻；沒觸發不會進冷卻）。</li>
-    <li>15 個屬性有命中效果；一般、惡、格鬥改成固定加成（下方第二個表）。</li>
+    <li><b>看招式屬性</b>：效果看招式的屬性，和寶可夢自己的屬性無關；所有造成傷害的招式都適用，沒有招式白名單或黑名單。</li>
+    <li><b>每一下各擲一次</b>：多段、多發、範圍大、持續傷害區域（每次跳傷害都算一下）的招式比較容易觸發。</li>
+    <li><b>共用冷卻</b>：同一隻敵人觸發成功後 2.5 秒內不會再被任何屬性效果觸發（沒觸發不會進冷卻）。</li>
+    <li>15 個屬性有命中效果；一般、惡、格鬥改成固定加成（第二個表）。</li>
   </ul>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">屬性</th><th scope="col">機率</th><th scope="col">效果</th><th scope="col">數值</th><th scope="col">頭目、傳說、無極汰那</th></tr></thead>
@@ -2604,8 +2839,12 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
     <thead><tr><th scope="col">屬性</th><th scope="col">固定加成（每一下都有）</th></tr></thead>
     <tbody><tr><td><span class="ty" data-t="normal">一般</span></td><td>傷害永遠 ×1.05</td></tr><tr><td><span class="ty" data-t="dark">惡</span></td><td>打體力低於 30% 的敵人時傷害 ×1.18</td></tr><tr><td><span class="ty" data-t="fighting">格鬥</span></td><td>擊退距離 ×1.3</td></tr></tbody>
   </table></div>
-
-  <h3>不會觸發或會改變效果的情況</h3>
+  <ul class="rules">
+    <li><b>招式自帶效果</b>（例如鬼火的灼傷、帶減速的招式）每一下都會套用，不受 2.5 秒冷卻和機率限制；和屬性效果可以同時存在。</li>
+    <li><b>減速</b>取比較強、比較久的那個，不相加。<b>灼傷、中毒</b>各最多 8 層，每次疊加重設持續時間，計算用的傷害取目前最高的那一下。</li>
+    <li><b>易傷</b>（蟲、鋼）和咬碎的「易傷 ×1.25」是不同的效果，可以相乘。</li>
+  </ul>
+  <h4>不會觸發或會改變效果的情況</h4>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">情況</th><th scope="col">影響</th></tr></thead>
     <tbody>
@@ -2617,62 +2856,132 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
       <tr><td>打樹木、岩石、牆壁</td><td>不觸發</td></tr>
     </tbody>
   </table></div>
+
+  <h3 id="mv-buffs">攻擊招式與強化招式的疊加</h3>
+  <h4>增益格子</h4>
   <ul class="rules">
-    <li><b>招式自帶效果</b>（例如鬼火的灼傷、帶減速的招式）每一下都會套用，不受 2.5 秒冷卻和機率限制；和屬性效果可以同時存在。</li>
-    <li>減速取比較強、比較久的那個，不相加。灼傷、中毒各最多 8 層，每次疊加重設持續時間，計算用的傷害取目前最高的那一下。</li>
-    <li>易傷（蟲、鋼）和咬碎的「易傷 ×1.25」是不同的效果，可以相乘。</li>
+    <li>你身上的增益分成 6 個<b>格子</b>：攻擊、物攻、特攻、速度、防禦、回復。每個來源只會放進其中一格（或兩格）。</li>
+    <li><b>同一格只保留比較強的那個</b>（層數 × 每層 比較大的）；比較弱的那個只會把持續時間延長到至少它自己的時間，<b>不相加</b>。</li>
+    <li>每次觸發 ＋1 層並把時間重設；時間到時<b>全部層數一次消失</b>。</li>
+    <li>不同格子之間、以及格子和其他倍率之間怎麼合併，見下方「計算關係」。</li>
+  </ul>
+  <div class="tbl ktbl"><table>
+    <thead><tr><th scope="col">格子</th><th scope="col">影響</th><th scope="col">和其他來源的關係</th></tr></thead>
+    <tbody>
+      <tr><td>攻擊</td><td>所有招式（物理、特殊）的傷害</td><td>攻擊力 ＝ 基礎 × 道具倍率 ×（1 ＋ 攻擊格子）→ 和物攻／特攻格子<b>相乘</b></td></tr>
+      <tr><td>物攻</td><td>只有物理招式</td><td>招式倍率 ＝ 攻擊力 × 物攻倍率 ×（1 ＋ 物攻格子）× …→ 和攻擊格子<b>相乘</b></td></tr>
+      <tr><td>特攻</td><td>只有特殊招式</td><td>同上，換成特攻倍率和特攻格子</td></tr>
+      <tr><td>速度</td><td>移動速度</td><td>速度 ＝ 基礎 × 卡片／強化倍率 ×（1 ＋ 速度格子）× 減速 × 特性 × 天氣 → <b>相乘</b></td></tr>
+      <tr><td>防禦</td><td>減傷%</td><td>減傷% ＝ 卡片 ＋ 永久強化 ＋ 道具 ＋ 防禦格子，<b>相加</b>，上限 80%；近身減傷 ×0.75、光牆另外<b>相乘</b></td></tr>
+      <tr><td>回復</td><td>每秒回復</td><td>每秒回復 ＝ 固定回復 ＋ 回復格子，<b>相加</b>；吸取類招式的回復另外加上去</td></tr>
+    </tbody>
+  </table></div>
+
+  <h4>會提升自身能力的攻擊招式</h4>
+  <div class="tbl ktbl"><table>
+    <thead><tr><th scope="col">招式</th><th scope="col">效果</th><th scope="col">數值</th><th scope="col">和強化招式的關係</th></tr></thead>
+    <tbody>
+      <tr><td><a class="mvl spe" href="#mv-silver-wind" data-go="mv:silver-wind">銀色旋風</a></td><td>攻擊、速度增益</td><td>每次施放 15% 機率，攻擊格子和速度格子各 +8%，最多 3 層（+24%），6 秒；升級、進化都不變</td><td>攻擊格子：和劍舞、龍之舞（物攻）、詭計、大地掌控（特攻）<b>相乘</b>。速度格子：和高速移動<b>同一格，只取較強</b></td></tr>
+      <tr><td>尖石攻擊、狙擊、千變萬花</td><td>擊中要害機率提高</td><td>每一下另外擲一次招式自帶的要害機率（尖石攻擊 30%、狙擊 30%、千變萬花 50%），和一般要害率任一成功就是要害：總機率 ＝ 1 −（1 − 一般要害率）×（1 − 招式加成）</td><td>要害倍率和所有攻擊增益<b>相乘</b>；強化招式不影響要害率</td></tr>
+      <tr><td>雜技</td><td>沒帶道具時傷害提高</td><td>沒有攜帶道具時 ×1.5</td><td>和所有攻擊增益<b>相乘</b></td></tr>
+      <tr><td>近身揮擊、連拳、交叉斬（20 招）</td><td>防禦：受到傷害減少</td><td>這類招式在當前欄位時，受到的傷害 ×0.75</td><td>和變硬（防禦格子，減傷% 相加、上限 80%）<b>相乘</b></td></tr>
+      <tr><td>衝撞類（9 招）、神速、飛撲類（雜技、暗影潛襲）</td><td>防禦：位移時無敵</td><td>衝撞 0.3 秒、神速每跳 0.25 秒、飛撲 0.45 秒</td><td>無敵期間完全不受傷，和增益無關</td></tr>
+      <tr><td>吸取之吻、吸取拳</td><td>回復</td><td>吸取之吻每打中一下回復 1 點體力；吸取拳每一拳打中 1 隻回復 1.5 點，每拳最多回復 6 點；打阿爾宙斯不回復</td><td>和水流環（回復格子）<b>相加</b></td></tr>
+      <tr><td>大爆炸</td><td>代價</td><td>每次扣目前體力 25%（不會致死）</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="rules">
+    <li>除了上表，其他攻擊招式都沒有提升自身攻擊、防禦或速度的效果。</li>
   </ul>
 
-  <h3 id="mv-buffs">銀色旋風與強化招式的疊加</h3>
-  <ul class="rules">
-    <li>你身上的增益分成幾個<b>格子</b>：<b>攻擊</b>（所有招式）、<b>物攻</b>（只有物理招式）、<b>特攻</b>（只有特殊招式）、<b>速度</b>、<b>防禦</b>、<b>回復</b>。</li>
-    <li><b>不同格子相乘</b>；<b>同一格只保留比較強的那個</b>（層數 × 每層 比較大的），比較弱的只會把持續時間延長，不相加。</li>
-    <li>每次施放 ＋1 層並把時間重設；時間到時<b>全部層數一次消失</b>。</li>
-  </ul>
+  <h4>強化招式與其他增益來源</h4>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">來源</th><th scope="col">格子</th><th scope="col">每層</th><th scope="col">層數上限</th><th scope="col">持續</th><th scope="col">觸發方式</th></tr></thead>
     <tbody>
-      <tr><td><a class="mvl spe" href="#mv-silver-wind" data-go="mv:silver-wind">銀色旋風</a></td><td>攻擊 ＋ 速度</td><td class="num">8%</td><td class="num">3（+24%）</td><td class="num">6 秒</td><td>每次施放 15% 機率（升級、進化都不變）；攻擊格子對物理、特殊招式都有效，所以遊戲寫「攻擊、特攻和速度」</td></tr>
-      <tr><td>劍舞</td><td>物攻</td><td class="num">13%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td><td rowspan="5">在當前欄位時每 0.85 秒施放（龍之舞 0.7 秒），不需要目標。Lv2 層數 +1、Lv3 每層 ×1.4、Lv4 時間 ×1.5、Lv5 層數 +1 且每層 ×1.4</td></tr>
+      <tr><td>劍舞</td><td>物攻</td><td class="num">13%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td><td rowspan="7">在當前欄位時每 0.85 秒施放（龍之舞 0.7 秒、水流環 0.9 秒），不需要目標。Lv2 層數 +1、Lv3 每層 ×1.4、Lv4 時間 ×1.5、Lv5 層數 +1 且每層 ×1.4（水流環從 4 層起算）</td></tr>
       <tr><td>龍之舞</td><td>物攻</td><td class="num">11%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td></tr>
       <tr><td>詭計</td><td>特攻</td><td class="num">13%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td></tr>
       <tr><td>大地掌控（哲爾尼亞斯）</td><td>特攻</td><td class="num">18%</td><td class="num">5（Lv5：7）</td><td class="num">8 秒</td></tr>
       <tr><td>高速移動</td><td>速度</td><td class="num">10%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td></tr>
+      <tr><td>變硬</td><td>防禦</td><td class="num">減傷 7%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td></tr>
+      <tr><td>水流環</td><td>回復</td><td class="num">每秒 1.6</td><td class="num">4（Lv5：6）</td><td class="num">8 秒</td></tr>
       <tr><td>特性：碎裂鎧甲／不屈之心／膽怯</td><td>速度</td><td class="num">20%／10%／25%</td><td class="num">1／2／1</td><td class="num">3／3／4 秒</td><td>被打中時（條件見「特性」分頁）</td></tr>
+      <tr><td>特性：持久</td><td>防禦</td><td class="num">減傷 3%</td><td class="num">5</td><td class="num">6 秒</td><td>被近身攻擊打中時</td></tr>
       <tr><td>專屬 Z 招式（有強化效果的）</td><td>攻擊、速度、防禦</td><td class="num">20%</td><td class="num">3</td><td class="num">20 秒</td><td>Z 招式結束時</td></tr>
-    </tbody>
-  </table></div>
-  <p class="formula">攻擊力 ＝ 基礎攻擊 × 道具攻擊倍率（例如幸運薰香 ×0.85）×（1 ＋ 攻擊格子）</p>
-  <p class="formula">招式傷害倍率 ＝ 攻擊力 × 物攻或特攻倍率 ×（1 ＋ 物攻或特攻格子）× 單屬性加成 × 道具 × 羈絆</p>
-  <div class="tbl ktbl"><table>
-    <thead><tr><th scope="col">特殊招式的例子</th><th scope="col">算法</th><th scope="col">總倍率</th></tr></thead>
-    <tbody>
-      <tr><td>銀色旋風 3 層 ＋ Lv1 詭計滿層（+65%）</td><td>1.24 × 1.65</td><td class="num">×2.05</td></tr>
-      <tr><td>銀色旋風 3 層 ＋ Lv5 詭計滿層（+178%）</td><td>1.24 × 2.78</td><td class="num">×3.45</td></tr>
-      <tr><td>上一列 ＋ 幸運薰香</td><td>0.85 × 1.24 × 2.78</td><td class="num">×2.93</td></tr>
-      <tr><td>詭計 ＋ 大地掌控</td><td>同一格，只取較強的</td><td class="num">不相乘</td></tr>
-      <tr><td>銀色旋風 ＋ 高速移動（速度）</td><td>同一格：高速移動較強時，銀色旋風觸發只延長時間</td><td class="num">取較強的</td></tr>
+      <tr><td>特性：心情不定</td><td>（不佔格子）</td><td class="num">10%</td><td class="num">1</td><td class="num">10 秒</td><td>每 10 秒隨機提升攻擊、特攻、速度或防禦其中一項，是獨立倍率，和所有格子<b>相乘</b></td></tr>
     </tbody>
   </table></div>
   <ul class="rules">
-    <li>銀色旋風的平均加成：冷卻 0.75 秒、一直有目標可打時，約 39% 的時間在 3 層，平均約 +13%；冷卻縮到 0.5 秒約 +16%。</li>
-    <li>強化招式只在當前欄位時施放和冷卻；要和攻擊招式同時用必須綁定（羈絆），兩招傷害各 ×0.8。或者切過去疊滿再切回來，增益還會維持 7 秒（Lv4 起 10.5 秒）。</li>
-    <li>11/25 版只修正了銀色旋風的說明文字（加上「特攻」），效果本身沒有改變。</li>
+    <li>Lv5 滿層：劍舞、詭計 +178%，龍之舞 +151%，大地掌控 +247%，高速移動 +137%，變硬減傷 96%（受 80% 上限限制），水流環每秒 +18.8。</li>
+    <li>強化招式只在當前欄位時施放和冷卻；要和攻擊招式同時用必須用羈絆結合（兩招傷害各 ×0.8），或者切過去疊滿再切回來，增益還會維持 7 秒（Lv4 起 10.5 秒）。</li>
   </ul>
+
+  <h4>計算關係</h4>
+  <p class="formula">攻擊力 ＝ 基礎攻擊 × 道具攻擊倍率（例如幸運薰香 ×0.85）×（1 ＋ 攻擊格子）</p>
+  <p class="formula">招式傷害倍率 ＝ 攻擊力 × 物攻或特攻倍率 ×（1 ＋ 物攻或特攻格子）× 單屬性加成 × 道具 × 羈絆</p>
+  <div class="tbl ktbl"><table>
+    <thead><tr><th scope="col">組合</th><th scope="col">關係</th><th scope="col">算法</th><th scope="col">結果</th></tr></thead>
+    <tbody>
+      <tr><td>攻擊格子 +24% ＋ Lv1 詭計滿層（+65%），特殊招式</td><td>不同格子：相乘</td><td>1.24 × 1.65</td><td class="num">×2.05</td></tr>
+      <tr><td>攻擊格子 +24% ＋ Lv5 詭計滿層（+178%），特殊招式</td><td>不同格子：相乘</td><td>1.24 × 2.78</td><td class="num">×3.45</td></tr>
+      <tr><td>上一列 ＋ 幸運薰香</td><td>道具倍率：相乘</td><td>0.85 × 1.24 × 2.78</td><td class="num">×2.93</td></tr>
+      <tr><td>攻擊格子 +24% ＋ Lv5 劍舞滿層，物理招式要害</td><td>相乘</td><td>1.24 × 2.78 × 要害倍率</td><td class="num">×3.45 × 要害</td></tr>
+      <tr><td>詭計 ＋ 大地掌控</td><td>同一格（特攻）</td><td>只取較強的</td><td class="num">不疊加</td></tr>
+      <tr><td>銀色旋風的速度 ＋ 高速移動</td><td>同一格（速度）</td><td>較弱的只延長時間</td><td class="num">取較強的</td></tr>
+      <tr><td>變硬 ＋ 護甲卡 ＋ 近身類招式</td><td>防禦格子和卡片相加；近身減傷相乘</td><td>(1 − min(80%, 卡片 ＋ 變硬)) × 0.75</td><td class="num">最低 ×0.15</td></tr>
+      <tr><td>水流環 ＋ 吸取之吻</td><td>回復來源相加</td><td>每秒回復 ＋ 每次命中回復</td><td class="num">相加</td></tr>
+    </tbody>
+  </table></div>
 </section>
 
 <section id="mv-kinds">
   <h2>攻擊類型</h2>
+  <ul class="rules">
+    <li>每種攻擊類型的施放方式、命中判定，以及「單體 DPS」把每次施放算成幾次命中。</li>
+    <li>最後一欄是該類型招式的實戰分（20 分・最終・三種玩法平均）中位數和範圍。</li>
+  </ul>
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">攻擊類型</th><th scope="col">招式數</th><th scope="col">單一目標每次施放的命中次數</th><th scope="col">範圍與命中判定</th><th scope="col">實戰分（20 分・最終・平均）：中位數（最低～最高）</th></tr></thead>
     <tbody><tr><td>投射</td><td>18</td><td>每發 1 次</td><td>朝最近的敵人射出，沿直線打中路徑上的敵人；每打中 1 隻扣 1 次貫穿，多發時以扇形散開</td><td>146（42～262）</td></tr><tr><td>近身揮擊</td><td>13</td><td>1 次</td><td>以自己為中心、朝最近敵人揮出的弧形，半徑和角度內全部敵人各中 1 次</td><td>26（13～92）</td></tr><tr><td>光束</td><td>8</td><td>1 次</td><td>長方形光束，長、寬範圍內全部敵人各中 1 次</td><td>86（74～97）</td></tr><tr><td>環繞</td><td>4</td><td>每顆環繞物經過目標時 1 次（同一目標每顆最快每冷卻秒數 1 次）</td><td>環繞物掃過的環帶內的敵人；表內以每圈合計傷害計</td><td>26（15～47）</td></tr><tr><td>全方位放射</td><td>11</td><td>放射狀，單一目標只中 1 發</td><td>向四周平均射出，60° 扇形內只有約 1/6 的子彈有機會命中</td><td>101（54～183）</td></tr><tr><td>範圍光環</td><td>7</td><td>1 次</td><td>以自己為中心的圓形，半徑內全部敵人</td><td>65（60～77）</td></tr><tr><td>迴旋鏢</td><td>4</td><td>去程、回程各 1 次</td><td>去程、回程各掃過一條直線，路徑上的敵人全中（無限貫穿）</td><td>145（116～160）</td></tr><tr><td>連鎖</td><td>3</td><td>主目標 1 次（之後每跳傷害 ×0.85）</td><td>從最近的敵人開始連鎖跳躍，每跳傷害 ×0.85</td><td>172（111～180）</td></tr><tr><td>地雷</td><td>3</td><td>單一目標觸發 1 顆</td><td>布在自己腳邊（多顆時散在 18～46 單位內），0.35 秒後啟動；有敵人走到雷的 14 單位內才爆炸，爆炸範圍內全中；放到持續時間結束沒人踩也會自爆，但只有一半傷害。同時最多 4＋2×顆數 顆</td><td>128（90～129）</td></tr><tr><td>隕石</td><td>8</td><td>單一目標中 1 顆</td><td>隨機落在 340 單位內的敵人身上，爆炸範圍內全中</td><td>121（85～195）</td></tr><tr><td>砲台</td><td>2</td><td>砲台存在期間的射擊次數</td><td>砲台放在身後，每發子彈不貫穿：同時最多打中「砲台數」隻</td><td>31（31～31）</td></tr><tr><td>衝撞</td><td>9</td><td>1 次</td><td>衝刺路徑（寬約 34）上的全部敵人各中 1 次</td><td>99（57～133）</td></tr><tr><td>軌跡</td><td>2</td><td>每 0.5 秒 1 次（以站在 1 個水窪中計）</td><td>留下的水窪每 0.5 秒打中上面的敵人；以每秒合計傷害計</td><td>68（64～73）</td></tr><tr><td>扇形噴射</td><td>5</td><td>每發 1 次（近距離全中）</td><td>扇形範圍內、射程內的每隻敵人各中 1 發（被多發覆蓋就中多次）</td><td>79（73～94）</td></tr><tr><td>追蹤</td><td>10</td><td>每發 1 次</td><td>同投射，但子彈會追蹤；貫穿用完就消失</td><td>94（14～136）</td></tr><tr><td>彈跳</td><td>7</td><td>每發 1 次（彈跳轉向其他敵人）</td><td>打中後轉向 220 單位內最近、未打過的敵人，彈跳次數用完再扣貫穿</td><td>246（210～252）</td></tr><tr><td>蓄力光束</td><td>5</td><td>1 次</td><td>蓄力後發出長方形光束，範圍內全部敵人各中 1 次</td><td>100（85～117）</td></tr><tr><td>旋轉</td><td>7</td><td>每圈 1 次</td><td>每圈打中半徑內全部敵人</td><td>26（19～30）</td></tr><tr><td>震波</td><td>2</td><td>波及目標的震波數</td><td>朝最近敵人方向連續落下的震波（每道間隔約 34），每道打中半徑內全部敵人</td><td>115（111～119）</td></tr><tr><td>漩渦</td><td>3</td><td>每 0.4 秒 1 次，最多同時 2 個</td><td>漩渦生在最近的敵人身上，把 1.4 倍半徑內的敵人拉進來，每 0.4 秒打中範圍內全部敵人</td><td>117（105～120）</td></tr><tr><td>推擊</td><td>6</td><td>1 次並擊退</td><td>以自己為中心的圓形，半徑內全部敵人（附擊退）</td><td>132（49～170）</td></tr><tr><td>暈眩</td><td>6</td><td>1 次並暈眩（首領暈眩時間 ×0.35）</td><td>以最近敵人為中心的小範圍</td><td>78（64～129）</td></tr><tr><td>地震環</td><td>2</td><td>擴散的圓環，每隻敵人 1 次</td><td>以自己為中心擴散的圓環，半徑內全部敵人各中 1 次</td><td>254（230～278）</td></tr><tr><td>巨浪</td><td>1</td><td>巨浪掃過，每隻敵人 1 次（並推走）</td><td>從身後 50 單位往前掃過「長＋50」的長方形，寬度內全部敵人各中 1 次並被推著走（模擬以每次施放時全部在場計，實戰中被推遠的敵人下一次可能打不到）</td><td>168</td></tr><tr><td>十字爆炸</td><td>2</td><td>在目標身上十字爆炸 1 次</td><td>在最近的敵人身上爆炸：橫臂長 r、直臂長 0.6r、寬 w，十字範圍內全部敵人</td><td>80（66～93）</td></tr><tr><td>落雷</td><td>2</td><td>每道雷隨機劈畫面內的敵人；只有 1 隻時全部劈牠</td><td>每道雷隨機挑一隻畫面內的敵人，落點半徑內的敵人全中</td><td>51（48～54）</td></tr><tr><td>連拳</td><td>5</td><td>每拳 1 次，最後一拳 ×1.4（以 n＋0.4 計）</td><td>朝最近敵人連續出拳（每 0.09 秒 1 拳，左右交替），每拳打中扇形內全部敵人，最後一拳 ×1.4</td><td>12（11～14）</td></tr><tr><td>交叉斬</td><td>2</td><td>兩道斜斬，正前方的目標中 2 次</td><td>朝最近敵人左右各斜 26° 斬兩刀，兩刀重疊的正前方會中 2 次</td><td>18（12～25）</td></tr><tr><td>連續突進</td><td>1</td><td>每跳換一隻沒打過的敵人，單一目標只中 1 次</td><td>每跳衝向半徑內最近、還沒打過的敵人，只打那一隻；跳到沒有目標為止</td><td>138</td></tr><tr><td>飛撲</td><td>2</td><td>落地衝擊 1 次（沒帶道具時 ×1.5）</td><td>跳到最近的敵人身上，落地衝擊半徑內全部敵人</td><td>128（99～157）</td></tr><tr><td>自爆</td><td>1</td><td>以自己為中心爆炸 1 次（扣目前體力 25%）</td><td>以自己為中心爆炸，半徑內全部敵人；每次扣目前體力的 25%（不會致死）</td><td>146</td></tr><tr><td>強化</td><td>7</td><td>不造成傷害</td><td>—</td><td>—</td></tr><tr><td>天氣</td><td>3</td><td>不造成傷害</td><td>—</td><td>—</td></tr><tr><td>守住</td><td>1</td><td>不造成傷害</td><td>—</td><td>—</td></tr><tr><td>睡覺</td><td>1</td><td>不造成傷害</td><td>—</td><td>—</td></tr><tr><td>光牆</td><td>2</td><td>不造成傷害</td><td>—</td><td>—</td></tr><tr><td>替身</td><td>1</td><td>不造成傷害</td><td>—</td><td>—</td></tr></tbody>
   </table></div>
 </section>
-
-<footer>資料來源：pokesurvivor.com 2026-11-19 版的 <code>app.min.js</code>（招式數值、升級階梯、進化、平衡係數與戰鬥判定）和 <code>zh-Hant.js</code>（遊戲內建的正體中文翻譯）。只讀取程式中的資料，沒有修改或執行遊戲。</footer>
+<footer>資料來源：pokesurvivor.com 的 <code>app.min.js</code>（招式數值、升級階梯、進化、平衡係數與戰鬥判定）和 <code>zh-Hant.js</code>（遊戲內建的正體中文翻譯）。只讀取程式中的資料，沒有修改或執行遊戲。</footer>
 </div>
 
 </template>
+<template id="tpl-ax"><div class="wrap">
+<header>
+  <h1>招式坐標軸</h1>
+  <p class="lede">把每個攻擊招式的<b>實戰分</b>和<b>單體 DPS</b>畫在同一張圖上，一眼看出哪些招式清群強、哪些打單體強。</p>
+  <ul class="rules lede-list">
+    <li><b>座標</b>：橫軸 ＝ log<sub>10</sub>(招式實戰分 ÷ 篩選後所有招式實戰分的平均)，縱軸 ＝ log<sub>10</sub>(招式單體 DPS ÷ 篩選後所有招式單體 DPS 的平均)。0 就是平均；每 +0.3 約等於 2 倍，−0.3 約等於一半。</li>
+    <li><b>怎麼讀</b>：右上＝實戰和單體都強；右下＝清群強、打單體普通；左上＝打單體（頭目）強、清群弱；左下＝兩者都弱。</li>
+    <li><b>資料</b>：實戰分依下方「實戰模擬」選的時間、型態和玩法；單體 DPS 取招式表的 Lv5 欄或進化 + 欄（選「最終型態」時；不會進化的招式用 Lv5）。平均值隨篩選結果重新計算。</li>
+    <li><b>操作</b>：滑鼠移到點或招式名稱上會淡化其他招式並顯示詳細數值；點招式名稱跳到「招式與傷害」表格中的那一列。</li>
+  </ul>
+</header>
+<section id="ax-main">
+  <h2>散布圖</h2>
+  <div class="tools">
+    <div class="chips" role="group" aria-label="屬性"><span class="lbl">屬性</span><div class="cg"><button class="chip" data-f="t" data-v="normal" aria-pressed="false"><span class="tdot" data-t="normal"></span>一般</button><button class="chip" data-f="t" data-v="fire" aria-pressed="false"><span class="tdot" data-t="fire"></span>火</button><button class="chip" data-f="t" data-v="water" aria-pressed="false"><span class="tdot" data-t="water"></span>水</button><button class="chip" data-f="t" data-v="grass" aria-pressed="false"><span class="tdot" data-t="grass"></span>草</button><button class="chip" data-f="t" data-v="electric" aria-pressed="false"><span class="tdot" data-t="electric"></span>電</button><button class="chip" data-f="t" data-v="ice" aria-pressed="false"><span class="tdot" data-t="ice"></span>冰</button><button class="chip" data-f="t" data-v="fighting" aria-pressed="false"><span class="tdot" data-t="fighting"></span>格鬥</button><button class="chip" data-f="t" data-v="poison" aria-pressed="false"><span class="tdot" data-t="poison"></span>毒</button><button class="chip" data-f="t" data-v="ground" aria-pressed="false"><span class="tdot" data-t="ground"></span>地面</button><button class="chip" data-f="t" data-v="flying" aria-pressed="false"><span class="tdot" data-t="flying"></span>飛行</button><button class="chip" data-f="t" data-v="psychic" aria-pressed="false"><span class="tdot" data-t="psychic"></span>超能力</button><button class="chip" data-f="t" data-v="bug" aria-pressed="false"><span class="tdot" data-t="bug"></span>蟲</button><button class="chip" data-f="t" data-v="rock" aria-pressed="false"><span class="tdot" data-t="rock"></span>岩石</button><button class="chip" data-f="t" data-v="ghost" aria-pressed="false"><span class="tdot" data-t="ghost"></span>幽靈</button><button class="chip" data-f="t" data-v="dragon" aria-pressed="false"><span class="tdot" data-t="dragon"></span>龍</button><button class="chip" data-f="t" data-v="dark" aria-pressed="false"><span class="tdot" data-t="dark"></span>惡</button><button class="chip" data-f="t" data-v="steel" aria-pressed="false"><span class="tdot" data-t="steel"></span>鋼</button><button class="chip" data-f="t" data-v="fairy" aria-pressed="false"><span class="tdot" data-t="fairy"></span>妖精</button><button class="chip clr" data-clr="t">全不選</button></div></div>
+    <div class="chips" role="group" aria-label="分類"><span class="lbl">分類</span><div class="cg"><button class="chip" data-f="c" data-v="phy" aria-pressed="false"><span class="phy">物理</span></button><button class="chip" data-f="c" data-v="spe" aria-pressed="false"><span class="spe">特殊</span></button><button class="chip clr" data-clr="c">全不選</button></div></div>
+    <div class="chips" role="group" aria-label="攻擊類型"><span class="lbl">攻擊類型</span><div class="cg"><button class="chip" data-f="k" data-v="projectile" aria-pressed="false">投射<small>18</small></button><button class="chip" data-f="k" data-v="melee" aria-pressed="false">近身揮擊<small>13</small></button><button class="chip" data-f="k" data-v="beam" aria-pressed="false">光束<small>8</small></button><button class="chip" data-f="k" data-v="orbit" aria-pressed="false">環繞<small>4</small></button><button class="chip" data-f="k" data-v="nova" aria-pressed="false">全方位放射<small>11</small></button><button class="chip" data-f="k" data-v="aura" aria-pressed="false">範圍光環<small>7</small></button><button class="chip" data-f="k" data-v="boomerang" aria-pressed="false">迴旋鏢<small>4</small></button><button class="chip" data-f="k" data-v="chain" aria-pressed="false">連鎖<small>3</small></button><button class="chip" data-f="k" data-v="mine" aria-pressed="false">地雷<small>3</small></button><button class="chip" data-f="k" data-v="meteor" aria-pressed="false">隕石<small>8</small></button><button class="chip" data-f="k" data-v="turret" aria-pressed="false">砲台<small>2</small></button><button class="chip" data-f="k" data-v="dash" aria-pressed="false">衝撞<small>9</small></button><button class="chip" data-f="k" data-v="trail" aria-pressed="false">軌跡<small>2</small></button><button class="chip" data-f="k" data-v="cone" aria-pressed="false">扇形噴射<small>5</small></button><button class="chip" data-f="k" data-v="homing" aria-pressed="false">追蹤<small>10</small></button><button class="chip" data-f="k" data-v="bounce" aria-pressed="false">彈跳<small>7</small></button><button class="chip" data-f="k" data-v="charge" aria-pressed="false">蓄力光束<small>5</small></button><button class="chip" data-f="k" data-v="spin" aria-pressed="false">旋轉<small>7</small></button><button class="chip" data-f="k" data-v="quake" aria-pressed="false">震波<small>2</small></button><button class="chip" data-f="k" data-v="vortex" aria-pressed="false">漩渦<small>3</small></button><button class="chip" data-f="k" data-v="shove" aria-pressed="false">推擊<small>6</small></button><button class="chip" data-f="k" data-v="stun" aria-pressed="false">暈眩<small>6</small></button><button class="chip" data-f="k" data-v="tremor" aria-pressed="false">地震環<small>2</small></button><button class="chip" data-f="k" data-v="wave" aria-pressed="false">巨浪<small>1</small></button><button class="chip" data-f="k" data-v="cross" aria-pressed="false">十字爆炸<small>2</small></button><button class="chip" data-f="k" data-v="storm" aria-pressed="false">落雷<small>2</small></button><button class="chip" data-f="k" data-v="punch" aria-pressed="false">連拳<small>5</small></button><button class="chip" data-f="k" data-v="scissor" aria-pressed="false">交叉斬<small>2</small></button><button class="chip" data-f="k" data-v="blitz" aria-pressed="false">連續突進<small>1</small></button><button class="chip" data-f="k" data-v="leap" aria-pressed="false">飛撲<small>2</small></button><button class="chip" data-f="k" data-v="boom" aria-pressed="false">自爆<small>1</small></button><button class="chip clr" data-clr="k">全不選</button></div></div>
+    <div class="chips" role="group" aria-label="專屬招式"><span class="lbl">專屬招式</span><div class="cg"><button class="chip" data-f="o" data-v="1" aria-pressed="false">只看專屬招式<small>39</small></button><button class="chip" data-f="o" data-v="0" aria-pressed="false">排除專屬招式</button><button class="chip clr" data-clr="o">全不選</button></div></div>
+    
+    <div class="chips simtools" role="group" aria-label="實戰模擬"><span class="lbl">實戰模擬</span><div class="cg">
+      <span class="sg"><button class="chip" data-at="600" aria-pressed="false">10 分</button><button class="chip" data-at="1200" aria-pressed="true">20 分</button></span>
+      <span class="sg"><button class="chip" data-as="lv5" aria-pressed="false">Lv5</button><button class="chip" data-as="fin" aria-pressed="true">最終型態</button></span>
+      <span class="sg"><span class="lbl2">玩法</span><button class="chip" data-am="avg" aria-pressed="true">三種玩法平均</button><button class="chip" data-am="stand" aria-pressed="false">站樁</button><button class="chip" data-am="kite" aria-pressed="false">繞圈</button><button class="chip" data-am="line" aria-pressed="false">直線</button></span>
+      <span class="sg sreset"><button type="button" class="chip rst" id="axreset">重置</button></span>
+    </div></div>
+    <div class="count" id="axcount"></div>
+  </div>
+  <div class="axbox" id="axbox"><svg id="axsvg" role="img" aria-label="招式實戰分與單體 DPS 散布圖"></svg><div class="axtip" id="axtip" hidden></div></div>
+</section>
+</div>
+</template>
+
+
 <template id="tpl-sp"><div class="wrap">
 <header class="narrow">
   <h1>PokéSurvivor 特殊進化</h1>
@@ -2681,7 +2990,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
     <li>四個選項：超級進化（或形態變化、合體）、極巨化（有超極巨化型態的寶可夢換成超極巨化）、Z 手環、太晶化。</li>
     <li>選好之後按「力量」鍵發動，時間到自動恢復，冷卻結束可以再用。</li>
   </ul>
-  <div class="facts"><a class="fact" href="#sp-powers" data-go="sp:powers"><b>5</b> 種力量</a><a class="fact" href="#sp-list" data-go="sp:list"><b>132</b> 隻有專屬選項</a><a class="fact" href="#sp-mega" data-go="sp:mega"><b>102</b> 種超級進化／形態</a><a class="fact" href="#sp-gmax" data-go="sp:gmax"><b>33</b> 種超極巨化</a><a class="fact" href="#sp-z" data-go="sp:z"><b>18</b> 個專屬 Z 招式</a></div>
+  <div class="facts"><a class="fact" href="#sp-powers" data-go="sp:powers"><b>力量</b><span>5 種力量的比較</span></a><a class="fact" href="#sp-list" data-go="sp:list"><b>專屬選項</b><span>132 隻寶可夢</span></a><a class="fact" href="#sp-mega" data-go="sp:mega"><b>超級進化／形態</b><span>102 種</span></a><a class="fact" href="#sp-gmax" data-go="sp:gmax"><b>超極巨化</b><span>33 種</span></a><a class="fact" href="#sp-z" data-go="sp:z"><b>專屬 Z 招式</b><span>18 個</span></a></div>
 </header>
 
 <section class="narrow" id="sp-powers">
@@ -2775,61 +3084,56 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 <template id="tpl-mech"><div class="wrap">
 <header>
   <h1>PokéSurvivor 遊戲機制</h1>
-  <p class="lede">依 11/19 版本的程式整理一局遊戲裡的成長與經濟。</p>
+  <p class="lede">依遊戲程式整理一局遊戲裡的難度、成長與經濟。</p>
   <ul class="rules lede-list">
-    <li>內容：經驗值、敵人與首領的強度曲線、寶可幣、掉落物、永久強化與升級卡。</li>
+    <li>內容分三大塊：<b>難度與敵人強度</b>（難度、出怪、頭目、裂縫與無極汰那）、<b>成長</b>（經驗值、升級卡、永久強化）、<b>經濟</b>（寶可幣、加成、掉落物）。</li>
     <li>所有數字都直接讀自程式碼；標示「估計」的是在說明的假設下計算出來的。</li>
   </ul>
+  <nav class="facts jump" aria-label="頁內跳轉">
+    <a class="fact" href="#gm-curve" data-go="gm:curve"><b>難度與敵人強度</b><span>難度、出怪、一般敵人</span></a>
+    <a class="fact" href="#gm-boss" data-go="gm:boss"><b>頭目與傳說</b><span>頭目、裂縫、無極汰那</span></a>
+    <a class="fact" href="#gm-xp" data-go="gm:xp"><b>經驗值</b><span>升級經驗、等級進度</span></a>
+    <a class="fact" href="#gm-ability" data-go="gm:ability"><b>升級卡與永久強化</b><span>抽卡規則、能力卡、局外強化</span></a>
+    <a class="fact" href="#gm-coins" data-go="gm:coins"><b>寶可幣</b><span>結算公式、局內來源</span></a>
+    <a class="fact" href="#gm-bonus" data-go="gm:bonus"><b>經驗與寶可幣加成</b><span>道具、卡片、特性一覽</span></a>
+    <a class="fact" href="#gm-drops" data-go="gm:drops"><b>掉落物</b><span>敵人、頭目、場景物件</span></a>
+  </nav>
 </header>
-  <div class="facts narrow"><a class="fact" href="#gm-xp" data-go="gm:xp"><b>經驗值</b></a><a class="fact" href="#gm-curve" data-go="gm:curve"><b>強度曲線</b>敵人、首領、裂縫</a><a class="fact" href="#gm-coins" data-go="gm:coins"><b>寶可幣</b></a><a class="fact" href="#gm-bonus" data-go="gm:bonus"><b>經驗與寶可幣加成</b>道具、卡片、特性</a><a class="fact" href="#gm-drops" data-go="gm:drops"><b>掉落物</b></a><a class="fact" href="#gm-ability" data-go="gm:ability"><b>能力</b>：永久強化與升級卡</a></div>
-
-<section class="narrow" id="gm-xp">
-  <h2>經驗值</h2>
-  <ul class="rules">
-    <li>11/14 大更新把升級需要的經驗降到舊版的 1/3，11/16 再少 25%（現在是大更新前的 1/4）；每次升級出 <b>4 張</b>卡。</li>
-    <li>敵人倒下時留下經驗球，要走進<b>吸取範圍</b>才會被吸過來：基礎 78，永久強化「磁鐵」每級 +12%，升級卡「磁鐵」每張 +25%（加法）。撿到「磁鐵」掉落物會把全場掉落物一次吸過來。</li>
-    <li><b>經驗倍率</b>：永久強化「智慧」每級 +2%（最多 8 級）、升級卡「學習」每張 +8%（加法，最多 15 張）、稀有卡「智慧」+15%（每局一次，每次升級 5% 機率出現）、攜帶道具「幸運蛋」×1.3、「經驗護符」×1.2。全部來源見下方「經驗與寶可幣加成一覽」。</li>
-    <li>寶可夢升到 <b>Lv20 和 Lv40</b> 時會在局中變強或進化（會出現專用的進化卡，優先排在 4 張卡的最前面）。11/16 起已進化的寶可夢開局只有第一階段的能力，到 Lv40 才是自己的能力，詳見「寶可夢」分頁。</li>
-    <li>一次拿到很多經驗時可以連升好幾級，每一級都會各給一次升級卡。合作模式每人拿到的經驗 ÷（1 ＋ 0.5 ×（人數 − 1））。</li>
-  </ul>
-  <h3>升級需要的經驗</h3>
-  <p class="formula">需要經驗 ＝ ⌊ 8 ＋ 6 × 等級 ＋ 1.6 × 等級<sup>1.75</sup> ⌋</p>
-  <div class="tbl xpt"><table><thead><tr><th scope="col">等級</th><th scope="col">Lv1→2</th><th scope="col">Lv2→3</th><th scope="col">Lv3→4</th><th scope="col">Lv5→6</th><th scope="col">Lv10→11</th><th scope="col">Lv19→20</th><th scope="col">Lv20→21</th><th scope="col">Lv30→31</th><th scope="col">Lv39→40</th><th scope="col">Lv40→41</th><th scope="col">Lv50→51</th><th scope="col">Lv99→100</th></tr></thead><tbody><tr><th scope="row">這一級需要</th><td class="num">15</td><td class="num">25</td><td class="num">36</td><td class="num">64</td><td class="num">157</td><td class="num">398</td><td class="num">430</td><td class="num">803</td><td class="num">1,215</td><td class="num">1,265</td><td class="num">1,812</td><td class="num">5,573</td></tr><tr><th scope="row">累計</th><td class="num">15</td><td class="num">40</td><td class="num">76</td><td class="num">190</td><td class="num">777</td><td class="num">3,332</td><td class="num">3,762</td><td class="num">10,035</td><td class="num">19,269</td><td class="num">20,534</td><td class="num">36,125</td><td class="num">211,903</td></tr></tbody></table></div>
-  <h3>經驗供給與等級進度（估計）</h3>
-  <ul class="rules">
-    <li>假設：出現的敵人全部打倒、經驗全部撿到；沒有任何經驗倍率。</li>
-    <li>頭目戰算 20 秒（期間出怪 ×0.25）、裂縫算 40 秒（期間不出怪）。</li>
-    <li>右欄是經驗倍率 ×2 時的等級。</li>
-    <li>實際上撿不完經驗，等級會比這裡低。</li>
-  </ul>
-  <div class="tbl"><table>
-    <thead><tr><th scope="col">時間</th><th scope="col">累計擊倒</th><th scope="col">累計經驗</th><th scope="col">等級</th><th scope="col">經驗 ×2 時</th></tr></thead>
-    <tbody><tr><td class="num">1:00</td><td class="num">78</td><td class="num">997</td><td class="num"><b>10</b></td><td class="num">14</td></tr><tr><td class="num">2:00</td><td class="num">174</td><td class="num">1,803</td><td class="num"><b>13</b></td><td class="num">18</td></tr><tr><td class="num">3:00</td><td class="num">260</td><td class="num">2,553</td><td class="num"><b>15</b></td><td class="num">21</td></tr><tr><td class="num">4:00</td><td class="num">398</td><td class="num">3,615</td><td class="num"><b>18</b></td><td class="num">24</td></tr><tr><td class="num">5:00</td><td class="num">439</td><td class="num">3,943</td><td class="num"><b>19</b></td><td class="num">25</td></tr><tr><td class="num">7:00</td><td class="num">710</td><td class="num">6,308</td><td class="num"><b>23</b></td><td class="num">30</td></tr><tr><td class="num">10:00</td><td class="num">1,145</td><td class="num">10,180</td><td class="num"><b>27</b></td><td class="num">36</td></tr><tr><td class="num">12:00</td><td class="num">1,513</td><td class="num">13,814</td><td class="num"><b>31</b></td><td class="num">41</td></tr><tr><td class="num">15:00</td><td class="num">2,023</td><td class="num">19,188</td><td class="num"><b>35</b></td><td class="num">46</td></tr><tr><td class="num">18:00</td><td class="num">2,647</td><td class="num">23,975</td><td class="num"><b>38</b></td><td class="num">50</td></tr><tr><td class="num">20:00</td><td class="num">3,131</td><td class="num">29,163</td><td class="num"><b>42</b></td><td class="num">54</td></tr><tr><td class="num">25:00</td><td class="num">4,523</td><td class="num">42,615</td><td class="num"><b>48</b></td><td class="num">63</td></tr><tr><td class="num">30:00</td><td class="num">5,755</td><td class="num">57,399</td><td class="num"><b>54</b></td><td class="num">71</td></tr></tbody></table></div>
-</section>
 
 <section class="narrow" id="gm-curve">
-  <h2>敵人與首領的強度曲線</h2>
+  <h2>一、難度與敵人強度</h2>
+  <h3 id="gm-diff">難度</h3>
+  <div class="tbl"><table>
+    <thead><tr><th scope="col">難度</th><th scope="col">敵人體力</th><th scope="col">敵人傷害</th><th scope="col">首領體力</th><th scope="col">單次受傷上限</th><th scope="col">結算寶可幣、扭蛋券</th><th scope="col">場上最多</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">普通</th><td class="num">×0.9</td><td class="num">×0.85</td><td class="num">×0.85</td><td class="num">25% 最大體力</td><td class="num">×1</td><td class="num">64 隻</td></tr>
+      <tr><th scope="row">困難</th><td class="num">×1.4</td><td class="num">×1.25</td><td class="num">×1.4</td><td class="num">30%</td><td class="num">×1.5</td><td class="num">64 隻</td></tr>
+      <tr><th scope="row">噩夢</th><td class="num">×2.2</td><td class="num">×1.65</td><td class="num">×2.2</td><td class="num">33%</td><td class="num">×2</td><td class="num">72 隻</td></tr>
+    </tbody></table></div>
+  <ul class="rules">
+    <li>打贏前一個難度的無極汰那才會解鎖下一個難度。</li>
+    <li>本頁的表格都是<b>普通</b>難度的值。</li>
+  </ul>
+  <h3>出怪與一般敵人</h3>
   <ul class="rules">
     <li>遊戲用三條隨時間上升的曲線控制難度：<b>群體體力</b>（每秒出現的敵人體力總和）、<b>單體體力</b>（頭目和傳說的基準）、<b>經驗供給</b>（每秒出現的經驗總和）。曲線在表列時間點之間以等比方式內插。</li>
     <li>出怪速度 ＝ 1 ＋ 3 × min(1, 時間 ÷ 18 分)<sup>0.8</sup> 隻／秒，18 分鐘後固定每秒 4 隻；場上最多 64 隻。另外每 38～56 秒一次「寶可夢浪潮」，一口氣出現「出怪速度 × 8」隻。</li>
     <li>每隻敵人的體力 ＝ 群體體力 ÷ 1.2 ÷ 出怪速度 × 難度倍率，經驗 ＝ 經驗供給 ÷ 出怪速度。所以出怪越快，每隻越弱、經驗越少，總量不變。還會依種類乘上倍率（例如坦克型體力較多），落後當前階段的舊種類體力 ×0.6、傷害 ×0.75。</li>
     <li>敵人移動速度隨時間增加：每秒 +1/1400（第 490 秒、約 8 分 10 秒時達到上限 +35%）。</li>
-    <li>難度：<b>普通</b>敵人體力 ×0.9、傷害 ×0.85、首領體力 ×0.85，單次受傷上限 25% 最大體力；<b>困難</b>體力 ×1.4、傷害 ×1.25、首領 ×1.4、上限 30%、結算寶可幣 ×1.5；<b>噩夢</b>體力 ×2.2、傷害 ×1.65、首領 ×2.2、上限 33%、寶可幣 ×2，場上最多 72 隻（其他難度 64 隻）。打贏前一個難度的無極汰那才會解鎖。下表都是普通難度的值。</li>
   </ul>
-  <h3>一般敵人</h3>
   <div class="tbl"><table>
     <thead><tr><th scope="col">時間</th><th scope="col">出怪（隻/秒）</th><th scope="col">每分鐘</th><th scope="col">浪潮隻數</th><th scope="col">經驗供給（每秒）</th><th scope="col">每隻經驗</th><th scope="col">每隻體力</th><th scope="col">群體體力曲線（每秒）</th><th scope="col">接觸傷害</th></tr></thead>
     <tbody><tr><td class="num">0:00</td><td class="num">1.00</td><td class="num">60</td><td class="num">8</td><td class="num">15.3</td><td class="num">15</td><td class="num">10</td><td class="num">13</td><td class="num">12</td></tr><tr><td class="num">1:00</td><td class="num">1.30</td><td class="num">78</td><td class="num">10</td><td class="num">13.3</td><td class="num">10</td><td class="num">11</td><td class="num">20</td><td class="num">16</td></tr><tr><td class="num">2:00</td><td class="num">1.52</td><td class="num">91</td><td class="num">12</td><td class="num">10.3</td><td class="num">7</td><td class="num">17</td><td class="num">33</td><td class="num">22</td></tr><tr><td class="num">3:00</td><td class="num">1.72</td><td class="num">103</td><td class="num">14</td><td class="num">11.7</td><td class="num">7</td><td class="num">20</td><td class="num">47</td><td class="num">29</td></tr><tr><td class="num">4:00</td><td class="num">1.90</td><td class="num">114</td><td class="num">15</td><td class="num">15.9</td><td class="num">8</td><td class="num">29</td><td class="num">74</td><td class="num">37</td></tr><tr><td class="num">5:00</td><td class="num">2.08</td><td class="num">125</td><td class="num">17</td><td class="num">16.5</td><td class="num">8</td><td class="num">48</td><td class="num">133</td><td class="num">48</td></tr><tr><td class="num">7:00</td><td class="num">2.41</td><td class="num">145</td><td class="num">19</td><td class="num">17.9</td><td class="num">7</td><td class="num">89</td><td class="num">285</td><td class="num">71</td></tr><tr><td class="num">10:00</td><td class="num">2.87</td><td class="num">172</td><td class="num">23</td><td class="num">24.7</td><td class="num">9</td><td class="num">175</td><td class="num">671</td><td class="num">127</td></tr><tr><td class="num">12:00</td><td class="num">3.17</td><td class="num">190</td><td class="num">25</td><td class="num">27.1</td><td class="num">9</td><td class="num">180</td><td class="num">760</td><td class="num">146</td></tr><tr><td class="num">15:00</td><td class="num">3.59</td><td class="num">216</td><td class="num">29</td><td class="num">28.1</td><td class="num">8</td><td class="num">305</td><td class="num">1,462</td><td class="num">178</td></tr><tr><td class="num">18:00</td><td class="num">4.00</td><td class="num">240</td><td class="num">32</td><td class="num">28.6</td><td class="num">7</td><td class="num">329</td><td class="num">1,756</td><td class="num">203</td></tr><tr><td class="num">20:00</td><td class="num">4.00</td><td class="num">240</td><td class="num">32</td><td class="num">29.4</td><td class="num">7</td><td class="num">380</td><td class="num">2,026</td><td class="num">221</td></tr><tr><td class="num">25:00</td><td class="num">4.00</td><td class="num">240</td><td class="num">32</td><td class="num">47.7</td><td class="num">12</td><td class="num">512</td><td class="num">2,730</td><td class="num">253</td></tr><tr><td class="num">30:00</td><td class="num">4.00</td><td class="num">240</td><td class="num">32</td><td class="num">47.7</td><td class="num">12</td><td class="num">671</td><td class="num">3,580</td><td class="num">289</td></tr></tbody></table></div>
-  <h3>頭目</h3>
+  <h3 id="gm-boss">頭目</h3>
   <p class="formula">頭目體力 ＝ 單體體力曲線（出現時間）× 保護秒數 × 係數 × 合作人數 × 難度（普通 ×0.85）</p>
   <div class="tbl"><table>
     <thead><tr><th scope="col">頭目</th><th scope="col">出現</th><th scope="col">單體體力曲線</th><th scope="col">保護秒數 × 係數</th><th scope="col">體力（單人、普通）</th><th scope="col">最快擊倒</th><th scope="col">經驗</th></tr></thead>
     <tbody><tr><th scope="row">第 1 隻</th><td class="num">2:00</td><td class="num">27</td><td class="num">25 × 0.895</td><td class="num"><b>514</b></td><td class="num">10 秒</td><td class="num">220</td></tr><tr><th scope="row">第 2 隻</th><td class="num">6:00</td><td class="num">132</td><td class="num">30 × 0.745</td><td class="num"><b>2,517</b></td><td class="num">12 秒</td><td class="num">420</td></tr><tr><th scope="row">第 3 隻</th><td class="num">10:00</td><td class="num">304</td><td class="num">35 × 0.635</td><td class="num"><b>5,737</b></td><td class="num">14 秒</td><td class="num">680</td></tr><tr><th scope="row">第 4 隻</th><td class="num">14:00</td><td class="num">580</td><td class="num">40 × 0.537</td><td class="num"><b>10,590</b></td><td class="num">16 秒</td><td class="num">1,000</td></tr><tr><th scope="row">第 5 隻</th><td class="num">18:00</td><td class="num">947</td><td class="num">45 × 0.454</td><td class="num"><b>16,440</b></td><td class="num">18 秒</td><td class="num">1,800</td></tr></tbody></table></div>
-  <ul class="rules" style="margin-top:12px">
+  <ul class="rules">
     <li><b>首領保護</b>：頭目、傳說、無極汰那每一下最多掉 10% 最大體力；每秒能「全額吃下」的傷害約為 最大體力 ÷ (0.4 × 保護秒數)（最多累積 2 秒），超過的部分只算 10%。上表「最快擊倒」就是 0.4 × 保護秒數：輸出再高也不會更快。</li>
     <li>頭目死亡時掉 14 顆大經驗球（合計上表經驗）、回復和磁鐵各 1 個、1/3 機率掉 10 連扭蛋券、1 個力量球、10 枚寶可幣（每枚 5）、1 個攜帶道具，一半機率再掉一個點心。</li>
   </ul>
-  <h3>裂縫傳說與無極汰那</h3>
+  <h3>裂縫傳說</h3>
   <p class="formula">傳說體力 ＝ 單體體力曲線 × 保護秒數 × (你的實測 DPS ÷ 曲線預期)<sup>0.585</sup></p>
   <ul class="rules">
     <li>裂縫在 4、8、12、16、25 分開啟。</li>
@@ -2841,6 +3145,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
   <div class="tbl"><table>
     <thead><tr><th scope="col">裂縫</th><th scope="col">開啟</th><th scope="col">保護秒數</th><th scope="col">體力（預期輸出時）</th><th scope="col">最快擊倒</th></tr></thead>
     <tbody><tr><th scope="row">第 1 個</th><td class="num">4:00</td><td class="num">55</td><td class="num"><b>3,442</b></td><td class="num">22 秒</td></tr><tr><th scope="row">第 2 個</th><td class="num">8:00</td><td class="num">60</td><td class="num"><b>10,377</b></td><td class="num">24 秒</td></tr><tr><th scope="row">第 3 個</th><td class="num">12:00</td><td class="num">65</td><td class="num"><b>23,628</b></td><td class="num">26 秒</td></tr><tr><th scope="row">第 4 個</th><td class="num">16:00</td><td class="num">70</td><td class="num"><b>44,986</b></td><td class="num">28 秒</td></tr><tr><th scope="row">第 5 個</th><td class="num">25:00</td><td class="num">75</td><td class="num"><b>112,811</b></td><td class="num">30 秒</td></tr></tbody></table></div>
+  <h3>無極汰那</h3>
   <ul class="rules">
     <li>無極汰那在 20 分出現，分三個階段。</li>
     <li>體力 ＝ 150 × 單體體力曲線（20 分）× 0.4 ≈ 58,889（單人、普通）。</li>
@@ -2848,8 +3153,64 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
   </ul>
 </section>
 
-<section class="narrow" id="gm-coins">
-  <h2>寶可幣</h2>
+<section class="narrow" id="gm-grow">
+  <h2>二、成長</h2>
+  <h3 id="gm-xp">經驗值</h3>
+  <ul class="rules">
+    <li>11/14 大更新把升級需要的經驗降到舊版的 1/3，11/16 再少 25%（現在是大更新前的 1/4）；每次升級出 <b>4 張</b>卡。</li>
+    <li>敵人倒下時留下經驗球，要走進<b>吸取範圍</b>才會被吸過來：基礎 78，永久強化「磁鐵」每級 +12%，升級卡「磁鐵」每張 +25%（加法）。撿到「磁鐵」掉落物會把全場掉落物一次吸過來。</li>
+    <li><b>經驗倍率</b>：永久強化「智慧」每級 +2%（最多 8 級）、升級卡「學習」每張 +8%（加法，最多 15 張）、稀有卡「智慧」+15%（每局一次，每次升級 5% 機率出現）、攜帶道具「幸運蛋」×1.3、「經驗護符」×1.2。全部來源見下方「經驗與寶可幣加成一覽」。</li>
+    <li>寶可夢升到 <b>Lv20 和 Lv40</b> 時會在局中變強或進化（會出現專用的進化卡，優先排在 4 張卡的最前面）。11/16 起已進化的寶可夢開局只有第一階段的能力，到 Lv40 才是自己的能力，詳見「寶可夢」分頁。</li>
+    <li>一次拿到很多經驗時可以連升好幾級，每一級都會各給一次升級卡。合作模式每人拿到的經驗 ÷（1 ＋ 0.5 ×（人數 − 1））。</li>
+  </ul>
+  <h4>升級需要的經驗</h4>
+  <p class="formula">需要經驗 ＝ ⌊ 8 ＋ 6 × 等級 ＋ 1.6 × 等級<sup>1.75</sup> ⌋</p>
+  <div class="tbl xpt"><table><thead><tr><th scope="col">等級</th><th scope="col">Lv1→2</th><th scope="col">Lv2→3</th><th scope="col">Lv3→4</th><th scope="col">Lv5→6</th><th scope="col">Lv10→11</th><th scope="col">Lv19→20</th><th scope="col">Lv20→21</th><th scope="col">Lv30→31</th><th scope="col">Lv39→40</th><th scope="col">Lv40→41</th><th scope="col">Lv50→51</th><th scope="col">Lv99→100</th></tr></thead><tbody><tr><th scope="row">這一級需要</th><td class="num">15</td><td class="num">25</td><td class="num">36</td><td class="num">64</td><td class="num">157</td><td class="num">398</td><td class="num">430</td><td class="num">803</td><td class="num">1,215</td><td class="num">1,265</td><td class="num">1,812</td><td class="num">5,573</td></tr><tr><th scope="row">累計</th><td class="num">15</td><td class="num">40</td><td class="num">76</td><td class="num">190</td><td class="num">777</td><td class="num">3,332</td><td class="num">3,762</td><td class="num">10,035</td><td class="num">19,269</td><td class="num">20,534</td><td class="num">36,125</td><td class="num">211,903</td></tr></tbody></table></div>
+  <h4>經驗供給與等級進度（估計）</h4>
+  <ul class="rules">
+    <li>假設：出現的敵人全部打倒、經驗全部撿到；沒有任何經驗倍率。</li>
+    <li>頭目戰算 20 秒（期間出怪 ×0.25）、裂縫算 40 秒（期間不出怪）。</li>
+    <li>右欄是經驗倍率 ×2 時的等級。</li>
+    <li>實際上撿不完經驗，等級會比這裡低。</li>
+  </ul>
+  <div class="tbl"><table>
+    <thead><tr><th scope="col">時間</th><th scope="col">累計擊倒</th><th scope="col">累計經驗</th><th scope="col">等級</th><th scope="col">經驗 ×2 時</th></tr></thead>
+    <tbody><tr><td class="num">1:00</td><td class="num">78</td><td class="num">997</td><td class="num"><b>10</b></td><td class="num">14</td></tr><tr><td class="num">2:00</td><td class="num">174</td><td class="num">1,803</td><td class="num"><b>13</b></td><td class="num">18</td></tr><tr><td class="num">3:00</td><td class="num">260</td><td class="num">2,553</td><td class="num"><b>15</b></td><td class="num">21</td></tr><tr><td class="num">4:00</td><td class="num">398</td><td class="num">3,615</td><td class="num"><b>18</b></td><td class="num">24</td></tr><tr><td class="num">5:00</td><td class="num">439</td><td class="num">3,943</td><td class="num"><b>19</b></td><td class="num">25</td></tr><tr><td class="num">7:00</td><td class="num">710</td><td class="num">6,308</td><td class="num"><b>23</b></td><td class="num">30</td></tr><tr><td class="num">10:00</td><td class="num">1,145</td><td class="num">10,180</td><td class="num"><b>27</b></td><td class="num">36</td></tr><tr><td class="num">12:00</td><td class="num">1,513</td><td class="num">13,814</td><td class="num"><b>31</b></td><td class="num">41</td></tr><tr><td class="num">15:00</td><td class="num">2,023</td><td class="num">19,188</td><td class="num"><b>35</b></td><td class="num">46</td></tr><tr><td class="num">18:00</td><td class="num">2,647</td><td class="num">23,975</td><td class="num"><b>38</b></td><td class="num">50</td></tr><tr><td class="num">20:00</td><td class="num">3,131</td><td class="num">29,163</td><td class="num"><b>42</b></td><td class="num">54</td></tr><tr><td class="num">25:00</td><td class="num">4,523</td><td class="num">42,615</td><td class="num"><b>48</b></td><td class="num">63</td></tr><tr><td class="num">30:00</td><td class="num">5,755</td><td class="num">57,399</td><td class="num"><b>54</b></td><td class="num">71</td></tr></tbody></table></div>
+  <h3 id="gm-ability">升級卡與永久強化</h3>
+  <h4>4 張卡怎麼抽出來</h4>
+  <ol class="rules">
+    <li>先放入<b>必定出現</b>的卡：寶可夢進化卡（Lv20、Lv40）→ 招式進化卡（同時最多 1 張）→ 稀有卡「第四個道具」（已有 3 個道具欄時 3%）→ 稀有卡「智慧」（5%，每局一次）→ 專屬招式（Lv10 起、還有空欄位時 1 張）。</li>
+    <li>剩下的位置從候選卡中依權重抽，抽過的不再重複：
+      <ul>
+        <li>新招式（還有空欄位時）：從可學招式中先抽 6 個候選，每個權重 10；和寶可夢較強一邊（物理／特殊）相符的招式被選為候選的機率是 2 倍。已有 2 個變化招式時不再出現變化招式。</li>
+        <li>招式升級：每個沒滿級的招式權重 8。</li>
+        <li>能力卡：先從還能拿的能力卡中隨機挑 5 種，權重 4（還有空欄位時）或 7（欄位已滿）；好運連連再 ×0.4。某個滿級招式在等的能力卡會額外加入，權重 14，並標示「進化 招式名」。</li>
+        <li>換招式（Lv4 起，沒有尚未使用的換招式時）：權重 2（還有空欄位）或 5（欄位已滿）。</li>
+      </ul></li>
+  </ol>
+  <h4>能力卡（局內）</h4>
+  <ul class="rules">
+    <li>11/16 起能力卡<b>沒有張數上限</b>（學習 15 張、閃避和好運連連 5 張除外），可以一直疊。</li>
+    <li>上限改由數值本身限制：減傷 80%、要害機率 60%、要害倍率 ×3.5、冷卻不會到 0。</li>
+    <li>大部分能力卡是<b>加法疊加</b>：第 n 張讓總倍率從 1 ＋ k(n−1) 變成 1 ＋ kn，所以越後面每張的相對效果越小。</li>
+  </ul>
+  <div class="tbl"><table>
+    <thead><tr><th scope="col">卡片</th><th scope="col">效果</th><th scope="col">張數上限</th><th scope="col">實際上限／參考</th></tr></thead>
+    <tbody><tr><th scope="row">活力</th><td>最大體力 +20，並回復同樣的量</td><td class="num">不限</td><td>—</td></tr><tr><th scope="row">威力</th><td>所有招式傷害 +8%（加法）</td><td class="num">不限</td><td>10 張 ×1.8、20 張 ×2.6</td></tr><tr><th scope="row">奔跑</th><td>移動速度 +5%（加法）</td><td class="num">不限</td><td>受速度軟上限影響</td></tr><tr><th scope="row">反應</th><td>所有招式冷卻 −5%：前 8 張加法（8 張 ×0.6），之後每張再 ×0.95</td><td class="num">不限</td><td>最低 ×0.05</td></tr><tr><th scope="row">護甲</th><td>減傷 +5%</td><td class="num">不限</td><td>減傷總和上限 80%（只靠卡片要 16 張）</td></tr><tr><th scope="row">光合作用</th><td>每秒回復 +0.6 體力</td><td class="num">不限</td><td>—</td></tr><tr><th scope="row">磁鐵</th><td>經驗球吸取範圍 +25%（加法）</td><td class="num">不限</td><td>—</td></tr><tr><th scope="row">學習</th><td>獲得的經驗值 +8%（加法）</td><td class="num">15</td><td>×2.2</td></tr><tr><th scope="row">要害之眼</th><td>擊中要害機率 +2%</td><td class="num">不限</td><td>總機率上限 60%（只靠卡片要 30 張）</td></tr><tr><th scope="row">殘暴一擊</th><td>擊中要害的傷害 +5%</td><td class="num">不限</td><td>要害倍率上限 ×3.5（從 ×1.5 起要 40 張）</td></tr><tr><th scope="row">獵手</th><td>對頭目、傳說、無極汰那的傷害 +6%（加法）</td><td class="num">不限</td><td>10 張 ×1.6</td></tr><tr><th scope="row">閃避</th><td>完全躲開敵人攻擊的機率 +3%</td><td class="num">5</td><td>15%</td></tr><tr><th scope="row">快速力量</th><td>力量（超級進化、極巨化、Z、太晶化）冷卻 −8%：前 4 張加法（×0.68），之後每張再 ×0.92；只在有力量時出現</td><td class="num">不限</td><td>最低 ×0.5</td></tr><tr><th scope="row">好運連連</th><td>本局寶可幣 +10%（出現權重只有其他能力卡的 0.4 倍）</td><td class="num">5</td><td>×1.5</td></tr><tr><th scope="row">金幣袋</th><td>立即 +60 寶可幣</td><td class="num">不限</td><td>—</td></tr><tr><th scope="row">文柚果</th><td>立即回復 45% 最大體力</td><td class="num">不限</td><td>—</td></tr></tbody></table></div>
+  <h4>永久強化（局外，用寶可幣購買）</h4>
+  <ul class="rules">
+    <li>每一級的價格 ＝ 10 × round(基本價 × 成長率<sup>已買級數</sup> ÷ 10)。</li>
+    <li>全部買滿合計 93,460 寶可幣。</li>
+    <li>每隻寶可夢的強化分開計算，只在用那隻寶可夢時有效。</li>
+  </ul>
+  <div class="tbl"><table>
+    <thead><tr><th scope="col">強化</th><th scope="col">每級效果</th><th scope="col">最高級</th><th scope="col">滿級</th><th scope="col">每級價格</th><th scope="col">合計</th></tr></thead>
+    <tbody><tr><th scope="row">活力</th><td>最大體力 +3</td><td class="num">10</td><td class="num">+30</td><td class="cost">60、80、110、150、200、270、360、490、660、890</td><td class="num"><b>3,270</b></td></tr><tr><th scope="row">力量</th><td>傷害 +1.5%</td><td class="num">10</td><td class="num">×1.15</td><td class="cost">80、110、150、210、290、400、550、760、1,050、1,450</td><td class="num"><b>5,050</b></td></tr><tr><th scope="row">步伐</th><td>移動速度 +1.5%</td><td class="num">8</td><td class="num">×1.12</td><td class="cost">70、100、140、190、270、380、530、740</td><td class="num"><b>2,420</b></td></tr><tr><th scope="row">反應</th><td>冷卻 −1%</td><td class="num">8</td><td class="num">×0.92</td><td class="cost">90、130、180、260、370、520、740、1,050</td><td class="num"><b>3,340</b></td></tr><tr><th scope="row">護甲</th><td>減傷 +0.75%</td><td class="num">8</td><td class="num">6%</td><td class="cost">80、110、160、220、310、430、600、840</td><td class="num"><b>2,750</b></td></tr><tr><th scope="row">光合作用</th><td>每秒回復 +0.1</td><td class="num">5</td><td class="num">+0.5/秒</td><td class="cost">120、180、270、400、610</td><td class="num"><b>1,580</b></td></tr><tr><th scope="row">磁鐵</th><td>吸取範圍 +12%</td><td class="num">6</td><td class="num">×1.72</td><td class="cost">50、70、100、140、190、270</td><td class="num"><b>820</b></td></tr><tr><th scope="row">智慧</th><td>經驗值 +2%</td><td class="num">8</td><td class="num">×1.16</td><td class="cost">100、140、200、290、410、580、820、1,160</td><td class="num"><b>3,700</b></td></tr><tr><th scope="row">財運</th><td>結算寶可幣 +8%</td><td class="num">8</td><td class="num">×1.64</td><td class="cost">120、170、250、370、530、770、1,120、1,620</td><td class="num"><b>4,950</b></td></tr><tr><th scope="row">要害攻擊</th><td>擊中要害機率 +1%</td><td class="num">10</td><td class="num">10%</td><td class="cost">90、130、180、250、350、480、680、950、1,330、1,860</td><td class="num"><b>6,300</b></td></tr><tr><th scope="row">強力暴擊</th><td>要害傷害 +5%</td><td class="num">10</td><td class="num">+50%</td><td class="cost">90、130、180、250、350、480、680、950、1,330、1,860</td><td class="num"><b>6,300</b></td></tr><tr><th scope="row">招式庫</th><td>開局帶 2 個招式</td><td class="num">1</td><td class="num">—</td><td class="cost">1,500</td><td class="num"><b>1,500</b></td></tr><tr><th scope="row">換牌</th><td>每局多 1 次重抽升級卡</td><td class="num">5</td><td class="num">5 次</td><td class="cost">150、240、380、610、980</td><td class="num"><b>2,360</b></td></tr><tr><th scope="row">否決</th><td>封鎖 1 個招式，不再出現在升級卡</td><td class="num">5</td><td class="num">5 招</td><td class="cost">300、570、1,080、2,060、3,910</td><td class="num"><b>7,920</b></td></tr><tr><th scope="row">初始招式</th><td>自選開局的招式</td><td class="num">1</td><td class="num">—</td><td class="cost">400</td><td class="num"><b>400</b></td></tr><tr><th scope="row">第二初始招式</th><td>自選第二個開局招式（需先買招式庫）</td><td class="num">1</td><td class="num">—</td><td class="cost">400</td><td class="num"><b>400</b></td></tr><tr><th scope="row">初始道具</th><td>開局帶一個自選道具（消耗一個）</td><td class="num">1</td><td class="num">—</td><td class="cost">400</td><td class="num"><b>400</b></td></tr><tr><th scope="row">第二個道具</th><td>一局可以同時帶 2 個道具</td><td class="num">1</td><td class="num">—</td><td class="cost">10,000</td><td class="num"><b>10,000</b></td></tr><tr><th scope="row">第三個道具</th><td>傳說強化：同時帶 3 個道具（需先買第二個）</td><td class="num">1</td><td class="num">—</td><td class="cost">30,000</td><td class="num"><b>30,000</b></td></tr></tbody></table></div>
+</section>
+
+<section class="narrow" id="gm-econ">
+  <h2>三、經濟</h2>
+  <h3 id="gm-coins">寶可幣</h3>
   <p class="formula">結算寶可幣 ＝ (存活秒數 ÷ 5 ＋ 擊倒數 ÷ 4 ＋ 80 × 打倒的頭目數 ＋ 局內撿到的寶可幣) × 寶可幣倍率 × 難度倍率</p>
   <ul class="rules">
     <li>例如存活 14:04（844 秒）、擊倒 1,669、打倒 6 個頭目、撿到 1,667：(168 ＋ 417 ＋ 480 ＋ 1,667) × 倍率。</li>
@@ -2857,10 +3218,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
     <li><b>局內撿到</b>：頭目 10 枚 × 5、傳說 10 枚 × 8、小偷型敵人 20 枚 × 5、金色敵人 35% 機率 3、草叢 6% 機率 1、岩石 25% 機率 2、南瓜 50% 機率 2、小寶箱 4～7 枚 × 3、大寶箱 9 枚 × 4、升級卡「金幣袋」60、超極巨化喵喵的「G-Max Gold Rush」每 3 秒 3 個 × 4 枚。</li>
     <li>困難／噩夢模式結算時的扭蛋券也會照難度倍率多給。</li>
   </ul>
-</section>
-
-<section class="narrow" id="gm-bonus">
-  <h2>經驗與寶可幣加成一覽</h2>
+  <h3 id="gm-bonus">經驗與寶可幣加成一覽</h3>
   <ul class="rules">
     <li>遊戲裡只有兩個倍率：<b>經驗倍率</b>（撿到經驗時立即乘上）和<b>寶可幣倍率</b>（結算時乘在全部寶可幣上，包括局內撿到的）。</li>
     <li>下表的來源彼此<b>相乘</b>；同一種升級卡多張之間是加法。</li>
@@ -2889,10 +3247,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
     <li>攜帶道具在局中被破壞時（萬聖節耿鬼活動會打壞一個道具），已經得到的寶可幣倍率不會減少。</li>
     <li>合作模式的經驗倍率取全隊平均：隊友帶幸運蛋，你也分得到一部分。</li>
   </ul>
-</section>
-
-<section class="narrow" id="gm-drops">
-  <h2>掉落物</h2>
+  <h3 id="gm-drops">掉落物</h3>
   <div class="tbl"><table>
     <thead><tr><th scope="col">來源</th><th scope="col">掉落</th></tr></thead>
     <tbody>
@@ -2903,39 +3258,6 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
       <tr><th scope="row">岩石</th><td>經驗 6（40%）、寶可幣 2（25%）、回復 6%</td></tr>
       <tr><th scope="row">上鎖的寶箱</th><td>單人直接升 1 級；11/16 起多人時每人只升 1/人數 級（2 人半級、3 人 1/3 級）</td></tr>
     </tbody></table></div>
-</section>
-
-<section class="narrow" id="gm-ability">
-  <h2>能力</h2>
-  <h3>永久強化（局外，用寶可幣購買）</h3>
-  <ul class="rules">
-    <li>每一級的價格 ＝ 10 × round(基本價 × 成長率<sup>已買級數</sup> ÷ 10)。</li>
-    <li>全部買滿合計 93,460 寶可幣。</li>
-    <li>每隻寶可夢的強化分開計算，只在用那隻寶可夢時有效。</li>
-  </ul>
-  <div class="tbl"><table>
-    <thead><tr><th scope="col">強化</th><th scope="col">每級效果</th><th scope="col">最高級</th><th scope="col">滿級</th><th scope="col">每級價格</th><th scope="col">合計</th></tr></thead>
-    <tbody><tr><th scope="row">活力</th><td>最大體力 +3</td><td class="num">10</td><td class="num">+30</td><td class="cost">60、80、110、150、200、270、360、490、660、890</td><td class="num"><b>3,270</b></td></tr><tr><th scope="row">力量</th><td>傷害 +1.5%</td><td class="num">10</td><td class="num">×1.15</td><td class="cost">80、110、150、210、290、400、550、760、1,050、1,450</td><td class="num"><b>5,050</b></td></tr><tr><th scope="row">步伐</th><td>移動速度 +1.5%</td><td class="num">8</td><td class="num">×1.12</td><td class="cost">70、100、140、190、270、380、530、740</td><td class="num"><b>2,420</b></td></tr><tr><th scope="row">反應</th><td>冷卻 −1%</td><td class="num">8</td><td class="num">×0.92</td><td class="cost">90、130、180、260、370、520、740、1,050</td><td class="num"><b>3,340</b></td></tr><tr><th scope="row">護甲</th><td>減傷 +0.75%</td><td class="num">8</td><td class="num">6%</td><td class="cost">80、110、160、220、310、430、600、840</td><td class="num"><b>2,750</b></td></tr><tr><th scope="row">光合作用</th><td>每秒回復 +0.1</td><td class="num">5</td><td class="num">+0.5/秒</td><td class="cost">120、180、270、400、610</td><td class="num"><b>1,580</b></td></tr><tr><th scope="row">磁鐵</th><td>吸取範圍 +12%</td><td class="num">6</td><td class="num">×1.72</td><td class="cost">50、70、100、140、190、270</td><td class="num"><b>820</b></td></tr><tr><th scope="row">智慧</th><td>經驗值 +2%</td><td class="num">8</td><td class="num">×1.16</td><td class="cost">100、140、200、290、410、580、820、1,160</td><td class="num"><b>3,700</b></td></tr><tr><th scope="row">財運</th><td>結算寶可幣 +8%</td><td class="num">8</td><td class="num">×1.64</td><td class="cost">120、170、250、370、530、770、1,120、1,620</td><td class="num"><b>4,950</b></td></tr><tr><th scope="row">要害攻擊</th><td>擊中要害機率 +1%</td><td class="num">10</td><td class="num">10%</td><td class="cost">90、130、180、250、350、480、680、950、1,330、1,860</td><td class="num"><b>6,300</b></td></tr><tr><th scope="row">強力暴擊</th><td>要害傷害 +5%</td><td class="num">10</td><td class="num">+50%</td><td class="cost">90、130、180、250、350、480、680、950、1,330、1,860</td><td class="num"><b>6,300</b></td></tr><tr><th scope="row">招式庫</th><td>開局帶 2 個招式</td><td class="num">1</td><td class="num">—</td><td class="cost">1,500</td><td class="num"><b>1,500</b></td></tr><tr><th scope="row">換牌</th><td>每局多 1 次重抽升級卡</td><td class="num">5</td><td class="num">5 次</td><td class="cost">150、240、380、610、980</td><td class="num"><b>2,360</b></td></tr><tr><th scope="row">否決</th><td>封鎖 1 個招式，不再出現在升級卡</td><td class="num">5</td><td class="num">5 招</td><td class="cost">300、570、1,080、2,060、3,910</td><td class="num"><b>7,920</b></td></tr><tr><th scope="row">初始招式</th><td>自選開局的招式</td><td class="num">1</td><td class="num">—</td><td class="cost">400</td><td class="num"><b>400</b></td></tr><tr><th scope="row">第二初始招式</th><td>自選第二個開局招式（需先買招式庫）</td><td class="num">1</td><td class="num">—</td><td class="cost">400</td><td class="num"><b>400</b></td></tr><tr><th scope="row">初始道具</th><td>開局帶一個自選道具（消耗一個）</td><td class="num">1</td><td class="num">—</td><td class="cost">400</td><td class="num"><b>400</b></td></tr><tr><th scope="row">第二個道具</th><td>一局可以同時帶 2 個道具</td><td class="num">1</td><td class="num">—</td><td class="cost">10,000</td><td class="num"><b>10,000</b></td></tr><tr><th scope="row">第三個道具</th><td>傳說強化：同時帶 3 個道具（需先買第二個）</td><td class="num">1</td><td class="num">—</td><td class="cost">30,000</td><td class="num"><b>30,000</b></td></tr></tbody></table></div>
-  <h3>升級卡：能力卡（局內）</h3>
-  <ul class="rules">
-    <li>11/16 起能力卡<b>沒有張數上限</b>（學習 15 張、閃避和好運連連 5 張除外），可以一直疊。</li>
-    <li>上限改由數值本身限制：減傷 80%、要害機率 60%、要害倍率 ×3.5、冷卻不會到 0。</li>
-    <li>大部分能力卡是<b>加法疊加</b>：第 n 張讓總倍率從 1 ＋ k(n−1) 變成 1 ＋ kn，所以越後面每張的相對效果越小。</li>
-  </ul>
-  <div class="tbl"><table>
-    <thead><tr><th scope="col">卡片</th><th scope="col">效果</th><th scope="col">張數上限</th><th scope="col">實際上限／參考</th></tr></thead>
-    <tbody><tr><th scope="row">活力</th><td>最大體力 +20，並回復同樣的量</td><td class="num">不限</td><td>—</td></tr><tr><th scope="row">威力</th><td>所有招式傷害 +8%（加法）</td><td class="num">不限</td><td>10 張 ×1.8、20 張 ×2.6</td></tr><tr><th scope="row">奔跑</th><td>移動速度 +5%（加法）</td><td class="num">不限</td><td>受速度軟上限影響</td></tr><tr><th scope="row">反應</th><td>所有招式冷卻 −5%：前 8 張加法（8 張 ×0.6），之後每張再 ×0.95</td><td class="num">不限</td><td>最低 ×0.05</td></tr><tr><th scope="row">護甲</th><td>減傷 +5%</td><td class="num">不限</td><td>減傷總和上限 80%（只靠卡片要 16 張）</td></tr><tr><th scope="row">光合作用</th><td>每秒回復 +0.6 體力</td><td class="num">不限</td><td>—</td></tr><tr><th scope="row">磁鐵</th><td>經驗球吸取範圍 +25%（加法）</td><td class="num">不限</td><td>—</td></tr><tr><th scope="row">學習</th><td>獲得的經驗值 +8%（加法）</td><td class="num">15</td><td>×2.2</td></tr><tr><th scope="row">要害之眼</th><td>擊中要害機率 +2%</td><td class="num">不限</td><td>總機率上限 60%（只靠卡片要 30 張）</td></tr><tr><th scope="row">殘暴一擊</th><td>擊中要害的傷害 +5%</td><td class="num">不限</td><td>要害倍率上限 ×3.5（從 ×1.5 起要 40 張）</td></tr><tr><th scope="row">獵手</th><td>對頭目、傳說、無極汰那的傷害 +6%（加法）</td><td class="num">不限</td><td>10 張 ×1.6</td></tr><tr><th scope="row">閃避</th><td>完全躲開敵人攻擊的機率 +3%</td><td class="num">5</td><td>15%</td></tr><tr><th scope="row">快速力量</th><td>力量（超級進化、極巨化、Z、太晶化）冷卻 −8%：前 4 張加法（×0.68），之後每張再 ×0.92；只在有力量時出現</td><td class="num">不限</td><td>最低 ×0.5</td></tr><tr><th scope="row">好運連連</th><td>本局寶可幣 +10%（出現權重只有其他能力卡的 0.4 倍）</td><td class="num">5</td><td>×1.5</td></tr><tr><th scope="row">金幣袋</th><td>立即 +60 寶可幣</td><td class="num">不限</td><td>—</td></tr><tr><th scope="row">文柚果</th><td>立即回復 45% 最大體力</td><td class="num">不限</td><td>—</td></tr></tbody></table></div>
-  <h3>4 張卡怎麼抽出來</h3>
-  <ol class="rules">
-    <li>先放入<b>必定出現</b>的卡：寶可夢進化卡（Lv20、Lv40）→ 招式進化卡（同時最多 1 張）→ 稀有卡「第四個道具」（已有 3 個道具欄時 3%）→ 稀有卡「智慧」（5%，每局一次）→ 專屬招式（Lv10 起、還有空欄位時 1 張）。</li>
-    <li>剩下的位置從候選卡中依權重抽，抽過的不再重複：
-      <ul>
-        <li>新招式（還有空欄位時）：從可學招式中先抽 6 個候選，每個權重 10；和寶可夢較強一邊（物理／特殊）相符的招式被選為候選的機率是 2 倍。已有 2 個變化招式時不再出現變化招式。</li>
-        <li>招式升級：每個沒滿級的招式權重 8。</li>
-        <li>能力卡：先從還能拿的能力卡中隨機挑 5 種，權重 4（還有空欄位時）或 7（欄位已滿）；好運連連再 ×0.4。某個滿級招式在等的能力卡會額外加入，權重 14，並標示「進化 招式名」。</li>
-        <li>換招式（Lv4 起，沒有尚未使用的換招式時）：權重 2（還有空欄位）或 5（欄位已滿）。</li>
-      </ul></li>
-  </ol>
 </section>
 </div>
 </template>
@@ -2949,7 +3271,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
     <li>名稱和說明採用遊戲內建的正體中文翻譯；「實際數值」欄是從程式碼讀出的細節。</li>
   </ul>
 </header>
-  <div class="facts narrow"><a class="fact" href="#it-carry" data-go="it:carry"><b>24</b> 種攜帶道具</a><a class="fact" href="#it-treat" data-go="it:treat"><b>8</b> 種點心</a><a class="fact" href="#it-orbs" data-go="it:orbs"><b>6</b> 種寶玉</a><a class="fact" href="#it-drops" data-go="it:drops"><b>10</b> 種掉落物</a><a class="fact" href="#it-altars" data-go="it:altars"><b>4</b> 種祭壇力量</a><a class="fact" href="#it-tms" data-go="it:tms"><b>92</b> 種招式學習器</a></div>
+  <div class="facts narrow"><a class="fact" href="#it-carry" data-go="it:carry"><b>攜帶道具</b><span>24 種</span></a><a class="fact" href="#it-treat" data-go="it:treat"><b>點心</b><span>8 種</span></a><a class="fact" href="#it-orbs" data-go="it:orbs"><b>寶玉</b><span>6 種</span></a><a class="fact" href="#it-drops" data-go="it:drops"><b>掉落物</b><span>10 種</span></a><a class="fact" href="#it-altars" data-go="it:altars"><b>祭壇力量</b><span>4 種</span></a><a class="fact" href="#it-tms" data-go="it:tms"><b>招式學習器</b><span>92 種</span></a></div>
 
 <section class="narrow" id="it-carry">
   <h2>攜帶道具</h2>
@@ -3039,7 +3361,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
     <li>敵人不是固定名單：每局開始時，遊戲從每個階段的候選中各抽 7 隻組成本局陣容。</li>
     <li>表中數值是「單人、普通難度」時的值（11/16 起普通難度敵人體力 ×0.9、傷害 ×0.85、首領體力 ×0.85）。</li>
   </ul>
-  <div class="facts"><a class="fact" href="#en-list" data-go="en:list"><b>1271</b> 筆候選（寶可夢 × 階段）</a><span><b>884</b> 隻不同的寶可夢</span><a class="fact" href="#en-time" data-go="en:time"><b>時間軸</b></a><a class="fact" href="#en-behave" data-go="en:behave"><b>12</b> 種行為</a><a class="fact" href="#en-boss" data-go="en:boss"><b>5</b> 隻頭目（431 筆候選）</a><a class="fact" href="#en-rift" data-go="en:rift"><b>94</b> 隻裂縫傳說</a><a class="fact" href="#en-judge" data-go="en:judge"><b>無極汰那</b>與審判</a></div>
+  <div class="facts"><a class="fact" href="#en-list" data-go="en:list"><b>敵人候選</b><span>1271 筆（寶可夢 × 階段）</span></a><span><b>884</b> 隻不同的寶可夢</span><a class="fact" href="#en-time" data-go="en:time"><b>時間軸</b><span>一局的出場順序</span></a><a class="fact" href="#en-behave" data-go="en:behave"><b>行為</b><span>12 種攻擊方式</span></a><a class="fact" href="#en-boss" data-go="en:boss"><b>頭目</b><span>5 隻（431 筆候選）</span></a><a class="fact" href="#en-rift" data-go="en:rift"><b>裂縫傳說</b><span>94 隻</span></a><a class="fact" href="#en-judge" data-go="en:judge"><b>無極汰那與審判</b><span>最終戰</span></a></div>
 </header>
 
 <section id="en-list">
@@ -4526,7 +4848,7 @@ render();
 
   const tb = document.getElementById('tb'), q = document.getElementById('mq'), cnt = document.getElementById('mcount');
   const all = [...tb.children];
-  const f = { t: '', c: '', k: '', o: '', g: '' };
+  const f = { t: new Set(), c: new Set(), k: new Set(), o: new Set(), g: '' };
   let sc = null, sd = null, mode = 's';     // 排序欄（3 實戰、4–9 等級）、方向、依據（s 單體／1 單發）
   const sim = { t: '1200', s: 'fin', m: 'avg', k: 5 };
   const SD = new Map(); all.forEach(r => { const c = r.querySelector('td.sim'); if (c && c.dataset.sim) SD.set(r, JSON.parse(c.dataset.sim)); });
@@ -4559,14 +4881,20 @@ render();
     let shown = 0;
     for (const r of all) {
       const sdat = SD.get(r);
-      const ok = (!f.t || r.dataset.t === f.t) && (!f.c || r.dataset.c === f.c) && (!f.k || r.dataset.kd === f.k) && (!f.o || r.dataset.o === f.o) && (!f.g || (sdat && sdat[skey()].tag === f.g)) && (!t || r.dataset.k.toLowerCase().includes(t));
+      const ok = (!f.t.size || f.t.has(r.dataset.t)) && (!f.c.size || f.c.has(r.dataset.c)) && (!f.k.size || f.k.has(r.dataset.kd)) && (!f.o.size || f.o.has(r.dataset.o)) && (!f.g || (sdat && sdat[skey()].tag === f.g)) && (!t || r.dataset.k.toLowerCase().includes(t));
       r.hidden = !ok; if (ok) shown++;
     }
     cnt.textContent = '顯示 ' + shown + ' / ' + all.length + ' 個招式';
   }
   document.querySelectorAll('#tab-moves .chip[data-f]').forEach(b => b.addEventListener('click', () => {
-    f[b.dataset.f] = b.dataset.v;
-    document.querySelectorAll('#tab-moves .chip[data-f="' + b.dataset.f + '"]').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    const s = f[b.dataset.f], v = b.dataset.v;
+    if (s.has(v)) s.delete(v); else s.add(v);
+    b.setAttribute('aria-pressed', s.has(v) ? 'true' : 'false');
+    apply();
+  }));
+  document.querySelectorAll('#tab-moves .chip.clr').forEach(b => b.addEventListener('click', () => {
+    f[b.dataset.clr].clear();
+    document.querySelectorAll('#tab-moves .chip[data-f="' + b.dataset.clr + '"]').forEach(x => x.setAttribute('aria-pressed', 'false'));
     apply();
   }));
   // 第 1 下：高→低；第 2 下：低→高；第 3 下：取消（回到依屬性排列）
@@ -4575,11 +4903,11 @@ render();
     if (sc !== c) { sc = c; sd = 'desc'; } else if (sd === 'desc') sd = 'asc'; else { sc = null; sd = null; }
     order();
   }));
-  const ms = document.querySelectorAll('.chip[data-m]');
+  const ms = document.querySelectorAll('#tab-moves .chip[data-m]');
   ms.forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; ms.forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); order(); }));
   q.addEventListener('input', apply);
   for (const [attr, key] of [['st', 't'], ['ss', 's'], ['sm', 'm'], ['sk', 'k']]) {
-    const bs = document.querySelectorAll('.chip[data-' + attr + ']');
+    const bs = document.querySelectorAll('#tab-moves .chip[data-' + attr + ']');
     bs.forEach(b => b.addEventListener('click', () => {
       sim[key] = key === 'k' ? +b.dataset[attr] : b.dataset[attr];
       bs.forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
@@ -4589,15 +4917,150 @@ render();
   }
   document.getElementById('simreset').addEventListener('click', () => {
     Object.assign(sim, { t: '1200', s: 'fin', m: 'avg', k: 5 }); f.g = '';
-    for (const [attr, v] of [['st', '1200'], ['ss', 'fin'], ['sm', 'avg'], ['sk', '5']]) document.querySelectorAll('.chip[data-' + attr + ']').forEach(x => x.setAttribute('aria-pressed', x.dataset[attr] === v ? 'true' : 'false'));
-    document.querySelectorAll('.chip[data-f="g"]').forEach(x => x.setAttribute('aria-pressed', x.dataset.v === '' ? 'true' : 'false'));
-    if (sc === 3) { sc = null; sd = null; }
+    for (const [attr, v] of [['st', '1200'], ['ss', 'fin'], ['sm', 'avg'], ['sk', '5']]) document.querySelectorAll('#tab-moves .chip[data-' + attr + ']').forEach(x => x.setAttribute('aria-pressed', x.dataset[attr] === v ? 'true' : 'false'));
+        if (sc === 3) { sc = null; sd = null; }
     simRender(); apply(); order();
   });
   simRender();
 })();
 
   },
+  ax: function () {
+
+(() => {
+  const root = document.getElementById('tab-ax');
+  const svg = document.getElementById('axsvg'), box = document.getElementById('axbox'), tip = document.getElementById('axtip'), cnt = document.getElementById('axcount');
+  const NS = 'http://www.w3.org/2000/svg';
+  const TZ = { normal: '一般', fire: '火', water: '水', grass: '草', electric: '電', ice: '冰', fighting: '格鬥', poison: '毒', ground: '地面', flying: '飛行', psychic: '超能力', bug: '蟲', rock: '岩石', ghost: '幽靈', dragon: '龍', dark: '惡', steel: '鋼', fairy: '妖精' };
+  const CZ = { phy: '物理', spe: '特殊' };
+  const MZ = { avg: '三種玩法平均', stand: '站樁', kite: '繞圈', line: '直線' };
+  // 資料直接取自「招式與傷害」的表格
+  const D = [];
+  document.getElementById('tpl-moves').content.querySelectorAll('tr.mv').forEach(r => {
+    const c = r.querySelector('td.sim'); if (!c || !c.dataset.sim) return;
+    const ch = r.children, lv5 = +(ch[8] && ch[8].dataset.dps) || 0, ev = +(ch[9] && ch[9].dataset.dps) || 0;
+    D.push({ id: r.id.slice(3), n: r.querySelector('th b').textContent, t: r.dataset.t, c: r.dataset.c, kd: r.dataset.kd, kz: r.querySelector('td.kind').textContent, o: r.dataset.o, sd: JSON.parse(c.dataset.sim), lv5, ev: ev || lv5 });
+  });
+  const f = { t: new Set(), c: new Set(), k: new Set(), o: new Set() };
+  const sim = { t: '1200', s: 'fin', m: 'avg' };
+  root.querySelectorAll('.chip[data-f]').forEach(b => b.addEventListener('click', () => {
+    const s = f[b.dataset.f], v = b.dataset.v;
+    if (s.has(v)) s.delete(v); else s.add(v);
+    b.setAttribute('aria-pressed', s.has(v) ? 'true' : 'false'); draw();
+  }));
+  root.querySelectorAll('.chip.clr').forEach(b => b.addEventListener('click', () => {
+    f[b.dataset.clr].clear();
+    root.querySelectorAll('.chip[data-f="' + b.dataset.clr + '"]').forEach(x => x.setAttribute('aria-pressed', 'false')); draw();
+  }));
+  for (const [attr, key] of [['at', 't'], ['as', 's'], ['am', 'm']]) {
+    const bs = root.querySelectorAll('.chip[data-' + attr + ']');
+    bs.forEach(b => b.addEventListener('click', () => { sim[key] = b.dataset[attr]; bs.forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); draw(); }));
+  }
+  document.getElementById('axreset').addEventListener('click', () => {
+    Object.assign(sim, { t: '1200', s: 'fin', m: 'avg' });
+    for (const [attr, v] of [['at', '1200'], ['as', 'fin'], ['am', 'avg']]) root.querySelectorAll('.chip[data-' + attr + ']').forEach(x => x.setAttribute('aria-pressed', x.dataset[attr] === v ? 'true' : 'false'));
+    draw();
+  });
+  const el = (n, a, p) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+  const fmt = v => v >= 100 ? Math.round(v).toLocaleString() : v >= 10 ? v.toFixed(1) : v.toFixed(2);
+  function draw() {
+    const key = sim.t + sim.s;
+    const L = D.filter(d => (!f.t.size || f.t.has(d.t)) && (!f.c.size || f.c.has(d.c)) && (!f.k.size || f.k.has(d.kd)) && (!f.o.size || f.o.has(d.o)))
+      .map(d => ({ d, s: d.sd[key][sim.m][5], p: sim.s === 'fin' ? d.ev : d.lv5 })).filter(q => q.s > 0 && q.p > 0);
+    svg.textContent = ''; tip.hidden = true;
+    if (!L.length) { cnt.textContent = '沒有符合篩選的攻擊招式'; svg.setAttribute('height', 80); return; }
+    const mS = L.reduce((a, q) => a + q.s, 0) / L.length, mP = L.reduce((a, q) => a + q.p, 0) / L.length;
+    L.forEach(q => { q.x = Math.log10(q.s / mS); q.y = Math.log10(q.p / mP); });
+    cnt.textContent = '顯示 ' + L.length + ' 個攻擊招式・' + (sim.t === '600' ? '10' : '20') + ' 分・' + (sim.s === 'fin' ? '最終型態' : 'Lv5') + '・' + MZ[sim.m] + '｜平均實戰分 ' + fmt(mS) + '、平均單體 DPS ' + fmt(mP);
+    const W = Math.max(640, box.clientWidth), H = Math.max(520, Math.min(900, Math.round(W * 0.62)));
+    const ml = 64, mr = 24, mt = 24, mb = 56;
+    let x0 = Math.min(...L.map(q => q.x)), x1 = Math.max(...L.map(q => q.x)), y0 = Math.min(...L.map(q => q.y)), y1 = Math.max(...L.map(q => q.y));
+    x0 = Math.min(x0, -0.1); x1 = Math.max(x1, 0.1); y0 = Math.min(y0, -0.1); y1 = Math.max(y1, 0.1);
+    { const ax = Math.max(-x0, x1), ay = Math.max(-y0, y1); x0 = -ax; x1 = ax; y0 = -ay; y1 = ay; }
+    const px = (x1 - x0) * 0.06, py = (y1 - y0) * 0.06; x0 -= px; x1 += px; y0 -= py; y1 += py;
+    const X = v => ml + (v - x0) / (x1 - x0) * (W - ml - mr), Y = v => mt + (y1 - v) / (y1 - y0) * (H - mt - mb);
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('width', W); svg.setAttribute('height', H);
+    const g0 = el('g', { class: 'axgrid' }, svg);
+    // 象限底色
+    el('rect', { x: X(0), y: mt, width: W - mr - X(0), height: Y(0) - mt, class: 'q q1' }, g0);
+    el('rect', { x: ml, y: Y(0), width: X(0) - ml, height: H - mb - Y(0), class: 'q q3' }, g0);
+    const step = (a, b) => { const r = b - a; return r > 2.4 ? 0.5 : r > 1.2 ? 0.25 : 0.1; };
+    const tickLbl = v => { const m = Math.pow(10, v); return v === 0 ? '平均' : '×' + (m >= 10 ? m.toFixed(0) : m >= 1 ? m.toFixed(1).replace(/\.0$/, '') : m.toFixed(2).replace(/0$/, '')); };
+    const sx = step(x0, x1), sy = step(y0, y1);
+    for (let v = Math.ceil(x0 / sx) * sx; v <= x1 + 1e-9; v += sx) {
+      const vv = Math.round(v * 100) / 100;
+      el('line', { x1: X(vv), x2: X(vv), y1: mt, y2: H - mb, class: vv === 0 ? 'zero' : 'gl' }, g0);
+      const t = el('text', { x: X(vv), y: H - mb + 16, class: 'tk', 'text-anchor': 'middle' }, g0); t.textContent = vv.toFixed(sx < 0.25 ? 1 : 2).replace(/0$/, '');
+      const t2 = el('text', { x: X(vv), y: H - mb + 30, class: 'tk2', 'text-anchor': 'middle' }, g0); t2.textContent = tickLbl(vv);
+    }
+    for (let v = Math.ceil(y0 / sy) * sy; v <= y1 + 1e-9; v += sy) {
+      const vv = Math.round(v * 100) / 100;
+      el('line', { x1: ml, x2: W - mr, y1: Y(vv), y2: Y(vv), class: vv === 0 ? 'zero' : 'gl' }, g0);
+      const t = el('text', { x: ml - 8, y: Y(vv) - 2, class: 'tk', 'text-anchor': 'end' }, g0); t.textContent = vv.toFixed(sy < 0.25 ? 1 : 2).replace(/0$/, '');
+      const t2 = el('text', { x: ml - 8, y: Y(vv) + 11, class: 'tk2', 'text-anchor': 'end' }, g0); t2.textContent = tickLbl(vv);
+    }
+    el('rect', { x: ml, y: mt, width: W - ml - mr, height: H - mt - mb, class: 'frame' }, g0);
+    const xl = el('text', { x: (ml + W - mr) / 2, y: H - 8, class: 'axl', 'text-anchor': 'middle' }, g0); xl.textContent = '實戰分：log₁₀(實戰分 ÷ 平均) →';
+    const yl = el('text', { x: 14, y: (mt + H - mb) / 2, class: 'axl', 'text-anchor': 'middle', transform: 'rotate(-90 14 ' + (mt + H - mb) / 2 + ')' }, g0); yl.textContent = '單體 DPS：log₁₀(單體 DPS ÷ 平均) →';
+    const ql = (x, y, a, s) => { const t = el('text', { x, y, class: 'ql', 'text-anchor': a }, g0); t.textContent = s; };
+    ql(W - mr - 8, mt + 16, 'end', '實戰強・單體強'); ql(W - mr - 8, H - mb - 8, 'end', '清群型'); ql(ml + 8, mt + 16, 'start', '打王型'); ql(ml + 8, H - mb - 8, 'start', '兩者偏弱');
+    // 點與標籤
+    const pts = L.map(q => ({ q, cx: X(q.x), cy: Y(q.y) }));
+    const placed = [], R = 5;
+    const ovl = (a, b) => Math.max(0, Math.min(a.x2, b.x2) - Math.max(a.x1, b.x1)) * Math.max(0, Math.min(a.y2, b.y2) - Math.max(a.y1, b.y1));
+    const order = [...pts].sort((a, b) => (b.q.x + b.q.y) - (a.q.x + a.q.y));
+    const DIRS = [[1, -1], [1, 1], [-1, -1], [-1, 1], [1, 0], [-1, 0], [0, -1], [0, 1]];
+    for (const p of order) {
+      const w = p.q.d.n.length * 11.5 + 4, h = 14;
+      let best = null, bestS = Infinity;
+      for (const dist of [10, 18, 28, 40, 54]) for (const [dx, dy] of DIRS) {
+        const ax = p.cx + dx * dist, ay = p.cy + dy * dist * 0.8;
+        const bx1 = dx < 0 ? ax - w : dx > 0 ? ax : ax - w / 2, by1 = dy < 0 ? ay - h : dy > 0 ? ay : ay - h / 2;
+        const bb = { x1: bx1, y1: by1, x2: bx1 + w, y2: by1 + h };
+        if (bb.x1 < ml || bb.x2 > W - mr || bb.y1 < mt || bb.y2 > H - mb) continue;
+        let s = dist * 0.6;
+        for (const o of placed) s += ovl(bb, o) * 3;
+        for (const o of pts) if (o !== p) s += ovl(bb, { x1: o.cx - R, y1: o.cy - R, x2: o.cx + R, y2: o.cy + R }) * 2;
+        if (s < bestS) { bestS = s; best = { bb, ax, ay, dx, dy }; }
+        if (s < dist * 0.6 + 1) break;
+      }
+      if (!best) best = { bb: { x1: p.cx + 6, y1: p.cy - 7, x2: p.cx + 6 + w, y2: p.cy + 7 }, ax: p.cx + 6, ay: p.cy, dx: 1, dy: 0 };
+      placed.push(best.bb); p.lab = best;
+    }
+    const gp = el('g', { class: 'axpts' }, svg), hi = el('g', { class: 'axhi' }, svg);
+    for (const p of pts) {
+      const d = p.q.d, g = el('g', { class: 'pt', 'data-i': d.id }, gp), lb = p.lab;
+      const lx = Math.max(lb.bb.x1, Math.min(p.cx, lb.bb.x2)), ly = Math.max(lb.bb.y1, Math.min(p.cy, lb.bb.y2));
+      el('line', { x1: p.cx, y1: p.cy, x2: lx, y2: ly, class: 'ld', style: 'stroke:var(--t-' + d.t + ')' }, g);
+      el('circle', { cx: p.cx, cy: p.cy, r: R, class: 'dot', style: 'fill:var(--t-' + d.t + ')' }, g);
+      const a = el('a', { href: '#mv-' + d.id, 'data-go': 'mv:' + d.id, class: 'lab' }, g);
+      const t = el('text', { x: (lb.bb.x1 + lb.bb.x2) / 2, y: lb.bb.y2 - 3, 'text-anchor': 'middle' }, a); t.textContent = d.n;
+      g.addEventListener('mouseenter', () => focus(g, p)); g.addEventListener('mouseleave', blur);
+      g.addEventListener('focusin', () => focus(g, p)); g.addEventListener('focusout', blur);
+    }
+    function focus(g, p) {
+      svg.classList.add('focus'); gp.querySelectorAll('.pt.on').forEach(x => x.classList.remove('on')); g.classList.add('on'); hi.textContent = ''; const cl = g.cloneNode(true); cl.classList.add('on'); hi.appendChild(cl);
+      const d = p.q.d;
+      tip.innerHTML = '<b style="color:var(--t-' + d.t + ')">' + d.n + '</b>' +
+        '<span>屬性：' + TZ[d.t] + '・' + CZ[d.c] + (d.o === '1' ? '・專屬' : '') + '</span><span>攻擊類型：' + d.kz + '</span>' +
+        '<span>實戰分：<b>' + p.q.s + '</b>（' + (p.q.x >= 0 ? '+' : '') + p.q.x.toFixed(2) + '）</span>' +
+        '<span>單體 DPS（' + (sim.s === 'fin' ? (d.ev !== d.lv5 ? '進化 +' : 'Lv5，不會進化') : 'Lv5') + '）：<b>' + fmt(p.q.p) + '</b>（' + (p.q.y >= 0 ? '+' : '') + p.q.y.toFixed(2) + '）</span>' +
+        '<span class="hint">點招式名稱看招式表</span>';
+      tip.hidden = false;
+      const bw = box.clientWidth, sc = svg.getBoundingClientRect().width / W;
+      let lx = p.cx * sc + 14, ly = p.cy * sc + 10;
+      if (lx + 240 > bw) lx = p.cx * sc - 254;
+      tip.style.left = Math.max(4, lx) + 'px'; tip.style.top = Math.max(4, ly) + 'px';
+    }
+    function blur() { svg.classList.remove('focus'); gp.querySelectorAll('.pt.on').forEach(x => x.classList.remove('on')); hi.textContent = ''; tip.hidden = true; }
+  }
+  let rt = 0; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (root.classList.contains('on')) draw(); }, 150); }, { passive: true });
+  const mo = new MutationObserver(() => { if (root.classList.contains('on')) draw(); }); mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+  draw();
+})();
+
+  },
+
   sp: function () {
 
 (() => {
@@ -4910,11 +5373,11 @@ render();
 
   }
   };
-  const tabs = { pokedex: 'dex', abilities: 'abil', moves: 'moves', special: 'sp', items: 'items', mechanics: 'mech', enemies: 'en', pdetail: 'pd' };
-  const NAME = { pokedex: '寶可夢', abilities: '特性', moves: '招式', special: '特殊進化', items: '道具', mechanics: '遊戲機制', enemies: '敵軍寶可夢', pdetail: '寶可夢頁' };
+  const tabs = { pokedex: 'dex', abilities: 'abil', moves: 'moves', axis: 'ax', special: 'sp', items: 'items', mechanics: 'mech', enemies: 'en', pdetail: 'pd' };
+  const NAME = { pokedex: '寶可夢', abilities: '特性', moves: '招式', axis: '招式坐標軸', special: '特殊進化', items: '道具', mechanics: '遊戲機制', enemies: '敵軍寶可夢', pdetail: '寶可夢頁' };
   const OVER = { moves: '招式與傷害頂端', special: '特殊進化頂端', items: '道具總覽', mechanics: '遊戲機制總覽', enemies: '敵軍寶可夢總覽' };
   const LABEL = s => s.tab === 'pdetail' ? (s.pdn || '寶可夢頁') : OVER[s.tab] && s.y < 400 ? OVER[s.tab] : NAME[s.tab];
-  const PREFIX = { pk: 'pokedex', ab: 'abilities', mv: 'moves', sp: 'special', it: 'items', gm: 'mechanics', en: 'enemies', pd: 'pdetail' };
+  const PREFIX = { pk: 'pokedex', ab: 'abilities', mv: 'moves', ax: 'axis', sp: 'special', it: 'items', gm: 'mechanics', en: 'enemies', pd: 'pdetail' };
   const state = {};          // s -> 'partial' | 'done'
   let pending = null;         // rows still to add to the Pokédex table
   function finishDex() {
@@ -5003,7 +5466,7 @@ render();
       click('#call'); const o = document.getElementById('onlymv'); if (o && o.getAttribute('aria-pressed') === 'true') o.click();
       clearInput('q');
     } else if (tab === 'moves') {
-      click('#tab-moves .chip[data-f="t"][data-v=""]'); click('#tab-moves .chip[data-f="c"][data-v=""]'); click('#tab-moves .chip[data-f="k"][data-v=""]'); click('#tab-moves .chip[data-f="o"][data-v=""]'); clearInput('mq');
+      document.querySelectorAll('#tab-moves .chip.clr').forEach(b => b.click()); clearInput('mq');
     }
   }
   function target(id) { const el = document.getElementById(id); return el && !el.hidden && el.offsetParent !== null ? el : null; }
