@@ -1076,6 +1076,10 @@ body{background:var(--bg)}
 #tab-ax .axhi{pointer-events:none}
 #tab-ax #axsvg.focus .axhi .pt{opacity:1}
 
+#tab-ax .axmode{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 14px}
+#tab-ax .axmode .chip{display:flex;flex-direction:column;align-items:flex-start;padding:8px 16px;border-radius:10px;font-weight:700;font-size:14px;line-height:1.3}
+#tab-ax .axmode .chip small{font-weight:400;font-size:12px;opacity:.8}
+
 </style>
 </head>
 <body>
@@ -2954,14 +2958,20 @@ body{background:var(--bg)}
   <h1>招式坐標軸</h1>
   <p class="lede">把每個攻擊招式的<b>實戰分</b>和<b>單體 DPS</b>畫在同一張圖上，一眼看出哪些招式清群強、哪些打單體強。</p>
   <ul class="rules lede-list">
-    <li><b>座標</b>：橫軸 ＝ log<sub>10</sub>(招式實戰分 ÷ 所選屬性所有招式實戰分的中位數)，縱軸 ＝ log<sub>10</sub>(招式單體 DPS ÷ 所選屬性所有招式單體 DPS 的中位數)。0 就是中位數（一半招式比它高、一半比它低）；每 +0.3 約等於 2 倍，−0.3 約等於一半。</li>
+    <li><b>座標</b>：橫軸 ＝ log<sub>10</sub>(招式實戰分 ÷ 基準招式實戰分的中位數)，縱軸 ＝ log<sub>10</sub>(招式單體 DPS ÷ 基準招式單體 DPS 的中位數)。0 就是中位數（一半基準招式比它高、一半比它低）；每 +0.3 約等於 2 倍，−0.3 約等於一半。</li>
+    <li><b>兩種模式</b>（散布圖標題下方切換）：
+      <ul>
+        <li><b>篩選模式</b>（預設）：基準＝全部攻擊招式。所有篩選按鈕（含屬性）都只決定顯示哪些招式，點的位置不變，可以直接跟全體比較。</li>
+        <li><b>比較模式</b>：基準＝「屬性」篩選選到的招式（沒選屬性＝全部）。適合看某個屬性內部誰強誰弱；分類、攻擊類型、專屬招式仍只決定顯示哪些招式。</li>
+      </ul></li>
     <li><b>怎麼讀</b>：右上＝實戰和單體都強；右下＝清群強、打單體普通；左上＝打單體（頭目）強、清群弱；左下＝兩者都弱。</li>
-    <li><b>資料</b>：實戰分依下方「實戰模擬」選的時間、型態和玩法；單體 DPS 取招式表的 Lv5 欄或進化 + 欄（選「最終型態」時；不會進化的招式用 Lv5）。<b>中位數和座標範圍只看「屬性」篩選</b>（沒選屬性＝全部屬性）；分類、攻擊類型、專屬招式只決定顯示哪些招式，點的位置不會變。時間、型態、玩法會改變實戰分本身，所以中位數會以同一組屬性、在新設定下重算。</li>
+    <li><b>資料</b>：實戰分依下方「實戰模擬」選的時間、型態和玩法；單體 DPS 取招式表的 Lv5 欄或進化 + 欄（選「最終型態」時；不會進化的招式用 Lv5）。中位數和座標範圍只由基準招式決定。時間、型態、玩法會改變實戰分本身，所以兩種模式下中位數都會在新設定下重算。</li>
     <li><b>操作</b>：滑鼠移到點或招式名稱上會淡化其他招式並顯示詳細數值；點招式名稱跳到「招式與傷害」表格中的那一列。</li>
   </ul>
 </header>
 <section id="ax-main">
   <h2>散布圖</h2>
+  <div class="axmode" role="group" aria-label="計算模式"><button class="chip" data-axm="filter" aria-pressed="true">篩選模式<small>以全部攻擊招式計算，按鈕只篩選顯示</small></button><button class="chip" data-axm="cmp" aria-pressed="false">比較模式<small>以所選屬性的招式計算中位數</small></button></div>
   <div class="tools">
     <div class="chips" role="group" aria-label="屬性"><span class="lbl">屬性</span><div class="cg"><button class="chip" data-f="t" data-v="normal" aria-pressed="false"><span class="tdot" data-t="normal"></span>一般</button><button class="chip" data-f="t" data-v="fire" aria-pressed="false"><span class="tdot" data-t="fire"></span>火</button><button class="chip" data-f="t" data-v="water" aria-pressed="false"><span class="tdot" data-t="water"></span>水</button><button class="chip" data-f="t" data-v="grass" aria-pressed="false"><span class="tdot" data-t="grass"></span>草</button><button class="chip" data-f="t" data-v="electric" aria-pressed="false"><span class="tdot" data-t="electric"></span>電</button><button class="chip" data-f="t" data-v="ice" aria-pressed="false"><span class="tdot" data-t="ice"></span>冰</button><button class="chip" data-f="t" data-v="fighting" aria-pressed="false"><span class="tdot" data-t="fighting"></span>格鬥</button><button class="chip" data-f="t" data-v="poison" aria-pressed="false"><span class="tdot" data-t="poison"></span>毒</button><button class="chip" data-f="t" data-v="ground" aria-pressed="false"><span class="tdot" data-t="ground"></span>地面</button><button class="chip" data-f="t" data-v="flying" aria-pressed="false"><span class="tdot" data-t="flying"></span>飛行</button><button class="chip" data-f="t" data-v="psychic" aria-pressed="false"><span class="tdot" data-t="psychic"></span>超能力</button><button class="chip" data-f="t" data-v="bug" aria-pressed="false"><span class="tdot" data-t="bug"></span>蟲</button><button class="chip" data-f="t" data-v="rock" aria-pressed="false"><span class="tdot" data-t="rock"></span>岩石</button><button class="chip" data-f="t" data-v="ghost" aria-pressed="false"><span class="tdot" data-t="ghost"></span>幽靈</button><button class="chip" data-f="t" data-v="dragon" aria-pressed="false"><span class="tdot" data-t="dragon"></span>龍</button><button class="chip" data-f="t" data-v="dark" aria-pressed="false"><span class="tdot" data-t="dark"></span>惡</button><button class="chip" data-f="t" data-v="steel" aria-pressed="false"><span class="tdot" data-t="steel"></span>鋼</button><button class="chip" data-f="t" data-v="fairy" aria-pressed="false"><span class="tdot" data-t="fairy"></span>妖精</button><button class="chip clr" data-clr="t">全不選</button></div></div>
     <div class="chips" role="group" aria-label="分類"><span class="lbl">分類</span><div class="cg"><button class="chip" data-f="c" data-v="phy" aria-pressed="false"><span class="phy">物理</span></button><button class="chip" data-f="c" data-v="spe" aria-pressed="false"><span class="spe">特殊</span></button><button class="chip clr" data-clr="c">全不選</button></div></div>
@@ -4943,6 +4953,9 @@ render();
   });
   const f = { t: new Set(), c: new Set(), k: new Set(), o: new Set() };
   const sim = { t: '1200', s: 'fin', m: 'avg' };
+  let mode = 'filter';
+  const mbs = root.querySelectorAll('.chip[data-axm]');
+  mbs.forEach(b => b.addEventListener('click', () => { mode = b.dataset.axm; mbs.forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); draw(); }));
   root.querySelectorAll('.chip[data-f]').forEach(b => b.addEventListener('click', () => {
     const s = f[b.dataset.f], v = b.dataset.v;
     if (s.has(v)) s.delete(v); else s.add(v);
@@ -4965,15 +4978,15 @@ render();
   const fmt = v => v >= 100 ? Math.round(v).toLocaleString() : v >= 10 ? v.toFixed(1) : v.toFixed(2);
   function draw() {
     const key = sim.t + sim.s;
-    const RF = D.filter(d => !f.t.size || f.t.has(d.t))
+    const RF = D.filter(d => mode === 'filter' || !f.t.size || f.t.has(d.t))
       .map(d => ({ d, s: d.sd[key][sim.m][5], p: sim.s === 'fin' ? d.ev : d.lv5 })).filter(q => q.s > 0 && q.p > 0);
-    const L = RF.filter(({ d }) => (!f.c.size || f.c.has(d.c)) && (!f.k.size || f.k.has(d.kd)) && (!f.o.size || f.o.has(d.o)));
+    const L = RF.filter(({ d }) => (!f.t.size || f.t.has(d.t)) && (!f.c.size || f.c.has(d.c)) && (!f.k.size || f.k.has(d.kd)) && (!f.o.size || f.o.has(d.o)));
     svg.textContent = ''; tip.hidden = true;
     if (!L.length) { cnt.textContent = '沒有符合篩選的攻擊招式'; svg.setAttribute('height', 80); return; }
     const med = a => { a = a.slice().sort((u, v) => u - v); const k = a.length >> 1; return a.length % 2 ? a[k] : (a[k - 1] + a[k]) / 2; };
     const mS = med(RF.map(q => q.s)), mP = med(RF.map(q => q.p));
     RF.forEach(q => { q.x = Math.log10(q.s / mS); q.y = Math.log10(q.p / mP); });
-    cnt.textContent = '顯示 ' + L.length + ' 個攻擊招式・' + (sim.t === '600' ? '10' : '20') + ' 分・' + (sim.s === 'fin' ? '最終型態' : 'Lv5') + '・' + MZ[sim.m] + '（基準：' + (f.t.size ? '所選屬性' : '全部屬性') + '的 ' + RF.length + ' 招）｜實戰分中位數 ' + fmt(mS) + '、單體 DPS 中位數 ' + fmt(mP);
+    cnt.textContent = '顯示 ' + L.length + ' 個攻擊招式・' + (sim.t === '600' ? '10' : '20') + ' 分・' + (sim.s === 'fin' ? '最終型態' : 'Lv5') + '・' + MZ[sim.m] + '（' + (mode === 'filter' ? '篩選模式・基準：全部攻擊招式 ' : '比較模式・基準：' + (f.t.size ? '所選屬性' : '全部屬性') + '的 ') + RF.length + ' 招）｜實戰分中位數 ' + fmt(mS) + '、單體 DPS 中位數 ' + fmt(mP);
     const W = Math.max(640, box.clientWidth), H = Math.max(520, Math.min(900, Math.round(W * 0.62)));
     const ml = 64, mr = 24, mt = 24, mb = 56;
     let x0 = Math.min(...RF.map(q => q.x)), x1 = Math.max(...RF.map(q => q.x)), y0 = Math.min(...RF.map(q => q.y)), y1 = Math.max(...RF.map(q => q.y));
