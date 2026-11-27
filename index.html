@@ -1082,6 +1082,11 @@ body{background:var(--bg)}
 .tabpanel .facts:has(> a.fact){width:fit-content!important;justify-self:start;align-self:start}
 .tabpanel nav.facts.jump{margin-top:14px!important}
 
+#tab-moves .bufsrc table{width:auto;max-width:100%}
+#tab-moves .bufsrc th:nth-child(-n+5),#tab-moves .bufsrc td:nth-child(-n+5){white-space:nowrap}
+#tab-moves .bufsrc td[rowspan]{white-space:normal;min-width:14em;max-width:22em;vertical-align:middle}
+#tab-moves .bufsrc tr:last-child td:last-child{white-space:normal;min-width:16em}
+
 </style>
 </head>
 <body>
@@ -2886,7 +2891,7 @@ body{background:var(--bg)}
   <div class="tbl ktbl"><table>
     <thead><tr><th scope="col">招式</th><th scope="col">效果</th><th scope="col">數值</th><th scope="col">和強化招式的關係</th></tr></thead>
     <tbody>
-      <tr><td><a class="mvl spe" href="#mv-silver-wind" data-go="mv:silver-wind">銀色旋風</a></td><td>攻擊、速度增益</td><td>每次施放 15% 機率，攻擊格子和速度格子各 +8%，最多 3 層（+24%），6 秒；升級、進化都不變</td><td>攻擊格子：和劍舞、龍之舞（物攻）、詭計、大地掌控（特攻）<b>相乘</b>。速度格子：和高速移動<b>同一格，只取較強</b></td></tr>
+      <tr><td>銀色旋風</td><td>攻擊、速度增益</td><td>每次施放 15% 機率，攻擊格子和速度格子各 +8%，最多 3 層（+24%），6 秒；升級、進化都不變</td><td>攻擊格子：和劍舞、龍之舞（物攻）、詭計、大地掌控（特攻）<b>相乘</b>。速度格子：和高速移動<b>同一格，只取較強</b></td></tr>
       <tr><td>尖石攻擊、狙擊、千變萬花</td><td>擊中要害機率提高</td><td>每一下另外擲一次招式自帶的要害機率（尖石攻擊 30%、狙擊 30%、千變萬花 50%），和一般要害率任一成功就是要害：總機率 ＝ 1 −（1 − 一般要害率）×（1 − 招式加成）</td><td>要害倍率和所有攻擊增益<b>相乘</b>；強化招式不影響要害率</td></tr>
       <tr><td>雜技</td><td>沒帶道具時傷害提高</td><td>沒有攜帶道具時 ×1.5</td><td>和所有攻擊增益<b>相乘</b></td></tr>
       <tr><td>近身揮擊、連拳、交叉斬（20 招）</td><td>防禦：受到傷害減少</td><td>這類招式在當前欄位時，受到的傷害 ×0.75</td><td>和變硬（防禦格子，減傷% 相加、上限 80%）<b>相乘</b></td></tr>
@@ -2900,10 +2905,10 @@ body{background:var(--bg)}
   </ul>
 
   <h4>強化招式與其他增益來源</h4>
-  <div class="tbl ktbl"><table>
+  <div class="tbl ktbl bufsrc"><table>
     <thead><tr><th scope="col">來源</th><th scope="col">格子</th><th scope="col">每層</th><th scope="col">層數上限</th><th scope="col">持續</th><th scope="col">觸發方式</th></tr></thead>
     <tbody>
-      <tr><td>劍舞</td><td>物攻</td><td class="num">13%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td><td rowspan="7">在當前欄位時每 0.85 秒施放（龍之舞 0.7 秒、水流環 0.9 秒），不需要目標。Lv2 層數 +1、Lv3 每層 ×1.4、Lv4 時間 ×1.5、Lv5 層數 +1 且每層 ×1.4（水流環從 4 層起算）</td></tr>
+      <tr><td>劍舞</td><td>物攻</td><td class="num">13%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td><td rowspan="7">在當前欄位時每 0.85 秒自動施放（龍之舞 0.7 秒、水流環 0.9 秒），不需要目標</td></tr>
       <tr><td>龍之舞</td><td>物攻</td><td class="num">11%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td></tr>
       <tr><td>詭計</td><td>特攻</td><td class="num">13%</td><td class="num">5（Lv5：7）</td><td class="num">7 秒</td></tr>
       <tr><td>大地掌控（哲爾尼亞斯）</td><td>特攻</td><td class="num">18%</td><td class="num">5（Lv5：7）</td><td class="num">8 秒</td></tr>
@@ -2917,6 +2922,7 @@ body{background:var(--bg)}
     </tbody>
   </table></div>
   <ul class="rules">
+    <li>強化招式升級：Lv2 層數 +1、Lv3 每層 ×1.4、Lv4 持續時間 ×1.5、Lv5 層數再 +1 且每層再 ×1.4（水流環從 4 層起算）。</li>
     <li>Lv5 滿層：劍舞、詭計 +178%，龍之舞 +151%，大地掌控 +247%，高速移動 +137%，變硬減傷 96%（受 80% 上限限制），水流環每秒 +18.8。</li>
     <li>強化招式只在當前欄位時施放和冷卻；要和攻擊招式同時用必須用羈絆結合（兩招傷害各 ×0.8），或者切過去疊滿再切回來，增益還會維持 7 秒（Lv4 起 10.5 秒）。</li>
   </ul>
