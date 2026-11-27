@@ -1074,6 +1074,14 @@ body{background:var(--bg)}
 .tabpanel .facts a.fact:hover b{color:var(--accent)!important}
 .tabpanel .facts a.fact:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
+/* 版面一致化：所有分頁同寬、同樣標題層級 */
+.tabpanel .narrow{max-width:none!important;margin-inline:0!important}
+.tabpanel .wrap > section > h2,.tabpanel .wrap > header + section > h2,.tabpanel section > h2{font-size:22px!important;font-weight:500!important;margin:0 0 10px!important}
+.tabpanel section > h3{font-size:18px!important;font-weight:500!important}
+.tabpanel .wrap > section{margin-top:36px}
+.tabpanel .facts:has(> a.fact){width:fit-content!important;justify-self:start;align-self:start}
+.tabpanel nav.facts.jump{margin-top:14px!important}
+
 </style>
 </head>
 <body>
@@ -2949,7 +2957,7 @@ body{background:var(--bg)}
 </template>
 <template id="tpl-ax"><div class="wrap">
 <header>
-  <h1>招式坐標軸</h1>
+  <h1>PokéSurvivor 招式座標軸</h1>
   <p class="lede">把每個攻擊招式的<b>實戰分</b>和<b>單體 DPS</b>畫在同一張圖上，一眼看出哪些招式清群強、哪些打單體強。</p>
   <ul class="rules lede-list">
     <li><b>座標</b>：橫軸 ＝ log<sub>10</sub>(招式實戰分 ÷ 基準招式實戰分的中位數)，縱軸 ＝ log<sub>10</sub>(招式單體 DPS ÷ 基準招式單體 DPS 的中位數)。0 就是中位數（一半基準招式比它高、一半比它低）；每 +0.3 約等於 2 倍，−0.3 約等於一半。</li>
@@ -2962,9 +2970,13 @@ body{background:var(--bg)}
     <li><b>資料</b>：實戰分依下方「實戰模擬」選的時間、型態和玩法；單體 DPS 取招式表的 Lv5 欄或進化 + 欄（選「最終型態」時；不會進化的招式用 Lv5）。中位數和座標範圍只由基準招式決定。時間、型態、玩法會改變實戰分本身，所以兩種模式下中位數都會在新設定下重算。</li>
     <li><b>操作</b>：滑鼠移到點或招式名稱上會淡化其他招式並顯示詳細數值；點招式名稱跳到「招式與傷害」表格中的那一列。</li>
   </ul>
+  <nav class="facts jump" aria-label="頁內跳轉">
+    <a class="fact" href="#ax-chart" data-go="ax:chart"><b>散布圖</b><span>模式切換、篩選、互動圖表</span></a>
+    <a class="fact" href="#mv-list" data-go="mv:list"><b>招式與傷害</b><span>完整招式表與數值</span></a>
+  </nav>
 </header>
 <section id="ax-main">
-  <h2>散布圖</h2>
+  <h2 id="ax-chart">散布圖</h2>
   <div class="axmode" role="group" aria-label="計算模式"><button class="chip" data-axm="filter" aria-pressed="true">篩選模式<small>以全部攻擊招式計算，按鈕只篩選顯示</small></button><button class="chip" data-axm="cmp" aria-pressed="false">比較模式<small>以所選屬性的招式計算中位數</small></button></div>
   <div class="tools">
     <div class="chips" role="group" aria-label="屬性"><span class="lbl">屬性</span><div class="cg"><button class="chip" data-f="t" data-v="normal" aria-pressed="false"><span class="tdot" data-t="normal"></span>一般</button><button class="chip" data-f="t" data-v="fire" aria-pressed="false"><span class="tdot" data-t="fire"></span>火</button><button class="chip" data-f="t" data-v="water" aria-pressed="false"><span class="tdot" data-t="water"></span>水</button><button class="chip" data-f="t" data-v="grass" aria-pressed="false"><span class="tdot" data-t="grass"></span>草</button><button class="chip" data-f="t" data-v="electric" aria-pressed="false"><span class="tdot" data-t="electric"></span>電</button><button class="chip" data-f="t" data-v="ice" aria-pressed="false"><span class="tdot" data-t="ice"></span>冰</button><button class="chip" data-f="t" data-v="fighting" aria-pressed="false"><span class="tdot" data-t="fighting"></span>格鬥</button><button class="chip" data-f="t" data-v="poison" aria-pressed="false"><span class="tdot" data-t="poison"></span>毒</button><button class="chip" data-f="t" data-v="ground" aria-pressed="false"><span class="tdot" data-t="ground"></span>地面</button><button class="chip" data-f="t" data-v="flying" aria-pressed="false"><span class="tdot" data-t="flying"></span>飛行</button><button class="chip" data-f="t" data-v="psychic" aria-pressed="false"><span class="tdot" data-t="psychic"></span>超能力</button><button class="chip" data-f="t" data-v="bug" aria-pressed="false"><span class="tdot" data-t="bug"></span>蟲</button><button class="chip" data-f="t" data-v="rock" aria-pressed="false"><span class="tdot" data-t="rock"></span>岩石</button><button class="chip" data-f="t" data-v="ghost" aria-pressed="false"><span class="tdot" data-t="ghost"></span>幽靈</button><button class="chip" data-f="t" data-v="dragon" aria-pressed="false"><span class="tdot" data-t="dragon"></span>龍</button><button class="chip" data-f="t" data-v="dark" aria-pressed="false"><span class="tdot" data-t="dark"></span>惡</button><button class="chip" data-f="t" data-v="steel" aria-pressed="false"><span class="tdot" data-t="steel"></span>鋼</button><button class="chip" data-f="t" data-v="fairy" aria-pressed="false"><span class="tdot" data-t="fairy"></span>妖精</button><button class="chip clr" data-clr="t">全不選</button></div></div>
@@ -3365,7 +3377,7 @@ body{background:var(--bg)}
     <li>敵人不是固定名單：每局開始時，遊戲從每個階段的候選中各抽 7 隻組成本局陣容。</li>
     <li>表中數值是「單人、普通難度」時的值（11/16 起普通難度敵人體力 ×0.9、傷害 ×0.85、首領體力 ×0.85）。</li>
   </ul>
-  <div class="facts"><a class="fact" href="#en-list" data-go="en:list"><b>敵人候選</b><span>1271 筆（寶可夢 × 階段）</span></a><span><b>884</b> 隻不同的寶可夢</span><a class="fact" href="#en-time" data-go="en:time"><b>時間軸</b><span>一局的出場順序</span></a><a class="fact" href="#en-behave" data-go="en:behave"><b>行為</b><span>12 種攻擊方式</span></a><a class="fact" href="#en-boss" data-go="en:boss"><b>頭目</b><span>5 隻（431 筆候選）</span></a><a class="fact" href="#en-rift" data-go="en:rift"><b>裂縫傳說</b><span>94 隻</span></a><a class="fact" href="#en-judge" data-go="en:judge"><b>無極汰那與審判</b><span>最終戰</span></a></div>
+  <div class="facts"><a class="fact" href="#en-list" data-go="en:list"><b>敵人候選</b><span>1271 筆・884 隻不同的寶可夢</span></a><a class="fact" href="#en-time" data-go="en:time"><b>時間軸</b><span>一局的出場順序</span></a><a class="fact" href="#en-behave" data-go="en:behave"><b>行為</b><span>12 種攻擊方式</span></a><a class="fact" href="#en-boss" data-go="en:boss"><b>頭目</b><span>5 隻（431 筆候選）</span></a><a class="fact" href="#en-rift" data-go="en:rift"><b>裂縫傳說</b><span>94 隻</span></a><a class="fact" href="#en-judge" data-go="en:judge"><b>無極汰那與審判</b><span>最終戰</span></a></div>
 </header>
 
 <section id="en-list">
