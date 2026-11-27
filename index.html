@@ -859,7 +859,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15
 .tabpanel{scroll-margin-top:8px}
 
 
-/* 招式坐標軸：沿用招式頁的版面 */
+/* 招式分布圖：沿用招式頁的版面 */
 #tab-ax .wrap{max-width:1400px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:26px}
 #tab-ax h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0;text-wrap:balance}
 #tab-ax h2{font-family:var(--f-display);font-weight:500;font-size:22px;margin:0 0 10px;text-wrap:balance}
@@ -1033,7 +1033,7 @@ body{background:var(--bg)}
 #tab-moves .chip.clr,#tab-ax .chip.clr{border-style:dashed;color:var(--muted);background:transparent}
 #tab-moves .chip.clr:hover,#tab-ax .chip.clr:hover{color:var(--accent);border-color:var(--accent)}
 
-/* ===== 招式坐標軸 ===== */
+/* ===== 招式分布圖 ===== */
 #tab-ax .wrap{gap:20px}
 #tab-ax .axbox{position:relative;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:6px;overflow:hidden}
 #tab-ax #axsvg{display:block;width:100%;height:auto;font-family:var(--f-body)}
@@ -1092,7 +1092,7 @@ body{background:var(--bg)}
 </head>
 <body>
 <div class="topwrap"><div class="topbar"><span class="brand">PokéSurvivor 資料表</span>
-<nav class="tabs" role="tablist" aria-label="資料表"><a href="#pokedex" id="t-dex" role="tab" aria-controls="tab-dex" aria-selected="true">寶可夢</a><a href="#abilities" id="t-abil" role="tab" aria-controls="tab-abil" aria-selected="false">特性</a><a href="#moves" id="t-moves" role="tab" aria-controls="tab-moves" aria-selected="false">招式與傷害</a><a href="#axis" id="t-ax" role="tab" aria-controls="tab-ax" aria-selected="false">招式坐標軸</a><a href="#special" id="t-sp" role="tab" aria-controls="tab-sp" aria-selected="false">特殊進化</a><a href="#mechanics" id="t-mech" role="tab" aria-controls="tab-mech" aria-selected="false">遊戲機制</a><a href="#items" id="t-items" role="tab" aria-controls="tab-items" aria-selected="false">道具</a><a href="#enemies" id="t-en" role="tab" aria-controls="tab-en" aria-selected="false">敵軍寶可夢</a></nav></div></div>
+<nav class="tabs" role="tablist" aria-label="資料表"><a href="#pokedex" id="t-dex" role="tab" aria-controls="tab-dex" aria-selected="true">寶可夢</a><a href="#abilities" id="t-abil" role="tab" aria-controls="tab-abil" aria-selected="false">特性</a><a href="#moves" id="t-moves" role="tab" aria-controls="tab-moves" aria-selected="false">招式與傷害</a><a href="#axis" id="t-ax" role="tab" aria-controls="tab-ax" aria-selected="false">招式分布圖</a><a href="#special" id="t-sp" role="tab" aria-controls="tab-sp" aria-selected="false">特殊進化</a><a href="#mechanics" id="t-mech" role="tab" aria-controls="tab-mech" aria-selected="false">遊戲機制</a><a href="#items" id="t-items" role="tab" aria-controls="tab-items" aria-selected="false">道具</a><a href="#enemies" id="t-en" role="tab" aria-controls="tab-en" aria-selected="false">敵軍寶可夢</a></nav></div></div>
 <noscript><p class="nojs">這份資料表需要 JavaScript。請用 Safari、Chrome 等瀏覽器開啟檔案。</p></noscript>
 <p class="loading" id="loading">載入中…</p>
 <button type="button" id="goback" class="goback" hidden>← 返回</button>
@@ -2668,7 +2668,7 @@ body{background:var(--bg)}
   <ul class="rules">
     <li>「三種玩法平均」的清怪、安全、浪潮、綜合、殲滅時間是三種玩法的平均；實戰分＝平均綜合 × 8 ÷ 平均殲滅時間。</li>
     <li>實戰分是除法，殲滅很快的招式分數會拉得很開：20 分・最終・平均前五名是 冰封世界（278）、暴風（262）、信號光束（252）、鏡光射擊（248）、精神衝擊（247）；殲滅最快的是 暴風（2.8 秒）、冰封世界（2.8 秒）、信號光束（2.9 秒）、精神衝擊（2.9 秒）、種子炸彈（3.0 秒）。</li>
-    <li>想只看生存能力時，把「實戰欄排序」切到「綜合」或「安全」。要看實戰分和單體 DPS 的關係，見「<a href="#axis" data-go="ax:main">招式坐標軸</a>」分頁。</li>
+    <li>想只看生存能力時，把「實戰欄排序」切到「綜合」或「安全」。要看實戰分和單體 DPS 的關係，見「<a href="#axis" data-go="ax:main">招式分布圖</a>」分頁。</li>
   </ul>
 
   <h3>測試設定</h3>
@@ -2963,7 +2963,7 @@ body{background:var(--bg)}
 </template>
 <template id="tpl-ax"><div class="wrap">
 <header>
-  <h1>PokéSurvivor 招式座標軸</h1>
+  <h1>PokéSurvivor 招式分布圖</h1>
   <p class="lede">把每個攻擊招式的<b>實戰分</b>和<b>單體 DPS</b>畫在同一張圖上，一眼看出哪些招式清群強、哪些打單體強。</p>
   <ul class="rules lede-list">
     <li><b>座標</b>：橫軸 ＝ log<sub>10</sub>(招式實戰分 ÷ 基準招式實戰分的中位數)，縱軸 ＝ log<sub>10</sub>(招式單體 DPS ÷ 基準招式單體 DPS 的中位數)。0 就是中位數（一半基準招式比它高、一半比它低）；每 +0.3 約等於 2 倍，−0.3 約等於一半。</li>
@@ -5397,7 +5397,7 @@ render();
   }
   };
   const tabs = { pokedex: 'dex', abilities: 'abil', moves: 'moves', axis: 'ax', special: 'sp', items: 'items', mechanics: 'mech', enemies: 'en', pdetail: 'pd' };
-  const NAME = { pokedex: '寶可夢', abilities: '特性', moves: '招式', axis: '招式坐標軸', special: '特殊進化', items: '道具', mechanics: '遊戲機制', enemies: '敵軍寶可夢', pdetail: '寶可夢頁' };
+  const NAME = { pokedex: '寶可夢', abilities: '特性', moves: '招式', axis: '招式分布圖', special: '特殊進化', items: '道具', mechanics: '遊戲機制', enemies: '敵軍寶可夢', pdetail: '寶可夢頁' };
   const OVER = { moves: '招式與傷害頂端', special: '特殊進化頂端', items: '道具總覽', mechanics: '遊戲機制總覽', enemies: '敵軍寶可夢總覽' };
   const LABEL = s => s.tab === 'pdetail' ? (s.pdn || '寶可夢頁') : OVER[s.tab] && s.y < 400 ? OVER[s.tab] : NAME[s.tab];
   const PREFIX = { pk: 'pokedex', ab: 'abilities', mv: 'moves', ax: 'axis', sp: 'special', it: 'items', gm: 'mechanics', en: 'enemies', pd: 'pdetail' };
