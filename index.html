@@ -1093,6 +1093,18 @@ body{background:var(--bg)}
 #tab-moves .fit th:last-child{width:100%}
 #tab-moves .tbl + .tbl{margin-top:12px}
 
+#tab-ax .axpk{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+#tab-ax .axpk label{font-weight:700}
+#tab-ax .axpk input{width:min(340px,100%);padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--fg);font:inherit}
+#tab-ax .axpk input:focus{outline:2px solid var(--accent);outline-offset:1px}
+#tab-ax .axpk .sg{display:inline-flex;gap:6px}
+#tab-ax .axpkmsg{color:var(--muted);font-size:13px}
+.axgo{margin:6px 0 12px}
+.axgo a{display:inline-flex;flex-direction:column;gap:1px;padding:7px 16px;border:1px solid var(--line);border-radius:8px;background:var(--panel);text-decoration:none;color:var(--fg)}
+.axgo a b{color:var(--accent)}
+.axgo a span{font-size:12px;color:var(--muted)}
+.axgo a:hover{background:var(--tag)}
+
 </style>
 </head>
 <body>
@@ -3043,6 +3055,7 @@ body{background:var(--bg)}
   <p class="lede">把每個攻擊招式的<b>實戰分</b>和<b>單體 DPS</b>畫在同一張圖上，一眼看出哪些招式清群強、哪些打單體強。</p>
   <ul class="rules lede-list">
     <li><b>座標</b>：橫軸 ＝ log<sub>10</sub>(招式實戰分 ÷ 基準招式實戰分的中位數)，縱軸 ＝ log<sub>10</sub>(招式單體 DPS ÷ 基準招式單體 DPS 的中位數)。0 就是中位數（一半基準招式比它高、一半比它低）；每 +0.3 約等於 2 倍，−0.3 約等於一半。</li>
+    <li><b>寶可夢</b>：在模式按鈕下方輸入編號或名稱，只顯示這隻寶可夢能用的攻擊招式。「學習」＝專屬招式＋升級可學招式，「招式機器」＝只能用招式學習器教的招式，「全部」＝兩者合計。它和其他篩選按鈕一樣只決定顯示哪些招式，不影響中位數；按「重置」會清空。</li>
     <li><b>兩種模式</b>（散布圖標題下方切換）：
       <ul>
         <li><b>篩選模式</b>（預設）：基準＝全部攻擊招式。所有篩選按鈕（含屬性）都只決定顯示哪些招式，點的位置不變，可以直接跟全體比較。</li>
@@ -3056,6 +3069,13 @@ body{background:var(--bg)}
 <section id="ax-main">
   <h2 id="ax-chart">散布圖</h2>
   <div class="axmode" role="group" aria-label="計算模式"><button class="chip" data-axm="filter" aria-pressed="true">篩選模式<small>以全部攻擊招式計算，按鈕只篩選顯示</small></button><button class="chip" data-axm="cmp" aria-pressed="false">比較模式<small>以所選屬性的招式計算中位數</small></button></div>
+  <div class="axpk" role="group" aria-label="寶可夢">
+    <label for="axpkin">寶可夢</label>
+    <input id="axpkin" type="search" list="axpklist" placeholder="輸入編號或名稱，例如 25 或 皮卡丘" autocomplete="off">
+    <datalist id="axpklist"></datalist>
+    <span class="sg"><button class="chip" data-axl="all" aria-pressed="true">全部</button><button class="chip" data-axl="learn" aria-pressed="false">學習</button><button class="chip" data-axl="tm" aria-pressed="false">招式機器</button></span>
+    <span class="axpkmsg" id="axpkmsg"></span>
+  </div>
   <div class="tools">
     <div class="chips" role="group" aria-label="屬性"><span class="lbl">屬性</span><div class="cg"><button class="chip" data-f="t" data-v="normal" aria-pressed="false"><span class="tdot" data-t="normal"></span>一般</button><button class="chip" data-f="t" data-v="fire" aria-pressed="false"><span class="tdot" data-t="fire"></span>火</button><button class="chip" data-f="t" data-v="water" aria-pressed="false"><span class="tdot" data-t="water"></span>水</button><button class="chip" data-f="t" data-v="grass" aria-pressed="false"><span class="tdot" data-t="grass"></span>草</button><button class="chip" data-f="t" data-v="electric" aria-pressed="false"><span class="tdot" data-t="electric"></span>電</button><button class="chip" data-f="t" data-v="ice" aria-pressed="false"><span class="tdot" data-t="ice"></span>冰</button><button class="chip" data-f="t" data-v="fighting" aria-pressed="false"><span class="tdot" data-t="fighting"></span>格鬥</button><button class="chip" data-f="t" data-v="poison" aria-pressed="false"><span class="tdot" data-t="poison"></span>毒</button><button class="chip" data-f="t" data-v="ground" aria-pressed="false"><span class="tdot" data-t="ground"></span>地面</button><button class="chip" data-f="t" data-v="flying" aria-pressed="false"><span class="tdot" data-t="flying"></span>飛行</button><button class="chip" data-f="t" data-v="psychic" aria-pressed="false"><span class="tdot" data-t="psychic"></span>超能力</button><button class="chip" data-f="t" data-v="bug" aria-pressed="false"><span class="tdot" data-t="bug"></span>蟲</button><button class="chip" data-f="t" data-v="rock" aria-pressed="false"><span class="tdot" data-t="rock"></span>岩石</button><button class="chip" data-f="t" data-v="ghost" aria-pressed="false"><span class="tdot" data-t="ghost"></span>幽靈</button><button class="chip" data-f="t" data-v="dragon" aria-pressed="false"><span class="tdot" data-t="dragon"></span>龍</button><button class="chip" data-f="t" data-v="dark" aria-pressed="false"><span class="tdot" data-t="dark"></span>惡</button><button class="chip" data-f="t" data-v="steel" aria-pressed="false"><span class="tdot" data-t="steel"></span>鋼</button><button class="chip" data-f="t" data-v="fairy" aria-pressed="false"><span class="tdot" data-t="fairy"></span>妖精</button><button class="chip clr" data-clr="t">全不選</button></div></div>
     <div class="chips" role="group" aria-label="分類"><span class="lbl">分類</span><div class="cg"><button class="chip" data-f="c" data-v="phy" aria-pressed="false"><span class="phy">物理</span></button><button class="chip" data-f="c" data-v="spe" aria-pressed="false"><span class="spe">特殊</span></button><button class="chip clr" data-clr="c">全不選</button></div></div>
@@ -5053,8 +5073,38 @@ render();
     const bs = root.querySelectorAll('.chip[data-' + attr + ']');
     bs.forEach(b => b.addEventListener('click', () => { sim[key] = b.dataset[attr]; bs.forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); draw(); }));
   }
+  // 寶可夢篩選
+  if (!window.__pdData) { try { mount('pd'); } catch (e) {} }
+  const PD = window.__pdData, pin = document.getElementById('axpkin'), pmsg = document.getElementById('axpkmsg');
+  const MONS = PD ? PD.mons : [];
+  const FZ = { stat: '能力形態', battle: '戰鬥形態', power: '力量形態', mega: '超級進化', regional: '地區形態' };
+  const pLabel = m => '#' + String(m.dex).padStart(4, '0') + ' ' + m.zh;
+  { const fr = document.createDocumentFragment(); MONS.forEach(m => { const o = document.createElement('option'); o.value = pLabel(m); fr.appendChild(o); }); document.getElementById('axpklist').appendChild(fr); }
+  let pk = null, pl = 'all';
+  const plb = root.querySelectorAll('.chip[data-axl]');
+  function findMon(v) {
+    v = v.trim(); if (!v) return null;
+    let m = MONS.find(x => pLabel(x) === v); if (m) return m;
+    const n = v.replace(/^#/, '');
+    if (/^\d+$/.test(n)) return MONS.find(x => x.dex === +n && !x.form) || MONS.find(x => x.dex === +n) || null;
+    return MONS.find(x => x.zh === v) || MONS.find(x => x.zh.startsWith(v)) || MONS.find(x => x.zh.includes(v)) || null;
+  }
+  function setMon(m) {
+    pk = m;
+    if (m) { pin.value = pLabel(m); pmsg.innerHTML = '學習 ' + ((m.sig || []).length + m.pool.length) + ' 個・招式機器 ' + m.tms.length + ' 個（含變化招式）・<a href="#pd-' + m.fid + '" data-go="pd:' + m.fid + '">寶可夢頁</a>'; }
+    else pmsg.textContent = pin.value.trim() ? '找不到這隻寶可夢' : '';
+    draw();
+  }
+  pin.addEventListener('change', () => setMon(findMon(pin.value)));
+  pin.addEventListener('keydown', e => { if (e.key === 'Enter') setMon(findMon(pin.value)); });
+  pin.addEventListener('search', () => { if (!pin.value) setMon(null); });
+  plb.forEach(b => b.addEventListener('click', () => { pl = b.dataset.axl; plb.forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); draw(); }));
+  const pkSet = () => { if (!pk) return null; const a = pl === 'tm' ? [] : [...(pk.sig || []), ...pk.pool], b = pl === 'learn' ? [] : pk.tms; return new Set([...a, ...b]); };
+  function pickFromLink() { const fid = window.__axPick; if (fid == null) return; window.__axPick = null; const m = MONS.find(x => x.fid === fid); if (!m) return; for (const k in f) f[k].clear(); root.querySelectorAll('.chip[data-f]').forEach(x => x.setAttribute('aria-pressed', 'false')); pl = 'all'; plb.forEach(x => x.setAttribute('aria-pressed', x.dataset.axl === 'all' ? 'true' : 'false')); setMon(m); }
+  document.addEventListener('axpick', pickFromLink);
   document.getElementById('axreset').addEventListener('click', () => {
     Object.assign(sim, { t: '1200', s: 'fin', m: 'avg' });
+    pin.value = ''; pk = null; pmsg.textContent = ''; pl = 'all'; plb.forEach(x => x.setAttribute('aria-pressed', x.dataset.axl === 'all' ? 'true' : 'false'));
     for (const [attr, v] of [['at', '1200'], ['as', 'fin'], ['am', 'avg']]) root.querySelectorAll('.chip[data-' + attr + ']').forEach(x => x.setAttribute('aria-pressed', x.dataset[attr] === v ? 'true' : 'false'));
     draw();
   });
@@ -5064,13 +5114,14 @@ render();
     const key = sim.t + sim.s;
     const RF = D.filter(d => mode === 'filter' || !f.t.size || f.t.has(d.t))
       .map(d => ({ d, s: d.sd[key][sim.m][5], p: sim.s === 'fin' ? d.ev : d.lv5 })).filter(q => q.s > 0 && q.p > 0);
-    const L = RF.filter(({ d }) => (!f.t.size || f.t.has(d.t)) && (!f.c.size || f.c.has(d.c)) && (!f.k.size || f.k.has(d.kd)) && (!f.o.size || f.o.has(d.o)));
+    const PS = pkSet();
+    const L = RF.filter(({ d }) => (!PS || PS.has(d.id)) && (!f.t.size || f.t.has(d.t)) && (!f.c.size || f.c.has(d.c)) && (!f.k.size || f.k.has(d.kd)) && (!f.o.size || f.o.has(d.o)));
     svg.textContent = ''; tip.hidden = true;
-    if (!L.length) { cnt.textContent = '沒有符合篩選的攻擊招式'; svg.setAttribute('height', 80); return; }
+    if (!L.length) { cnt.textContent = (pk ? pk.zh + '：' : '') + '沒有符合篩選的攻擊招式'; svg.setAttribute('height', 80); return; }
     const med = a => { a = a.slice().sort((u, v) => u - v); const k = a.length >> 1; return a.length % 2 ? a[k] : (a[k - 1] + a[k]) / 2; };
     const mS = med(RF.map(q => q.s)), mP = med(RF.map(q => q.p));
     RF.forEach(q => { q.x = Math.log10(q.s / mS); q.y = Math.log10(q.p / mP); });
-    cnt.textContent = '顯示 ' + L.length + ' 個攻擊招式・' + (sim.t === '600' ? '10' : '20') + ' 分・' + (sim.s === 'fin' ? '最終型態' : 'Lv5') + '・' + MZ[sim.m] + '（' + (mode === 'filter' ? '篩選模式・基準：全部攻擊招式 ' : '比較模式・基準：' + (f.t.size ? '所選屬性' : '全部屬性') + '的 ') + RF.length + ' 招）｜實戰分中位數 ' + fmt(mS) + '、單體 DPS 中位數 ' + fmt(mP);
+    cnt.textContent = (pk ? pk.zh + '（' + ({ all: '學習＋招式機器', learn: '學習', tm: '招式機器' })[pl] + '）・' : '') + '顯示 ' + L.length + ' 個攻擊招式・' + (sim.t === '600' ? '10' : '20') + ' 分・' + (sim.s === 'fin' ? '最終型態' : 'Lv5') + '・' + MZ[sim.m] + '（' + (mode === 'filter' ? '篩選模式・基準：全部攻擊招式 ' : '比較模式・基準：' + (f.t.size ? '所選屬性' : '全部屬性') + '的 ') + RF.length + ' 招）｜實戰分中位數 ' + fmt(mS) + '、單體 DPS 中位數 ' + fmt(mP);
     const W = Math.max(640, box.clientWidth), H = Math.max(520, Math.min(900, Math.round(W * 0.62)));
     const ml = 64, mr = 24, mt = 24, mb = 56;
     let x0 = Math.min(...RF.map(q => q.x)), x1 = Math.max(...RF.map(q => q.x)), y0 = Math.min(...RF.map(q => q.y)), y1 = Math.max(...RF.map(q => q.y));
@@ -5156,6 +5207,7 @@ render();
   let rt = 0; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (root.classList.contains('on')) draw(); }, 150); }, { passive: true });
   const mo = new MutationObserver(() => { if (root.classList.contains('on')) draw(); }); mo.observe(root, { attributes: true, attributeFilter: ['class'] });
   draw();
+  pickFromLink();
 })();
 
   },
@@ -5445,6 +5497,7 @@ render();
       <section id="pds-ab"><h2>特性</h2><ul class="rules"><li>每隻寶可夢只會有一個特性，依帳號固定。</li><li>機率：隱藏特性 5%；否則有特性 2 時一半機率是特性 2。</li><li>可用商店的特性膠囊更換。</li></ul><div class="abs">${abHtml}</div></section>
       ${spHtml}
       <section id="pds-mv"><h2>招式</h2>
+        <p class="axgo"><a href="#axis" data-axpk="${m.fid}"><b>在招式分布圖查看</b><span>${esc(m.zh)} 能用的全部攻擊招式（學習＋招式機器）</span></a></p>
         <ul class="rules">
           <li>「實戰 10 分／20 分」＝困難難度、最終型態（有進化就用進化版）、三種玩法平均的<b>實戰分</b>（綜合 × 8 ÷ 殲滅秒數，越高越好，沒有上限）；小字是適合的玩法。算法見「<a href="#mv-sim" data-go="mv:sim">實戰模擬</a>」。預設依實戰 20 分排序。</li>
           <li>「這隻用的單體 DPS」＝ Lv5 單體 DPS × 這隻寶可夢的物攻或特攻倍率${m.types.length === 1 ? '（同屬性招式再 ×1.2）' : ''}；沒有算性格、升級卡和道具，用來在同一隻寶可夢的招式之間比較。</li>
@@ -5468,6 +5521,8 @@ render();
     return m;
   }
   window.__pdRender = render;
+  window.__pdData = D;
+  document.addEventListener('click', e => { const a = e.target.closest('[data-axpk]'); if (!a) return; window.__axPick = +a.dataset.axpk; setTimeout(() => document.dispatchEvent(new Event('axpick')), 0); });
 })();
 
   }
